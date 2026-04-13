@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avianca × Cossio — Inteligencia Reputacional | Epical</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F5FA;--surface:#FFFFFF;--border:#DDDDE8;--text:#3B3B58;--muted:#71718F;--dim:#A0A0B8;--dark:#0F1635;--magenta:#D6336C;--cyan:#1098AD;--amber:#C27803;--green:#2B8A3E;--red:#DC2626;--shadow:0 1px 8px rgba(0,0,0,0.05);--display:'Playfair Display',Georgia,serif;--body:'DM Sans','Helvetica Neue',sans-serif;--mono:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.78;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+@media print{.sl{min-height:auto!important;page-break-after:always;padding:40px!important}.cover{color:#0F1635!important;background:#fff!important}}
+.sl{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:64px 48px;position:relative}
+.si{max-width:1000px;width:100%}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta);margin-bottom:14px}
+.h1{font-family:var(--display);font-size:clamp(28px,4.5vw,46px);font-weight:700;color:var(--dark);line-height:1.15;margin-bottom:12px}
+.h2{font-family:var(--display);font-size:clamp(20px,3vw,30px);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:10px}
+.h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.sub{font-size:15px;color:var(--muted);font-style:italic;margin-bottom:30px;line-height:1.7;max-width:700px}
+.p{font-size:15px;color:var(--text);line-height:1.85;margin-bottom:14px}
+.p strong{color:var(--dark);font-weight:600}
+.sm{font-size:13px;color:var(--muted);line-height:1.7}
+.cover{flex-direction:column;background:linear-gradient(145deg,#0F1635,#1A2456);color:#fff}
+.cover .tag{color:rgba(255,255,255,0.5)}.cover .h1{color:#fff;font-size:clamp(34px,5.5vw,56px);margin-bottom:20px}.cover .h1 em{color:#FF4081;font-style:normal}
+.cover-sub{font-size:16px;color:rgba(255,255,255,0.6);max-width:620px;margin-bottom:48px;line-height:1.9;font-weight:300}
+.cover-meta{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px;border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;margin-top:32px}
+.tr{text-align:center;background:linear-gradient(145deg,#0F1635,#1A2456);color:#fff}
+.tr .h1{color:#fff;max-width:660px;margin:0 auto 14px}.tr .sub{color:rgba(255,255,255,0.45);margin:0 auto}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}.g2w{grid-template-columns:3fr 2fr}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:var(--shadow)}
+.card-a{border-left:3px solid var(--magenta)}.card-a .h3{color:var(--magenta)}
+.card-b{border-left:3px solid var(--cyan)}.card-b .h3{color:var(--cyan)}
+.card-c{border-left:3px solid var(--green)}.card-c .h3{color:var(--green)}
+.card-m{background:var(--bg);border-color:#D0D0E0}
+.kpi-row{display:flex;gap:14px;margin:22px 0;flex-wrap:wrap}
+.kpi{flex:1;min-width:125px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;box-shadow:var(--shadow)}
+.kpi-v{font-size:30px;font-weight:700;color:var(--dark)}.kpi-l{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-top:4px}
+.chart-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:var(--shadow)}
+.chart-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.insight{background:#E8F6FC;border:1px solid #B3DEF0;border-radius:10px;padding:18px 22px;margin-top:20px}
+.insight p{font-size:14px;color:#0A5975;line-height:1.75;margin:0}
+.sowhat{background:#FFF6EB;border:1px solid #FFD9A3;border-radius:10px;padding:18px 22px;margin-top:20px}
+.sowhat-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.sowhat p{font-size:14px;color:#6B3A00;line-height:1.75;margin:0}
+.risk-box{background:#FFF0F0;border:1px solid #FFC5C5;border-radius:10px;padding:18px 22px;margin-top:20px}
+.risk-box p{font-size:14px;color:#991B1B;line-height:1.75;margin:0}
+.bar{display:flex;height:30px;border-radius:6px;overflow:hidden;margin:10px 0}
+.bar div{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:#fff;letter-spacing:0.5px}
+/* Social post mock */
+.spost{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:10px 0;box-shadow:var(--shadow)}
+.spost-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.spost-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700}
+.spost-user{font-size:13px;font-weight:600;color:var(--dark)}.spost-handle{font-size:11px;color:var(--dim)}
+.spost-text{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:10px}
+.spost-meta{display:flex;gap:16px;font-size:11px;color:var(--dim)}
+.spost-meta span{display:flex;align-items:center;gap:4px}
+.nar{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}
+.nar-num{font-family:var(--display);font-size:56px;color:var(--bg);float:right;margin-top:-8px}
+.nar-title{font-family:var(--display);font-size:22px;font-weight:700;color:var(--dark);margin-bottom:6px;line-height:1.25;max-width:82%}
+.badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.badge-g{background:#E6F9EF;color:var(--green)}.badge-o{background:#FFF6EB;color:var(--amber)}.badge-b{background:#E8F6FC;color:var(--cyan)}
+.plat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:var(--shadow);border-top:3px solid var(--dim)}
+.plat-name{font-family:var(--display);font-size:20px;color:var(--dark)}.plat-n{font-family:var(--mono);font-size:15px;color:var(--cyan);margin:2px 0}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
+.sc{border-radius:12px;padding:22px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.sc-letter{font-family:var(--display);font-size:28px}.sc-name{font-size:16px;font-weight:700;color:var(--dark);margin:4px 0}
+.rec{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:14px;box-shadow:var(--shadow)}
+.rec h3{font-family:var(--display);font-size:18px;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.3}
+.rec-signal{font-family:var(--mono);font-size:10px;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.spike{display:flex;gap:14px;margin:10px 0;align-items:flex-start}
+.spike-dot{min-width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:14px;font-weight:700;color:#fff}
+table{width:100%;border-collapse:collapse;margin:14px 0}
+th{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-align:left;padding:8px 12px;border-bottom:2px solid var(--border)}
+td{font-size:13px;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+td:first-child{font-weight:600;color:var(--dark)}
+.fu{opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s ease}.fu.vis{opacity:1;transform:translateY(0)}
+.s2{transition-delay:.1s}.s3{transition-delay:.2s}.s4{transition-delay:.3s}
+@media(max-width:768px){.sl{padding:40px 20px}.g2,.g3,.g4,.sc-grid{grid-template-columns:1fr}.kpi-row{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<!-- ========== COVER ========== -->
+<section class="sl cover">
+<div class="si">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:48px">
+<img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:16px;opacity:0.6" onerror="this.style.display='none'">
+<div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px">CONFIDENCIAL</div>
+</div>
+<div class="tag">Análisis de inteligencia reputacional · preparado para Avianca</div>
+<h1 class="h1">La audiencia ya tomó posición.<br><em>Avianca ganó.</em></h1>
+<p class="cover-sub">Análisis profundo de 14,403 menciones relevantes sobre el conflicto Avianca × Cossio. Lo que revelan los datos no es una crisis de marca — es una ventana de posicionamiento que requiere decisiones esta semana.</p>
+<div class="cover-meta">PERÍODO: 6 MARZO — 7 ABRIL 2026 &nbsp;·&nbsp; 38,172 MENCIONES PROCESADAS &nbsp;·&nbsp; 14,403 RELEVANTES &nbsp;·&nbsp; 5 PLATAFORMAS</div>
+</div>
+</section>
+
+<!-- ========== EXEC SUMMARY ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Resumen ejecutivo</div>
+<div class="h1 fu">Tres hallazgos que cambian la lectura de esta crisis</div>
+<p class="sub fu s2">Lo que distingue este análisis de un reporte de monitoreo estándar.</p>
+<div class="g3 fu s2">
+<div class="card card-a"><div class="h3">HALLAZGO 1</div><p class="p" style="font-size:14px;margin:0">El 94% del sentimiento negativo es contra Cossio, no contra Avianca. Un dashboard convencional muestra 70.9% negativo sin distinguir hacia quién — lo que sugiere una crisis que no existe.</p></div>
+<div class="card card-b"><div class="h3">HALLAZGO 2</div><p class="p" style="font-size:14px;margin:0">Avianca tiene más defensores activos (238) que detractores directos por el incidente. Las 384 menciones negativas son mayoritariamente quejas de servicio preexistentes.</p></div>
+<div class="card card-c"><div class="h3">HALLAZGO 3</div><p class="p" style="font-size:14px;margin:0">El incidente funcionó como catalizador: 2,084 menciones tangenciales expusieron insatisfacción acumulada con el servicio. Ese flanco operativo es más urgente que el conflicto con Cossio.</p></div>
+</div>
+<div class="sowhat fu s3" style="margin-top:24px"><div class="sowhat-label">Implicancia para la Dirección de Comunicaciones</div><p>La estrategia no es de contención — es de capitalización. Avianca tiene una ventana de legitimidad donde la audiencia validó su respuesta institucional. La pregunta no es "cómo nos defendemos" sino <strong>"cómo convertimos esta legitimidad en posicionamiento antes de que se enfríe"</strong>.</p></div>
+</div></section>
+
+<!-- ========== METHODOLOGY ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Nota metodológica</div>
+<div class="h1 fu">Cómo se produjo este análisis</div>
+<p class="sub fu s2">Transparencia sobre qué datos usamos, qué descartamos, y por qué.</p>
+<div class="g2 g2w fu s3">
+<div>
+<table>
+<thead><tr><th>Etapa</th><th>Descripción</th><th style="text-align:right">Resultado</th></tr></thead>
+<tbody>
+<tr><td>Recolección</td><td>Social listening (YouScan) + scrapping directo de perfiles en FB, IG, TikTok</td><td style="text-align:right;font-family:var(--mono)">38,172</td></tr>
+<tr><td>Limpieza</td><td>Remoción de menciones de otras aerolíneas (2,228), textos vacíos (4,092), contenido no relacionado (1,017)</td><td style="text-align:right;font-family:var(--mono)">−7,337</td></tr>
+<tr><td>Clasificación IA</td><td>Modelos propietarios de clasificación: relevancia, sentimiento, dirección de sentimiento, confianza. 623 batches, 0 errores.</td><td style="text-align:right;font-family:var(--mono)">30,835</td></tr>
+<tr><td>Filtro relevancia</td><td>Solo menciones directamente sobre el conflicto Avianca-Cossio.</td><td style="text-align:right;font-family:var(--mono);color:var(--cyan)">14,403</td></tr>
+<tr><td>Análisis emocional</td><td>Epical Perception Engine: motor propietario de percepción profunda de marca. 25 matices emocionales, detección de competidores, intensidad.</td><td style="text-align:right;font-family:var(--mono)">20,756</td></tr>
+</tbody>
+</table>
+</div>
+<div><div class="card card-m"><div class="h3">¿Por qué 14,403 y no 38,172?</div><p class="p" style="font-size:13px">Un análisis convencional habría reportado 38K como "la conversación". Habría incluido quejas de American Airlines, partidas de Free Fire, y comentarios sobre la perrita de Cossio.</p><p class="p" style="font-size:13px;margin:0">El filtro de relevancia no es un recorte — es la diferencia entre medir ruido y medir señal.</p></div></div>
+</div>
+</div></section>
+
+<!-- ========== THE DATA ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Los datos</div>
+<div class="h1 fu">14,403 menciones relevantes: la foto real</div>
+<div class="kpi-row fu s2">
+<div class="kpi"><div class="kpi-v">14,403</div><div class="kpi-l">Relevantes</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">10,208</div><div class="kpi-l">Negativas (70.9%)</div></div>
+<div class="kpi"><div class="kpi-v">2,615</div><div class="kpi-l">Neutrales (18.2%)</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--green)">1,580</div><div class="kpi-l">Positivas (11.0%)</div></div>
+</div>
+<div class="g2 fu s3">
+<div class="chart-box"><div class="chart-label">Sentimiento por dirección (hacia quién)</div><div style="position:relative;height:280px"><canvas id="dirChart"></canvas></div></div>
+<div class="chart-box"><div class="chart-label">Espectro emocional (Epical Perception Engine)</div><div style="position:relative;height:280px"><canvas id="emoChart"></canvas></div></div>
+</div>
+<div class="insight fu s4"><p><strong>El dato que invierte la lectura:</strong> de las 10,208 menciones negativas, 9,617 (94%) critican a Cossio. Solo 384 (3.8%) critican a Avianca directamente. La conversación castiga al influencer — no a la marca.</p></div>
+</div></section>
+
+<!-- ========== TRANSITION ========== -->
+<section class="sl tr"><div class="h1 fu">La conversación tiene tres actores.<br>Cada uno requiere una lectura diferente.</div><p class="sub fu s2">80% habla de Cossio. 14% habla de ambos. Solo 5% habla de Avianca sola.</p></section>
+
+<!-- ========== COSSIO ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Sobre Cossio — 11,546 menciones (80.2%)</div>
+<div class="h1 fu">La audiencia lo sancionó antes que la justicia</div>
+<div class="g2 g2w fu s2">
+<div>
+<p class="p"><strong>83.3% negativo. 11.6% positivo. 7 críticas por cada defensa.</strong> La audiencia no tiene matices: la mayoría absoluta considera irresponsable lo que hizo Cossio en el vuelo AV46.</p>
+<p class="p">Sus defensores (1,337 menciones) usan dos argumentos: <strong>"fue un accidente"</strong> y <strong>"Avianca exagera porque quiere plata"</strong>. Ninguno logra tracción fuera de su base de fans.</p>
+<p class="p">La emoción dominante (Epical Perception Engine) no es enojo — es <strong>indignación moral</strong> (1,677 menciones). El enojo se disipa en horas; la indignación moral cristaliza en juicio de valor duradero.</p>
+<div class="sowhat"><div class="sowhat-label">Lectura estratégica</div><p>La audiencia ya hizo el trabajo de sanción social. Cualquier acción institucional adicional visible hacia el individuo corre el riesgo de reencuadrar la historia como "ensañamiento corporativo".</p></div>
+</div>
+<div>
+<div class="card" style="margin-bottom:10px"><div class="chart-label">Sentimiento sobre Cossio</div><div class="bar"><div style="width:83.3%;background:var(--red)">83.3% NEG</div><div style="width:11.6%;background:var(--green);font-size:8px">11.6%</div><div style="width:5.1%;background:var(--dim)"></div></div></div>
+<div class="spost">
+<div class="spost-head"><div class="spost-avatar" style="background:linear-gradient(135deg,#f09433,#e6683c)">🔴</div><div><div class="spost-user">EL MONO 🐒</div><div class="spost-handle">TikTok · 29 marzo · 59,589 interacciones</div></div></div>
+<div class="spost-text">😮‍💨🔴#ElColmo Avianca anunció acciones legales, el vuelo estuvo en peligro tras la broma, arrojó el químico en la cabina y se expandió por todo el avión.</div>
+<div class="spost-meta"><span>❤️ 59,589</span></div>
+</div>
+<div class="spost">
+<div class="spost-head"><div class="spost-avatar" style="background:linear-gradient(135deg,#833ab4,#fd1d1d)">💬</div><div><div class="spost-user">Comentario en @YefersonCossio</div><div class="spost-handle">Instagram · 30 marzo · 2,002 interacciones</div></div></div>
+<div class="spost-text">Nea, jugar con la seguridad de un vuelo no es chistoso, más de 200 pasajeros viéndose afectados por una "bromita"</div>
+<div class="spost-meta"><span>❤️ 2,002</span></div>
+</div>
+</div>
+</div>
+</div></section>
+
+<!-- ========== AVIANCA ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Sobre Avianca — 702 menciones (4.9%)</div>
+<div class="h1 fu">La defienden más de lo que la cuestionan por el incidente</div>
+<div class="g2 g2w fu s2">
+<div>
+<p class="p"><strong>33.9% positivo vs 54.7% negativo.</strong> Parece desfavorable. Pero el desglose del negativo cambia la lectura:</p>
+<table><thead><tr><th>Tipo de crítica</th><th style="text-align:right">%</th></tr></thead>
+<tbody>
+<tr><td>Quejas de servicio preexistentes</td><td style="text-align:right">10.4%</td></tr>
+<tr><td>"¿Cómo dejaron subir eso al avión?"</td><td style="text-align:right">4.4%</td></tr>
+<tr><td>"Avianca quiere plata"</td><td style="text-align:right">3.9%</td></tr>
+<tr><td>Doble rasero ("a nosotros no nos responden")</td><td style="text-align:right">3.6%</td></tr>
+<tr><td>Desproporción de la sanción</td><td style="text-align:right">2.9%</td></tr>
+</tbody></table>
+<p class="p">Las 238 positivas son contundentes. No son fans de la marca — son ciudadanos validando una posición institucional.</p>
+<div class="sowhat"><div class="sowhat-label">Lectura estratégica</div><p>El negativo hacia la marca no nació con este incidente — es insatisfacción acumulada que encontró micrófono. La narrativa de "doble rasero" es la que tiene mayor potencial de daño porque conecta el conflicto con la experiencia cotidiana de servicio.</p></div>
+</div>
+<div>
+<div class="card" style="margin-bottom:10px"><div class="chart-label">Sentimiento sobre Avianca</div><div class="bar"><div style="width:54.7%;background:var(--red)">54.7% NEG</div><div style="width:33.9%;background:var(--green)">33.9% POS</div><div style="width:11.4%;background:var(--dim)"></div></div></div>
+<div class="spost">
+<div class="spost-head"><div class="spost-avatar" style="background:linear-gradient(135deg,#1DA1F2,#0d8ecf)">📲</div><div><div class="spost-user">Pulzo 📲</div><div class="spost-handle">TikTok · 30 marzo · 2,881 interacciones</div></div></div>
+<div class="spost-text">Total apoyo a Avianca</div>
+<div class="spost-meta"><span>❤️ 2,881</span></div>
+</div>
+<div class="spost">
+<div class="spost-head"><div class="spost-avatar" style="background:linear-gradient(135deg,#1DA1F2,#0d8ecf)">⚖️</div><div><div class="spost-user">soydanilegal</div><div class="spost-handle">TikTok · 1 abril · 1,956 interacciones</div></div></div>
+<div class="spost-text">Pasajeros deben demandar junto con Avianca</div>
+<div class="spost-meta"><span>❤️ 1,956</span></div>
+</div>
+</div>
+</div>
+</div></section>
+
+<!-- ========== CATALYST ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Hallazgo no obvio</div>
+<div class="h1 fu">El efecto catalizador: el incidente le dio micrófono a la insatisfacción acumulada</div>
+<p class="sub fu s2">2,084 menciones tangenciales negativas revelan un problema que trasciende el caso Cossio.</p>
+<div class="g2 fu s2">
+<div>
+<p class="p">Además de las 14,403 relevantes, detectamos <strong>2,084 menciones tangenciales negativas</strong> — quejas sobre Avianca sin relación directa con el incidente pero que aparecieron durante el mismo período.</p>
+<p class="p">El incidente funcionó como <strong>catalizador de insatisfacción latente</strong>: personas que tenían una queja guardada vieron que Avianca era tendencia y aprovecharon para hacerla visible.</p>
+<p class="p">Composición: problemas de equipaje, cancelaciones sin respuesta, atención automatizada, percepciones de cobro excesivo.</p>
+</div>
+<div>
+<div class="spost"><div class="spost-head"><div class="spost-avatar" style="background:#4267B2">✈️</div><div><div class="spost-user">Comentario en @Avianca</div><div class="spost-handle">TikTok · 2 abril</div></div></div><div class="spost-text">PÉSIMO CERVICIOOOOOOOO</div><div class="spost-meta"><span>❤️ 287</span></div></div>
+<div class="spost"><div class="spost-head"><div class="spost-avatar" style="background:#4267B2">✈️</div><div><div class="spost-user">Comentario en @Avianca</div><div class="spost-handle">Facebook · 1 abril</div></div></div><div class="spost-text">Respondan! Le dejaron la maleta súper mala, rota, sucia y descosida. Hice los debidos procesos de queja y dijeron que no fue daño.</div><div class="spost-meta"><span>😡 12</span></div></div>
+</div>
+</div>
+<div class="risk-box fu s3"><p><strong>Patrón predecible:</strong> cada vez que Avianca sea tendencia en redes, este banco de insatisfacción se reactiva. No es un problema comunicacional — es un indicador operativo que Comunicaciones puede llevar a la mesa de Customer Experience como evidencia cuantificada.</p></div>
+</div></section>
+
+<!-- ========== BOTH ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Sobre ambos — 2,040 menciones (14.2%)</div>
+<div class="h1 fu">El territorio informativo: medios que amplifican sin tomar posición</div>
+<div class="g2 g2w fu s2">
+<div>
+<p class="p"><strong>89.9% neutral.</strong> Menciones informativas: medios digitales, cuentas de noticias, creadores replicando la historia sin tomar partido.</p>
+<p class="p"><strong>La crisis no se contagió al sector.</strong> LATAM Airlines (534 menciones detectadas por Epical Perception Engine), Wingo (112) y Volaris (34) aparecen sin sentimiento negativo asociado al incidente.</p>
+<div class="sowhat"><div class="sowhat-label">Lectura estratégica</div><p>La focalización es ventaja y riesgo: Avianca absorbe sola el costo reputacional. LATAM tiene hoy mejor percepción comparativa (21.6% positivo vs 14.9% negativo). Si no se ocupa el vacío, otros pueden apropiarse de la narrativa de "aerolínea más confiable".</p></div>
+</div>
+<div>
+<div class="card"><div class="chart-label">Sentimiento cuando ambos aparecen</div><div class="bar"><div style="width:89.9%;background:var(--dim)">89.9% NEUTRAL</div><div style="width:9.9%;background:var(--red);font-size:8px">9.9%</div></div></div>
+<div class="spost" style="margin-top:12px">
+<div class="spost-head"><div class="spost-avatar" style="background:linear-gradient(135deg,#000,#333)">⚖️</div><div><div class="spost-user">soydanilegal</div><div class="spost-handle">TikTok · 30 marzo · 71,311 interacciones</div></div></div>
+<div class="spost-text">¿Justicia o exageración? Déjame tu opinión aquí abajo. ⚖️👇 #avianca #yefersoncossio #cossio #fyp #viral</div>
+<div class="spost-meta"><span>❤️ 71,311</span><span style="color:var(--magenta);font-weight:600">Post con mayor engagement del período</span></div>
+</div>
+</div>
+</div>
+</div></section>
+
+<!-- ========== PLATFORMS ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Lectura por plataforma</div>
+<div class="h1 fu">Cada plataforma juega un partido diferente</div>
+<div class="g4 fu s2">
+<div class="plat" style="border-top-color:var(--cyan)"><div class="plat-name">Twitter</div><div class="plat-n">5,035 (35%)</div><p class="sm" style="margin-top:6px">Medios y formadores de opinión. Tono informativo. Donde se formó el marco legal.</p></div>
+<div class="plat" style="border-top-color:var(--amber)"><div class="plat-name">Facebook</div><div class="plat-n">4,684 (32.5%)</div><p class="sm" style="margin-top:6px">Audiencia adulta, debate argumentado. Donde el efecto catalizador se manifiesta más.</p></div>
+<div class="plat" style="border-top-color:var(--magenta)"><div class="plat-name">TikTok</div><div class="plat-n">3,595 (25%)</div><p class="sm" style="margin-top:6px">Donde el engagement explota. Cossio pierde 7x incluso en su propia plataforma.</p></div>
+<div class="plat" style="border-top-color:var(--green)"><div class="plat-name">Instagram</div><div class="plat-n">783 (5.4%)</div><p class="sm" style="margin-top:6px">Comentarios directos en perfiles. Menor volumen, mayor intensidad emocional.</p></div>
+</div>
+<div class="insight fu s3"><p><strong>Contraintuitivo:</strong> Avianca no pierde en TikTok. Cossio tiene 7 críticas por cada defensa incluso ahí. La oportunidad en TikTok no es defensiva — es ofensiva.</p></div>
+</div></section>
+
+<!-- ========== TIMELINE ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Evolución temporal</div>
+<div class="h1 fu">48 horas que definieron la conversación</div>
+<div class="chart-box fu s2"><div style="position:relative;height:200px"><canvas id="volChart"></canvas></div></div>
+<div class="g2 fu s3" style="margin-top:20px">
+<div>
+<div class="spike"><div class="spike-dot" style="background:var(--dim)">A</div><div><p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">11 marzo — 21 menciones</p><p class="sm" style="margin:0">El incidente. Cero cobertura mediática.</p></div></div>
+<div class="spike"><div class="spike-dot" style="background:var(--red)">B</div><div><p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">29 marzo — 2,179 menciones</p><p class="sm" style="margin:0">Comunicado de Avianca. 18 días después.</p></div></div>
+</div>
+<div>
+<div class="spike"><div class="spike-dot" style="background:var(--red)">C</div><div><p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">30 marzo — 4,863 menciones</p><p class="sm" style="margin:0">TikTok explota. "¿Justicia o exageración?" 71K interacciones.</p></div></div>
+<div class="spike"><div class="spike-dot" style="background:var(--magenta)">D</div><div><p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">31 marzo — 5,354 menciones (pico)</p><p class="sm" style="margin:0">Cossio gira a "fue un ACCIDENTE". Demasiado tarde.</p></div></div>
+</div>
+</div>
+<div class="sowhat fu s4"><div class="sowhat-label">Hallazgo sobre timing</div><p>Los 18 días entre incidente y comunicado fueron una ventaja involuntaria. Avianca habló con hechos verificados desde posición de firmeza. <strong>Principio: la precisión importa más que la velocidad cuando la marca tiene la posición de autoridad.</strong></p></div>
+</div></section>
+
+<!-- ========== TRANSITION ========== -->
+<section class="sl tr"><div class="h1 fu">Los datos definen el presente.<br>Las narrativas definen cómo se recuerda.</div><p class="sub fu s2">Tres narrativas compiten por dar forma a la memoria colectiva.</p></section>
+
+<!-- ========== NARRATIVES ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Las tres narrativas en juego</div>
+<div class="nar fu s2"><div class="nar-num">01</div><div class="nar-title">"La seguridad aérea es innegociable"</div><div class="badge badge-g">Dominante · Favorable a Avianca</div><p class="p">La narrativa ganadora. La mayoría acepta que Cossio fue irresponsable y Avianca respondió correctamente. La emoción motriz es <strong>indignación moral</strong> — más duradera que el enojo porque implica que la audiencia percibe un principio en juego, no solo una reacción emocional.</p></div>
+<div class="nar fu s3"><div class="nar-num">02</div><div class="nar-title">"El castigo es desproporcionado — Avianca busca plata"</div><div class="badge badge-o">Minoritaria · Riesgo medio</div><p class="p">11.6% de las menciones sobre Cossio. Su peligro no es el volumen actual sino la capacidad de fusionarse con la narrativa de "doble rasero". Si el proceso legal escala públicamente y coincide con un episodio de mal servicio, las dos narrativas convergen en "corporación abusiva".</p></div>
+<div class="nar fu s4"><div class="nar-num">03</div><div class="nar-title">"Los influencers deben tener límites"</div><div class="badge badge-b">Emergente · Oportunidad estratégica</div><p class="p">Trasciende el caso específico. Toca una tensión social creciente: desconfianza hacia la cultura de "bromas" y el poder sin accountability de creadores. Avianca puede posicionarse como <strong>"la empresa que priorizó pasajeros sobre likes"</strong> — territorio sin dueño.</p></div>
+</div></section>
+
+<!-- ========== SCENARIOS ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Proyección a 30 días</div>
+<div class="h1 fu">Tres escenarios según nivel de acción</div>
+<div class="sc-grid fu s2">
+<div class="sc" style="background:#FFF8F8;border-top:3px solid var(--red)"><div class="sc-letter" style="color:var(--red)">A</div><div class="sc-name">Sin acción</div><p class="p" style="font-size:13px;margin-top:6px">La posición favorable se diluye. Las quejas de servicio quedan como última impresión visible.</p><p class="sm" style="color:var(--red);font-weight:600;padding-top:8px;border-top:1px solid #FFCDD2;margin:0">Se pierde la oportunidad. No se pierde reputación.</p></div>
+<div class="sc" style="background:#FFF8F0;border-top:3px solid var(--amber)"><div class="sc-letter" style="color:var(--amber)">B</div><div class="sc-name">Respuesta táctica</div><p class="p" style="font-size:13px;margin-top:6px">Contenido de humanización + resolución de quejas podría extender la ventana de legitimidad 15-20 días.</p><p class="sm" style="color:var(--amber);font-weight:600;padding-top:8px;border-top:1px solid #FFD699;margin:0">Se protege la posición. No se maximiza.</p></div>
+<div class="sc" style="background:#F0F8FF;border-top:3px solid var(--cyan)"><div class="sc-letter" style="color:var(--cyan)">C</div><div class="sc-name">Posicionamiento proactivo</div><p class="p" style="font-size:13px;margin-top:6px">Estrategia integral. El incidente podría convertirse en pilar de posicionamiento: "la aerolínea que prioriza pasajeros".</p><p class="sm" style="color:var(--cyan);font-weight:600;padding-top:8px;border-top:1px solid #B3DEF0;margin:0">El incidente se convierte en activo reputacional.</p></div>
+</div>
+</div></section>
+
+<!-- ========== STRATEGIC READINGS ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Lecturas estratégicas</div>
+<div class="h1 fu">Cuatro señales que los datos emiten</div>
+<p class="sub fu s2">No son instrucciones — son lecturas de lo que la conversación sugiere como dirección estratégica.</p>
+<div class="rec fu s2"><h3>La insatisfacción de servicio es el flanco real — no el conflicto con Cossio</h3><p class="p" style="font-size:14px">Las 2,084 menciones tangenciales negativas revelan que cada vez que Avianca es tendencia, la insatisfacción acumulada sale a la superficie. La narrativa de "doble rasero" tiene potencial de fusionarse con la Narrativa 02 y reencuadrar la firmeza como hipocresía corporativa.</p><div class="rec-signal">Señal → la percepción de servicio condiciona la credibilidad de cualquier posicionamiento posterior</div></div>
+<div class="rec fu s3"><h3>La tripulación es el activo de comunicación más creíble en este momento</h3><p class="p" style="font-size:14px">Epical Perception Engine detecta que la audiencia separa al personal que manejó el incidente de la marca corporativa. La tripulación aparece como "escudo moral". Las personas son más creíbles que la institución para convertir indignación moral en confianza sostenida.</p><div class="rec-signal">Señal → la humanización orgánica supera al comunicado institucional en conversión de sentimiento</div></div>
+<div class="rec fu s3"><h3>El marco "precisión sobre velocidad" es exportable a futuros incidentes</h3><p class="p" style="font-size:14px">Los 18 días entre incidente y comunicado fueron ventaja involuntaria. Avianca habló con hechos verificados desde posición de autoridad. Ese principio es sistematizable como protocolo para futuros conflictos con personalidades digitales.</p><div class="rec-signal">Señal → la velocidad de respuesta no siempre correlaciona con eficacia reputacional</div></div>
+<div class="rec fu s4"><h3>"Pasajeros sobre likes" es un territorio de posicionamiento que trasciende este incidente</h3><p class="p" style="font-size:14px">La Narrativa 03 conecta con una tensión social creciente. Avianca tiene la oportunidad de ser la marca que define los estándares de convivencia entre corporaciones y creadores de contenido. Territorio sin dueño con relevancia más allá de la industria aérea.</p><div class="rec-signal">Señal → el posicionamiento de largo plazo vale más que la gestión de corto plazo de este incidente</div></div>
+</div></section>
+
+<!-- ========== COMMS APPLICATIONS ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Uso práctico</div>
+<div class="h1 fu">Aplicaciones concretas para la Dirección de Comunicaciones</div>
+<div class="g2 fu s2">
+<div>
+<div class="card" style="margin-bottom:10px"><div class="h3">Defender la decisión internamente</div><p class="sm">14,403 menciones con dirección de sentimiento verificada muestran que la audiencia validó la posición. Datos, no opinión.</p></div>
+<div class="card" style="margin-bottom:10px"><div class="h3">Calibrar la estrategia legal</div><p class="sm">La audiencia ya sancionó a Cossio (7x más críticas que defensas). Escalar el proceso legal público genera riesgo de "ensañamiento" sin beneficio reputacional.</p></div>
+<div class="card" style="margin-bottom:10px"><div class="h3">Llevar evidencia a CX y Operaciones</div><p class="sm">Las 2,084 quejas tangenciales son evidencia cuantificada de que la reputación se construye en el servicio diario.</p></div>
+<div class="card" style="margin-bottom:10px"><div class="h3">Briefear contenido con fundamento</div><p class="sm">Las lecturas estratégicas están fundamentadas en datos de audiencia — son briefeables directamente a agencia creativa.</p></div>
+</div>
+<div>
+<div class="card" style="margin-bottom:10px"><div class="h3">Monitorear riesgo de fusión narrativa</div><p class="sm">Narrativa 02 + quejas de servicio es el escenario de mayor riesgo. Requiere monitoreo activo.</p></div>
+<div class="card" style="margin-bottom:10px"><div class="h3">Posicionar a largo plazo</div><p class="sm">"La aerolínea que priorizó pasajeros sobre likes" — territorio sin dueño, alcance más allá de este caso.</p></div>
+<div class="card" style="margin-bottom:10px"><div class="h3">Reportar al board con perspectiva</div><p class="sm">Marco de decisión que separa lo urgente (quejas, declaración) de lo estratégico (posicionamiento, protocolo).</p></div>
+<div class="card" style="margin-bottom:10px"><div class="h3">Dimensionar el valor de inteligencia continua</div><p class="sm">La diferencia entre "70.9% negativo" y "94% contra Cossio, Avianca está bien" justifica análisis profundo — no solo dashboards.</p></div>
+</div>
+</div>
+</div></section>
+
+<!-- ========== CLOSING ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Cierre</div>
+<div class="h1 fu">La diferencia entre información y decisión</div>
+<div class="g2 fu s2">
+<div class="card card-m"><div class="h3" style="color:var(--dim)">Monitoreo estándar</div><p class="p" style="font-size:14px">38,172 menciones. 70.9% negativo. "Avianca debe implementar una campaña que aborde las preocupaciones del público".</p><p class="sm">Diagnóstico: crisis. Estrategia: contención.</p></div>
+<div class="card card-b"><div class="h3">Análisis profundo</div><p class="p" style="font-size:14px">14,403 relevantes. 94% del negativo es contra Cossio. Avianca tiene una ventana de capitalización.</p><p class="sm" style="color:var(--cyan)">Diagnóstico: posición favorable. Estrategia: posicionamiento.</p></div>
+</div>
+<div class="sowhat fu s3" style="margin-top:28px"><div class="sowhat-label">La pregunta que queda</div><p>Dos lecturas del mismo dataset producen dos estrategias opuestas. Una gasta en contención. La otra invierte en posicionamiento. <strong>La diferencia no es la herramienta — es la profundidad del análisis y la calidad de la pregunta que se hace antes de abrir los datos.</strong></p></div>
+<div style="display:flex;justify-content:center;align-items:center;gap:40px;margin-top:56px" class="fu s4">
+<img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:16px;filter:brightness(0.3);opacity:0.5" onerror="this.style.display='none'">
+<div style="width:1px;height:24px;background:var(--border)"></div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Avianca_Logo.svg/200px-Avianca_Logo.svg.png" alt="Avianca" style="height:20px;opacity:0.5" onerror="this.style.display='none'">
+</div>
+<p style="text-align:center;font-size:11px;color:var(--dim);margin-top:12px">Social & Consumer Intelligence aplicada a decisiones de negocio · epical.digital</p>
+</div></section>
+
+<!-- ========== SCRIPTS ========== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+var RED='#DC2626',GREEN='#2B8A3E',GRAY='#B0B0C8',DARK='#0F1635',PINK='#D6336C',CYAN='#1098AD',AMBER='#C27803',BDR='#E0E0EE';
+
+new Chart(document.getElementById('dirChart'),{type:'bar',data:{labels:['Sobre Cossio','Sobre ambos','Sobre Avianca','Otro'],datasets:[{label:'Negativo',data:[9617,202,384,5],backgroundColor:RED,borderWidth:0,borderRadius:4},{label:'Neutral',data:[592,1833,80,110],backgroundColor:GRAY,borderWidth:0,borderRadius:4},{label:'Positivo',data:[1337,5,238,0],backgroundColor:GREEN,borderWidth:0,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:DARK,font:{family:'DM Sans',size:11},padding:16,usePointStyle:true,pointStyle:'circle'}}},scales:{x:{stacked:true,ticks:{color:DARK,font:{family:'DM Sans',size:11}},grid:{display:false}},y:{stacked:true,ticks:{color:GRAY,font:{family:'JetBrains Mono',size:10}},grid:{color:BDR}}}}});
+
+new Chart(document.getElementById('emoChart'),{type:'bar',data:{labels:['Informativo','Indignación activa','Indignación moral','Celebración','Frustración','Conexión','Desencanto','Lealtad'],datasets:[{data:[12805,2692,1677,1122,898,439,339,300],backgroundColor:[GRAY,RED,PINK,GREEN,AMBER,'#7C3AED','#EA580C',CYAN],borderWidth:0,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:GRAY,font:{family:'JetBrains Mono',size:9}},grid:{color:BDR}},y:{ticks:{color:DARK,font:{family:'DM Sans',size:11}},grid:{display:false}}}}});
+
+new Chart(document.getElementById('volChart'),{type:'line',data:{labels:['Mar 11','29','30','31','Abr 1','2','3','4','5','6','7'],datasets:[{data:[21,2179,4863,5354,958,515,194,87,84,33,5],borderColor:CYAN,backgroundColor:'rgba(16,152,173,0.08)',fill:true,tension:0.35,borderWidth:2.5,pointRadius:[3,5,6,7,4,4,3,3,3,3,3],pointBackgroundColor:[GRAY,RED,RED,PINK,CYAN,CYAN,GRAY,GRAY,GRAY,GRAY,GRAY],pointBorderColor:'transparent'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:DARK,font:{family:'JetBrains Mono',size:10}},grid:{color:BDR}},y:{ticks:{color:GRAY,font:{family:'JetBrains Mono',size:9}},grid:{color:BDR}}}}});
+
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.08});
+document.querySelectorAll('.fu').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

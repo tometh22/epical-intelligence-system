@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avianca &mdash; Informe de Inteligencia Social</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<style>
+/* ===== THEME VARIABLES ===== */
+
+:root {
+    --bg-primary: #050D1A;
+    --bg-secondary: #0A1628;
+    --bg-card: rgba(255,255,255,0.03);
+    --border-color: rgba(255,255,255,0.06);
+    --text-primary: #FFFFFF;
+    --text-secondary: #A0AEC0;
+    --text-muted: #5A6378;
+    --accent-primary: #FF1B6B;
+    --accent-secondary: #00D4FF;
+    --accent-gold: #FFB800;
+    --shadow: none;
+    --chart-text: #A0AEC0;
+    --chart-grid: rgba(255,255,255,0.04);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
+body {
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    background: #050D1A;
+    color: #A0AEC0;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ===== SECTION SNAP ===== */
+.section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 48px;
+    overflow: hidden;
+}
+.section.auto-height {
+    min-height: auto;
+    scroll-snap-align: start;
+}
+.section-inner {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.font-header {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+.font-mono {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+.section-title {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 48px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 48px;
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #FF1B6B, #00D4FF);
+    margin-top: 16px;
+}
+.section-subtitle {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    color: #A0AEC0;
+    margin-top: -36px;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+.text-secondary { color: #A0AEC0; }
+.text-white { color: #FFFFFF; }
+
+/* ===== EDITORIAL QUESTION & INSIGHT ===== */
+.editorial-question {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #00D4FF;
+    margin-bottom: 32px;
+}
+.insight-box {
+    border-left: 4px solid #FF1B6B;
+    padding: 16px 24px;
+    margin-top: 32px;
+    background: rgba(255,27,107,0.03);
+}
+.insight-box p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+
+/* ===== COVER ===== */
+.cover {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.cover-orb {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,27,107,0.15), rgba(0,212,255,0.1), transparent 70%);
+    filter: blur(80px);
+    animation: orb-rotate 15s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+}
+@keyframes orb-rotate {
+    0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+    25%  { transform: translate(-50%, -50%) rotate(90deg) scale(1.1); }
+    50%  { transform: translate(-50%, -50%) rotate(180deg) scale(1); }
+    75%  { transform: translate(-50%, -50%) rotate(270deg) scale(0.95); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+}
+.cover-content {
+    position: relative;
+    z-index: 1;
+}
+.cover-client {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: clamp(60px, 10vw, 120px);
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #FF1B6B, #00D4FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+}
+.cover-subtitle {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #A0AEC0;
+    margin-top: 16px;
+}
+.cover-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #5A6378;
+    margin-top: 24px;
+}
+.cover-line {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,27,107,0.5), transparent);
+    margin: 32px auto 0;
+}
+.cover-wordmark {
+    z-index: 1;
+}
+
+/* ===== EXECUTIVE SUMMARY CARDS ===== */
+.exec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+@media (max-width: 900px) {
+    .exec-grid { grid-template-columns: 1fr; }
+}
+.exec-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 28px 24px;
+}
+.exec-card h3 {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+}
+.exec-card p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    color: #FFFFFF;
+    line-height: 1.8;
+    margin-bottom: 8px;
+}
+.exec-card-paso { border-left: 4px solid #FF1B6B; }
+.exec-card-juego { border-left: 4px solid #00D4FF; }
+.exec-card-viene { border-left: 4px solid #FFB800; }
+
+/* ===== KPI CARDS ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+@media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+}
+.kpi-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.kpi-card:hover {
+    border-color: rgba(255,27,107,0.2);
+    box-shadow: 0 0 40px rgba(255,27,107,0.05);
+}
+.kpi-label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #A0AEC0;
+    margin-bottom: 12px;
+}
+.kpi-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+.kpi-value.white { color: #FFFFFF; }
+.kpi-value.cyan { color: #00D4FF; }
+.kpi-value.magenta { color: #FF1B6B; }
+.kpi-value.gold { color: #FFB800; }
+
+/* Actor stacked bar */
+.actor-bar-container {
+    margin-top: 16px;
+}
+.actor-bar {
+    display: flex;
+    height: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+}
+.actor-bar-segment {
+    height: 100%;
+    transition: width 1.5s ease;
+}
+.actor-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+    font-size: 11px;
+    color: #A0AEC0;
+}
+.actor-legend-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* ===== CHART SECTION ===== */
+.chart-wrapper {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 32px;
+}
+.chart-wrapper canvas {
+    max-height: 400px;
+    width: 100% !important;
+}
+
+/* ===== TWO COLUMN LAYOUT ===== */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+@media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+}
+
+/* ===== NARRATIVE TRANSITION ===== */
+.transition-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+.transition-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+.transition-bg .blob {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.05;
+}
+.transition-bg .blob-magenta {
+    background: #FF1B6B;
+    top: 20%;
+    left: 20%;
+}
+.transition-bg .blob-cyan {
+    background: #00D4FF;
+    bottom: 20%;
+    right: 20%;
+}
+.transition-quote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(28px, 4vw, 36px);
+    font-style: italic;
+    color: #FFFFFF;
+    max-width: 800px;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== NARRATIVE FULL-VIEWPORT SLIDES (NEW) ===== */
+.narrative-bg-number {
+    position: absolute; top: -20px; left: -10px;
+    font-family: 'Bebas Neue', Impact, sans-serif; font-size: 160px;
+    color: rgba(255,27,107,0.08); line-height: 1; z-index: 0;
+}
+.narrative-slide-title {
+    font-family: 'Bebas Neue', Impact, sans-serif; font-size: 42px; color: #fff;
+    letter-spacing: 2px; margin-bottom: 40px; position: relative; z-index: 1;
+}
+.narrative-two-col {
+    display: grid; grid-template-columns: 45fr 55fr; gap: 40px;
+}
+@media (max-width: 768px) {
+    .narrative-two-col { grid-template-columns: 1fr; }
+    .narrative-slide-title { font-size: 32px; }
+    .narrative-bg-number { font-size: 100px; }
+}
+.subsection-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 2px; color: #FF1B6B; margin-bottom: 12px; margin-top: 32px;
+}
+.subsection-text { color: #A0AEC0; font-size: 15px; line-height: 1.8; }
+.subsection-text p { margin-bottom: 12px; }
+.subsection-text ul { padding-left: 20px; margin-bottom: 12px; }
+.subsection-text li { margin-bottom: 4px; }
+.subsection-text strong { color: #FFFFFF; }
+.narrative-mini-chart {
+    position: absolute; top: 0; right: 0; width: 220px;
+}
+
+/* ===== PLATFORM CARDS ===== */
+.platform-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+@media (max-width: 768px) {
+    .platform-grid { grid-template-columns: 1fr; }
+}
+.platform-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 24px;
+}
+.platform-name {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+}
+.platform-quadrant {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+.platform-bullets {
+    list-style: none;
+    padding: 0;
+}
+.platform-bullets li {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    color: #A0AEC0;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+}
+.platform-bullets li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: #5A6378;
+}
+
+/* ===== ANOMALY CARDS ===== */
+.anomaly-card {
+    border-radius: 0 16px 16px 0;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    border-left: 4px solid;
+}
+.anomaly-card.critical {
+    border-left-color: #FF1B6B;
+    background: rgba(255,27,107,0.03);
+}
+.anomaly-card.warning {
+    border-left-color: #FFB800;
+    background: rgba(255,184,0,0.03);
+}
+.anomaly-card.info {
+    border-left-color: #00D4FF;
+    background: rgba(0,212,255,0.03);
+}
+.severity-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.severity-badge.critical {
+    background: rgba(255,27,107,0.15);
+    color: #FF1B6B;
+}
+.severity-badge.warning {
+    background: rgba(255,184,0,0.15);
+    color: #FFB800;
+}
+.severity-badge.info {
+    background: rgba(0,212,255,0.15);
+    color: #00D4FF;
+}
+.anomaly-desc {
+    color: #A0AEC0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ===== RECOMMENDATION CARDS ===== */
+.rec-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+.rec-number {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 36px;
+    color: #FF1B6B;
+    line-height: 1;
+    min-width: 36px;
+    flex-shrink: 0;
+}
+.rec-body h4 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+}
+.rec-body p {
+    color: #A0AEC0;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+.rec-fundamento {
+    color: #A0AEC0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+.rec-metrica {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #5A6378;
+}
+.rec-metrica-label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #FFB800;
+    margin-right: 6px;
+}
+.draft-badge {
+    display: inline-block;
+    background: rgba(255,27,107,0.15);
+    border: 1px solid rgba(255,27,107,0.3);
+    color: #FF1B6B;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 32px;
+}
+
+/* ===== SPIKE EXPLORER ===== */
+.spike-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.spike-btn {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,27,107,0.3);
+    border-radius: 8px;
+    color: #A0AEC0;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    line-height: 1.4;
+}
+.spike-btn:hover {
+    border-color: #FF1B6B;
+    color: #FFFFFF;
+}
+.spike-btn.active {
+    background: #FF1B6B;
+    border-color: #FF1B6B;
+    color: #FFFFFF;
+}
+.spike-btn .spike-letter {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 18px;
+    display: block;
+    color: inherit;
+}
+.spike-btn .spike-dates {
+    font-size: 11px;
+    display: block;
+    opacity: 0.8;
+}
+.spike-btn .spike-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    display: block;
+    color: #FF1B6B;
+}
+.spike-btn.active .spike-pct {
+    color: #FFFFFF;
+}
+.spike-panel {
+    margin-top: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-left: 4px solid #FF1B6B;
+    border-radius: 0 12px 12px 0;
+    padding: 24px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+.spike-panel.open {
+    max-height: 300px;
+    opacity: 1;
+}
+.spike-panel-title {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+.spike-panel-desc {
+    font-size: 14px;
+    color: #A0AEC0;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+.spike-panel-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.spike-meta-item {
+    font-size: 12px;
+}
+.spike-meta-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #5A6378;
+    font-size: 10px;
+    display: block;
+    margin-bottom: 2px;
+}
+.spike-meta-value {
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+}
+
+/* ===== METHODOLOGY FOOTER ===== */
+.methodology {
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 60px 48px;
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.methodology-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.methodology .brand {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 32px;
+    letter-spacing: 4px;
+    color: #FF1B6B;
+    margin-bottom: 8px;
+}
+.methodology .tagline {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    color: #A0AEC0;
+    margin-bottom: 24px;
+}
+.methodology .stats {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #5A6378;
+    margin-bottom: 8px;
+}
+.methodology .confidential {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    color: #5A6378;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+}
+.methodology p {
+    color: #5A6378;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+/* ===== NAV DOTS ===== */
+.nav-dots {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    position: relative;
+}
+.nav-dot.small {
+    width: 4px;
+    height: 4px;
+}
+.nav-dot.active {
+    width: 10px;
+    height: 10px;
+    background: #FF1B6B;
+    border-color: #FF1B6B;
+    box-shadow: 0 0 12px rgba(255,27,107,0.4);
+}
+.nav-dot::before {
+    content: attr(title);
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(5,13,26,0.95);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #A0AEC0;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+.nav-dot:hover::before {
+    opacity: 1;
+}
+@media (max-width: 768px) {
+    .nav-dots { right: 12px; gap: 8px; }
+    .section { padding: 60px 24px; }
+    .methodology { padding: 40px 24px; }
+    .cover-wordmark { left: 24px; bottom: 24px; }
+    .nav-dot::before { display: none; }
+}
+
+/* ===== D3 VIZ SHARED ===== */
+.d3-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 32px;
+    overflow: hidden;
+}
+.d3-card svg {
+    width: 100%;
+    display: block;
+}
+.d3-tooltip {
+    position: absolute;
+    background: rgba(5,13,26,0.95);
+    border: 1px solid rgba(255,27,107,0.3);
+    color: #A0AEC0;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 999;
+}
+.d3-tooltip.visible {
+    opacity: 1;
+}
+
+/* Pulse animation for crisis markers */
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+.pulse-marker {
+    animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ===== WORD CLOUD ===== */
+.wordcloud-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 32px 16px;
+    min-height: 200px;
+}
+.wordcloud-word {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(12px);
+    cursor: default;
+}
+.wordcloud-word.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== HEATMAP ===== */
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 11px;
+    color: #5A6378;
+}
+.heatmap-legend-bar {
+    width: 200px;
+    height: 12px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #0A1628, #FF1B6B);
+}
+
+/* ===== FORCE GRAPH ===== */
+.force-graph-container {
+    position: relative;
+    overflow: hidden;
+}
+.force-graph-container svg {
+    cursor: grab;
+}
+.force-graph-container svg:active {
+    cursor: grabbing;
+}
+
+/* ===== FORCE GRAPH LEGEND ===== */
+.force-legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.force-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #A0AEC0;
+}
+.force-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+</style>
+</head>
+<body>
+
+<!-- Shared D3 tooltip -->
+<div class="d3-tooltip" id="d3Tooltip"></div>
+
+<!-- Navigation dots (dynamic) -->
+<nav class="nav-dots" id="navDots" aria-label="Navegación de secciones">
+    <button class="nav-dot active" data-index="0" title="Cover"></button>
+    <button class="nav-dot" data-index="1" title="Marco"></button>
+    <button class="nav-dot" data-index="2" title="Lo que necesitás saber"></button>
+    <button class="nav-dot" data-index="3" title="Impacto"></button>
+    <button class="nav-dot" data-index="4" title="Cronología"></button>
+    <button class="nav-dot" data-index="5" title="Sentimiento"></button>
+    <button class="nav-dot" data-index="6" title="Red de actores"></button>
+    <button class="nav-dot" data-index="7" title="Narrativa 01"></button>
+    <button class="nav-dot" data-index="8" title="Narrativa 02"></button>
+    <button class="nav-dot" data-index="9" title="Narrativa 03"></button>
+    <button class="nav-dot" data-index="10" title="Escenarios"></button>
+    <button class="nav-dot" data-index="11" title="Audiencias"></button>
+    <button class="nav-dot" data-index="12" title="Decisiones"></button>
+    <button class="nav-dot" data-index="13" title="Metodología"></button>
+</nav>
+
+<!-- SEC-0: COVER -->
+<section class="section cover" id="sec-0">
+    <div class="cover-orb"></div>
+    <div class="cover-content">
+        <div class="fade-up" style="margin-bottom:32px;">
+            <span style="display:inline-block;background:#CC0000;color:#fff;font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:4px;">DEMO</span>
+        </div>
+        <h1 class="fade-up stagger-1" style="font-family:'Bebas Neue',Impact,sans-serif;font-size:52px;letter-spacing:4px;color:#FFFFFF;line-height:1.1;margin-bottom:24px;">INFORME DE INTELIGENCIA SOCIAL</h1>
+        <p class="fade-up stagger-2" style="font-family:'IBM Plex Sans',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:3px;color:#5A6378;margin-bottom:20px;">preparado para</p>
+        <div class="fade-up stagger-3" style="margin-bottom:32px;"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjE0MDQiIHZpZXdCb3g9Ii0xLjMgMCAxOTIxLjMgMTA4MCIgd2lkdGg9IjI1MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibS0xLjMgMGgxOTIxLjN2MTA4MGgtMTkyMS4zeiIgZmlsbD0iI2YwMCIvPjxnIGZpbGw9IiNmZmYiPjxwYXRoIGQ9Im0zMDcuMiA2MDkuN2MtMTYuNCAxMy41LTM1LjQgMTkuMi01NyAxNy0zMy4xLTMuMy01My41LTMwLjMtNTAuOS02Mi43IDMtMzcuNCAzNy41LTUxLjggNzAuMi01My4zIDEwLjgtLjUgMjEuNi0uOSAzMi40LTEuMi4zIDAgLjUtLjMuNi0uNi4zLTE4LjMtMTAtMjcuOC0yNy43LTI4LjgtMTcuMi0xLTMzLjcgNC41LTQ4LjIgMTMuNS0uMi4xLS41LjEtLjYtLjJsLTE2LTMwLjdjLS4xLS4yIDAtLjUuMi0uNiAyNi4zLTE2LjkgNTcuNi0yMyA4OC40LTE4LjkgMzAuMyA0IDQ4LjcgMjEuMiA1Mi4zIDUxLjcuNCAzLjMuNiA4LjguNiAxNi4zIDAgMjggMCA1NS45LjEgODMuOSAwIDguNSAxLjMgMTcuOCAzLjkgMjcuOC4xLjMgMCAuNS0uNC41aC0yOC4zYy05LjktLjEtMTUuNS00LjUtMTguOC0xMy42LS4zLS4yLS42LS4zLS44LS4xbS00MC4yLTIyLjFjMTIuMSAxLjcgMjUuNi0xLjIgMzUuMS05LjIuMi0uMi4zLS40LjMtLjd2LTMzYzAtLjMtLjItLjUtLjUtLjUtNy45LjItMTUuNy4zLTIzLjMuNS04LjEuMi0xNSAxLjYtMjAuNyA0LjMtOC44IDQuMi0xMS44IDEyLjYtMTAuMSAyMS45IDEuOCA5LjYgOS44IDE1LjQgMTkuMiAxNi43em0xODktMjcuMyA0Mi41LTExNC4xYy4xLS4xLjItLjIuMy0uMmg0Ny42Yy4yIDAgLjMuMi4zLjRsLTczLjYgMTc2LjljLS4xLjItLjIuMi0uMy4yLTE4LjMuMi0zMy44IDIuNi00Mi4yLTE3LjctMjEuOC01My4xLTQzLjYtMTA2LjItNjUuNS0xNTkuNS0uMS0uMSAwLS4zLjItLjNoNDguMWMuMiAwIC4zLjEuMy4ybDQxLjggMTE0LjFjLjIuMi40LjIuNSAwem0xNTMuNSA2Mi44YzAgLjItLjIuMy0uMy4zaC00Ny42Yy0uMiAwLS4zLS4yLS4zLS4zdi0xNzYuOGMwLS4yLjItLjMuMy0uM2g0Ny42Yy4yIDAgLjMuMi4zLjN6bTMuNi0yMjZjMS4zIDE0LjgtMTAgMjcuOS0yNS4yIDI5LjMtMTUuMiAxLjMtMjguNi05LjYtMjkuOS0yNC40czEwLTI3LjkgMjUuMi0yOS4zIDI4LjYgOS41IDI5LjkgMjQuNHptMTIzLjMgMTExLjhjMS41LTE4LjctMTEuMS0yOC0yOC40LTI4LjktMTYuOS0uOC0zMy4yIDQuNy00Ny40IDEzLjUtLjIuMS0uNC4xLS41LS4xbC0xNi0zMC42Yy0uMi0uMy0uMS0uNi4yLS43IDI1LjQtMTYuNyA1Ni44LTIyLjcgODYuOC0xOS4yIDM3LjIgNC40IDU0LjMgMjcuMyA1NC40IDYzLjggMCAyOC44LjEgNTcuNi4xIDg2LjQgMCAxMC4xIDEuMyAyMC4xIDMuOCAyOS44LjEuMyAwIC41LS4zLjUtOS4yLjEtMTguNC4xLTI3LjYuMS0xMC4zIDAtMTYuMS00LjItMTkuNS0xMy44LS4xLS4yLS4zLS4zLS41LS4xLTE0LjggMTIuMy0zMiAxOC4xLTUxLjUgMTcuNC0xOS43LS43LTM3LjItOC44LTQ3LjctMjUuMy05LjktMTUuNS0xMS41LTM2LjEtNS40LTUzLjMgNC45LTEzLjkgMTcuNi0yNC44IDMxLjgtMzAuNCAyMS44LTguNiA0NC40LTcuOSA2Ny40LTguNi4xIDAgLjMtLjIuMy0uNW0tNTQgNjMuN2MyLjYgMTAgMTEuNiAxNC40IDIxLjMgMTUuMyAxMS45IDEuMSAyMi42LTEuOSAzMi4xLTguOS41LS4zLjctLjkuNy0xLjV2LTMyLjhjMC0uNC0uMi0uNi0uNi0uNi03LjYuMi0xNS4xLjQtMjIuNS43LTEwLjUuNC0yNS44IDIuMi0zMC4zIDEyLjctMiA0LjQtMi4yIDkuNS0uNyAxNS4xem0xODAuMy0xMDkuOWMuMS4zLjUuNC43LjIgMjAuOS0xNS42IDQ5LjQtMjUuOCA3NS40LTE4LjcgMjkuMyA4IDQwLjMgMzQuMiA0MC4zIDYyLjJ2MTE2LjljMCAuMS0uMS4yLS4yLjJoLTQ3LjZjLS4yIDAtLjQtLjItLjQtLjR2LTEwMy44YzAtOS42LTEuMS0yMS42LTcuMS0yOC41LTkuMy0xMC43LTI3LjgtNi42LTM4LjktMS4yLTYuOCAzLjItMTMuMSA3LjEtMTkgMTEuNy0uMi4yLS4zLjQtLjMuNnYxMjEuNWMwIC4xLS4xLjItLjIuMmgtNDcuOGMtLjEgMC0uMi0uMS0uMi0uMnYtMTc2LjhjMC0uMy4xLS40LjQtLjQgMTAuNi0uNSAxOC42LS40IDIzLjkuMiAxMC40IDEuMSAxNy41IDYuNiAyMSAxNi4zem0xOTUuNCAzOGMtMTkuMiAyOC40LTkuNSA4MC4yIDI5LjggODUuOSAxNy45IDIuNiAzNS41LTIuNyA1MC43LTExLjkuMi0uMS41IDAgLjUuMmwxMi40IDMzLjZjLjEuMiAwIC41LS4yLjYtMTcuNSAxMS4xLTM5LjUgMTcuMi01OS45IDE3LjktMzMuOCAxLjMtNjQuMy0xMi45LTgwLjEtNDMuNS0xMC43LTIwLjgtMTMuNC00Ni41LTguOC02OS4yIDEzLjYtNjYuMSA4NS4yLTg5LjMgMTQwLjktNTkuNy4zLjIuNC40LjQuN2wtMS42IDM5YzAgLjMtLjEuMy0uMy4yLTI1LTE4LjEtNjQuMi0yMi44LTgzLjggNi4yem0yMTIuMyAxMDljLS4xLS4yLS4yLS4yLS40LS4xLTE3LjYgMTQuMi0zNy44IDE5LjgtNjAuNSAxNi42LTMzLjItNC42LTUxLjktMzQuNS00Ny4xLTY2LjUgNS4zLTM1LjEgMzguOS00Ny43IDcwLjEtNDkuMSAxMC42LS41IDIxLjMtLjkgMzEuOS0xLjIuMyAwIC41LS4yLjUtLjUgMi4yLTMyLjQtMzQuMy0zMi4xLTU0LjgtMjUuMi03LjUgMi41LTE0LjUgNS44LTIxLjEgMTAtLjEuMS0uMyAwLS40LS4xbC0xNi4xLTMwLjhjLS4xLS4yIDAtLjQuMS0uNSAyMy4yLTE1LjEgNTAuMy0yMS4zIDc4LjItMTkuOSAyNC4zIDEuMiA0Ny42IDkuNCA1Ny42IDMzLjEgNC43IDExLjIgNS40IDIyLjIgNS40IDM1LjkgMCAyNy4yIDAgNTQuMy4xIDgxLjUgMCAxMC4zIDEuMyAyMC4zIDMuOCAzMC4zLjEuMyAwIC40LS4zLjQtOS4xLjEtMTguMy4xLTI3LjMuMS0xMC42LS4yLTE2LjItNC41LTE5LjctMTRtLTM2LjktMjEuOGMxMC43LjggMjItMi4zIDMwLjctOSAuNi0uNC45LTEuMS45LTJ2LTMyLjNjMC0uNC0uMy0uNi0uNi0uNi04LjEuMi0xNi4zLjUtMjQuNS44LTEyLjEuNC0yOS4xIDMuOC0yOS44IDE5LjMtLjkgMTUuNCA4LjkgMjIuOCAyMy4zIDIzLjh6bTM1NC41IDI3LjRjLjUgMCAuNi0uMi4yLS41YTQ2MC4zIDQ2MC4zIDAgMCAxIC0zMi0zMy41Yy0uNC0uNC0uOS0uNy0xLjUtLjgtNjcuNy00LjUtMTM2LjItMzEuNC0xNTUuOC0xMDMuMi0xMi45LTQ3LjItMi42LTEwOC4zIDMyLjUtMTQ0LjQuMS0uMS4zLS4xLjQuMSAyMC42IDg5LjggNjMuNSAxNzYuMSAxMjIuOSAyNDYuNi4yLjIuNS41IDEgLjguMi4yLjUuMy44LjMgMTQuNS45IDI4LjUgMi44IDQyLjEgNS42IDE4LjQgMy44IDQwLjYgMTEuNSA0Ny4yIDMxLjMuMS4yIDAgLjMtLjIuMy01LjUtMS42LTExLjQtMi40LTE3LjctMi41LTE3LjktLjEtMzAuNS0uMS0zOC0uMS0uNSAwLS42LjItLjIuNiAzNS41IDM0LjIgNzkgNjEuMSAxMjYgNzYuMy42LjIuNi40IDAgLjUtMS4zLjMtMi44LjUtNC41LjctMjIgMi4yLTQ0LjguOC02Ni40LTMuMi0yNi4yLTQuOC01MC4yLTE0LjktNzIuOC0yOC43LTE5LjItMTEuNy0zOC40LTI0LjMtNTkuNC0zMS4zLTkuMS0zLjEtMTguOS01LjItMjkuNC02LjMtNy43LS44LTI0LjQtLjItMjktOC0uMi0uNC0uMS0uNi4zLS42em0tMTAxMy42IDExMGMtLjQgMC0uNi40LS41LjcgNCA5LjMgMTQuNiAxMS42IDIyLjQgNS4zLjMtLjIuNS0uMi43IDBsNy4xIDYuNWMuNC40LjQuNy0uMSAxLTkuMyA2LjktMjEuNCA4LjQtMzEuMyAyLjUtMTguNi0xMC45LTEzLjctMzkuMyA3LjQtNDMuNyAxNy4zLTMuNiAyOC40IDExIDI3LjYgMjcgMCAuNC0uMi41LS42LjVoLTMyLjdtMjEuMS05LjRjLTIuMS01LjctNi4yLTguNS0xMi40LTguMy0yLjcuMS01LjIgMS40LTYuNyAzLjZsLTEuNyAyLjNjLTEuNSAyLjEtMSAzLjEgMS42IDMuMWgxOC42Yy42LjEuOC0uMS42LS43em0yOS45LTM1djYzLjJjMCAuMi0uMS4zLS4zLjNoLTExLjZjLS4yIDAtLjMtLjEtLjMtLjN2LTYxLjJjMC0uMS4xLS4yLjItLjNsMTEuNi0yYy4yIDAgLjQuMS40LjN6bTUxLjkgMjguNmMtOC4zLTMuOS0xNy4xLjgtMTguMyA5LjktMS44IDEzLjkgMTMuOCAyMC40IDIzIDEwLjQuMi0uMi41LS4yLjYgMGw2LjggNy4xYy4xLjIuMS40IDAgLjUtMTUgMTUuMS00Mi41IDcuNC00Mi42LTE1LjYtLjEtMjMuMiAyNy42LTMyLjEgNDIuOS0xNi4zLjIuMi4yLjUgMCAuN2wtNi44IDcuMmMtLjMuMy0uNS4zLS44IDAtMS44LTItMy40LTMuMy00LjgtMy45em0yOS43LTIzLjRjMCAzLjgtMy4xIDYuOS02LjkgNi45cy02LjktMy4xLTYuOS02LjkgMy4xLTYuOSA2LjktNi45YzMuOC0uMSA2LjkgMyA2LjkgNi45em0tLjkgNThjMCAuMi0uMi4zLS4zLjNoLTExLjRjLS4yIDAtLjMtLjItLjMtLjN2LTQ1LjRjMC0uMi4yLS4zLjMtLjNoMTEuNGMuMiAwIC4zLjIuMy4zem0xOC40LTE4LjZjLS4yIDAtLjQuMi0uMy40IDMuNyA5LjUgMTQuNyAxMS45IDIyLjUgNS42LjItLjIuNS0uMi43IDBsNy4yIDYuNWMuMy4zLjMuNiAwIC45LTEwLjIgOC0yNS4yIDguNy0zNC44LjItMTYtMTQuMi03LTQwLjYgMTQuNi00MS42IDE1LjctLjcgMjQuOSAxMi44IDIzLjcgMjcuNiAwIC4yLS4xLjMtLjMuM2gtMzMuM20tLjItOC43IDIxLjQuMXMuMSAwIC4xLS4xYzAtNS00LjgtOS0xMC43LTloLS4xYy01LjkgMC0xMC43IDQtMTAuNyA5LS4xIDAgMCAwIDAgMHptNTEuNC0zNS44djYzLjFjMCAuMi0uMS4zLS4zLjNoLTExLjVjLS4yIDAtLjMtLjEtLjMtLjN2LTYxLjJjMC0uMi4xLS4zLjItLjNsMTEuNS0xLjljLjMgMCAuNC4xLjQuM3ptNTQuNyA0MC45Yy0uMiAxMy4yLTExLjQgMjMuOC0yNSAyMy42cy0yNC41LTExLjEtMjQuMy0yNC40Yy4yLTEzLjIgMTEuNC0yMy44IDI1LTIzLjYgMTMuNy4yIDI0LjUgMTEuMSAyNC4zIDI0LjRtLTI0LjYgMTIuOWM3IDAgMTIuNy01LjkgMTIuNy0xMy4zcy01LjctMTMuMy0xMi43LTEzLjMtMTIuNyA1LjktMTIuNyAxMy4zYzAgNy4zIDUuNyAxMy4zIDEyLjcgMTMuM3ptNTYuNi04LjhjMy4xIDkuOSAxNC44IDExLjUgMjIuNCA1LjYuMi0uMi40LS4yLjYgMGw3LjQgNi44Yy4yLjIuMi40IDAgLjYtMTEgOC42LTI3LjMgOS4xLTM3LjEtMS44LTguOC05LjctNy43LTI0LjcgMS41LTMzLjMgOC42LTggMjIuNC04LjcgMzEuMS0uNSA2LjMgNiA4LjEgMTMuMSA3LjggMjEuNyAwIC4zLS4yLjUtLjUuNWgtMzNjLS4yIDAtLjMuMi0uMi40bTIxLjYtOS43Yy0zLjYtMTEuNS0xOC45LTExLjUtMjIgLjIgMCAuMi4xLjMuMi4zaDIxLjRjLjMgMCAuNS0uMi40LS41em00My45IDE1LjFjMC04LjQtMjUuNC0uOC0yOC4yLTE2LjYtMS41LTguNyA0LjItMTQuOSAxMi40LTE2LjQgOS4xLTEuNyAxNy41LS4xIDI1LjEgNC44LjIuMS4yLjQuMS42bC01LjQgNy4zYy0uMS4yLS40LjItLjYuMS00LjgtMy4yLTEzLjQtNi4yLTE4LjgtMy4xLTQuNCAyLjUtMS42IDYuNyAyLjMgNy4zIDguNiAxLjMgMjMuNCAxLjMgMjQuNSAxMy40LjkgOS4yLTcuMiAxNS4yLTE1LjcgMTYuMy05LjIgMS4yLTE3LjYtLjctMjUuMi01LjctLjItLjItLjMtLjUtLjEtLjdsNS42LTcuNWMuMi0uMi41LS4zLjctLjEgNC42IDMuNCA5LjggNS4xIDE1LjQgNSAzIDAgNy45LTEuMiA3LjktNC43em02NS43LTMwLjZ2LTE3LjdjMC0uMy4xLS40LjQtLjVsMTEuNS0xLjljLjIgMCAuMy4xLjMuM3Y2My4zYzAgLjEtLjEuMi0uMi4yaC0xMS40Yy0uNCAwLS41LS4yLS41LS41di0yLjVjMC0uMy0uMy0uNC0uNS0uMy0xMC4zIDcuNC0yNC4xIDMuOS0zMS4zLTUuNS0zLjktNS4yLTUuMi0xMS44LTQuMi0xOC4zIDIuNi0xNi41IDIwLjgtMjQuMyAzNS4zLTE2LjIuNC4xLjYgMCAuNi0uNG0tLjQgMTEuM2MtOC45LTcuOS0yNC4zLTMuNS0yMy44IDkuOC41IDEyLjUgMTUuNSAxNi45IDIzLjkgOC43LjItLjIuMi0uNC4yLS42di0xNy4xYy4xLS4zIDAtLjYtLjMtLjh6bTMwLjggMTRjMy4yIDkuOCAxNC45IDExLjcgMjIuNCA1LjYuMi0uMi40LS4yLjYgMGw3LjQgNi43Yy4yLjIuMi40IDAgLjUtNC4zIDMuNC05LjEgNS41LTE0LjIgNi4xLTE1LjcgMi4xLTMxLTkuNS0yOC44LTI2LjUgMi45LTIyLjcgMzMuMy0yOS4yIDQzLjctOC4xIDIuMiA0LjQgMyA5LjMgMi40IDE0LjkgMCAuMi0uMS4zLS40LjNoLTMyLjljLS4yIDAtLjMuMi0uMi41bTAtOS4yaDIxLjRjLjEgMCAuMSAwIC4xLS4xIDAtNC45LTQuOC04LjktMTAuNy04LjloLS4xYy02LS4xLTEwLjggMy45LTEwLjcgOS0uMS0uMSAwIDAgMCAwem02MS4xLTguM2gtOC42Yy0uMyAwLS40LS4xLS40LS40di05LjNjMC0uMy4xLS40LjQtLjRoOC42Yy4zIDAgLjUtLjIuNS0uNXYtMTAuOGMwLS4zLjEtLjUuNC0uNWwxMS4zLTIuNmMuMi0uMS40LjEuNC4zdjEzLjhjMCAuMi4xLjMuMy4zaDEyLjRjLjMgMCAuNC4xLjQuNHY5LjNjMCAuMy0uMS40LS40LjRoLTEyLjJjLS4zIDAtLjUuMi0uNS41LS4xIDEwLjctLjEgMTcuOSAwIDIxLjcuMiA1LjYgOC44IDQuMiAxMi4zIDMuMi4zLS4xLjQgMCAuNC4zdjkuMWMwIC4zLS4xLjUtLjQuNi03LjcgMi4xLTE5LjkgMi40LTIzLjQtNi4zLS43LTEuOC0xLjEtNS40LTEuMS0xMXYtMTcuN2MwLS4yLS4xLS40LS40LS40em03Ni4zIDEzLjNjLS4yIDEzLjItMTEuNSAyMy44LTI1LjEgMjMuNS0xMy42LS4yLTI0LjUtMTEuMi0yNC4yLTI0LjQuMi0xMy4yIDExLjUtMjMuOCAyNS4xLTIzLjUgMTMuNi4yIDI0LjQgMTEuMiAyNC4yIDI0LjRtLTI0LjcgMTIuOWM3IDAgMTIuNy02IDEyLjctMTMuMyAwLTcuNC01LjctMTMuMy0xMi43LTEzLjNzLTEyLjcgNi0xMi43IDEzLjMgNS43IDEzLjMgMTIuNyAxMy4zeiIvPjxwYXRoIGQ9Im0xMjAwLjkgNzAwLjV2LTE3LjdjMC0uMy4yLS41LjQtLjVsMTEuNS0xLjljLjEgMCAuMi4xLjIuMnY2My4xYzAgLjMtLjIuNC0uNC40aC0xMS4xYy0uMyAwLS41LS4yLS41LS41di0yLjZjMC0uNC0uMi0uNS0uNS0uMi05LjMgNi0yMC4yIDUuMS0yOC40LTIuMi0xMy41LTEyLjEtOC40LTM0LjYgOC43LTQwLjEgNi41LTIuMSAxMy0xLjMgMTkuNSAyLjIuNS4zLjYuMi42LS4ybS0xNi42IDMyLjdjNS42IDIuNCAxMC45IDEuNiAxNS45LTIuNC41LS40LjctMS4xLjgtMi4xdi0xNi4xYzAtLjMtLjEtLjUtLjMtLjctNS41LTQuNy0xMy4xLTUuNS0xOC45LTEuMS03LjcgNS42LTYuNSAxOC42IDIuNSAyMi40em04My41LTExLjZjLS4yIDEzLjItMTEuNCAyMy44LTI1IDIzLjZzLTI0LjUtMTEuMS0yNC4zLTI0LjRjLjItMTMuMiAxMS40LTIzLjggMjUtMjMuNnMyNC41IDExLjEgMjQuMyAyNC40bS0yNC42IDEyLjljNyAwIDEyLjctNiAxMi43LTEzLjRzLTUuNy0xMy4zLTEyLjgtMTMuM2MtNyAwLTEyLjcgNi0xMi43IDEzLjQuMSA3LjQgNS44IDEzLjMgMTIuOCAxMy4zem01NS45LTMuNmMwLTIuNC0yLjQtMy41LTQuNi0zLjktNS4xLS44LTkuMy0xLjUtMTIuNi0yLjEtOC43LTEuNy0xMy45LTkuOS0xMC40LTE4LjMgMy42LTguNiAxNS41LTEwLjIgMjMuNi04LjggNC44LjggOS4yIDIuNSAxMy4yIDUuMi4yLjEuMi40LjEuNWwtNS40IDcuM2MtLjIuMy0uNC4zLS43LjEtNC43LTMuMS0xMy4xLTYtMTguNS0zLjMtNCAyLTIuNyA2LjUgMS40IDcuMiA5LjEgMS43IDI2LjIgMS42IDI1LjMgMTUuOC0uNyA5LjgtMTAuNyAxNC4yLTE5LjEgMTQuNS03LjYuMy0xNS41LTEuNy0yMS45LTYuMi0uMS0uMS0uMi0uMy0uMS0uNGw1LjYtNy40Yy4zLS40LjYtLjQgMS0uMSA0LjcgMy41IDEwIDUuMiAxNS45IDQuOSAyLjktLjIgNy4yLTEuNiA3LjItNXoiLz48L2c+PC9zdmc+" alt="Avianca" style="max-height:48px;width:auto;object-fit:contain;"></div>
+        <p class="fade-up stagger-4" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#5A6378;margin-bottom:0;">Marzo de 2026 &mdash; Generado el 09/04/2026 09:36</p>
+        <div class="cover-line fade-up stagger-5"></div>
+    </div>
+    <div class="cover-wordmark" style="position:absolute;bottom:40px;left:48px;display:flex;align-items:center;gap:10px;z-index:1;">
+        <img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:14px;object-fit:contain;opacity:0.7;" onerror="this.style.display='none'">
+        <span style="font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);">Social &amp; Consumer Intelligence</span>
+    </div>
+</section>
+
+<!-- SEC-1: INTRO / DATASET & FRAMEWORK -->
+<section class="section" id="sec-1" style="justify-content:center;">
+    <div class="section-inner" style="max-width:1000px;">
+        <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:3px;color:#fff;margin-bottom:8px;">MARCO DE ANÁLISIS</h2>
+            <div style="width:60px;height:3px;background:linear-gradient(90deg,#FF1B6B,#00D4FF);margin:0 auto;"></div>
+        </div>
+        <div class="fade-up stagger-2" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-bottom:48px;">
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-top:3px solid #FF1B6B;border-radius:0 0 16px 16px;padding:28px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#FF1B6B;margin-bottom:12px;">Período de análisis</div>
+                <div style="font-family:'IBM Plex Sans',sans-serif;font-size:18px;color:#fff;font-weight:600;margin-bottom:8px;">Marzo de 2026</div>
+                <div style="font-size:13px;color:#A0AEC0;line-height:1.6;">Monitoreo continuo de conversaciones digitales en torno a Avianca y actores relacionados.</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-top:3px solid #00D4FF;border-radius:0 0 16px 16px;padding:28px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#00D4FF;margin-bottom:12px;">Dataset</div>
+                <div style="font-family:'IBM Plex Sans',sans-serif;font-size:18px;color:#fff;font-weight:600;margin-bottom:8px;">28,501 menciones</div>
+                <div style="font-size:13px;color:#A0AEC0;line-height:1.6;">Fuentes: Social listening + scrapping multicanal de plataformas digitales.</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-top:3px solid #FFB800;border-radius:0 0 16px 16px;padding:28px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#FFB800;margin-bottom:12px;">Framework</div>
+                <div style="font-family:'IBM Plex Sans',sans-serif;font-size:18px;color:#fff;font-weight:600;margin-bottom:8px;">Inteligencia Estratégica</div>
+                <div style="font-size:13px;color:#A0AEC0;line-height:1.6;">Análisis de volumen, sentimiento, narrativas, actores, plataformas y anomalías con IA.</div>
+            </div>
+        </div>
+        <div class="fade-up stagger-3" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+            <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:24px;">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#5A6378;margin-bottom:16px;">Plataformas cubiertas</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <span style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);color:#00D4FF;padding:4px 12px;border-radius:6px;font-size:12px;">Facebook</span><span style="background:rgba(255,27,107,0.1);border:1px solid rgba(255,27,107,0.2);color:#FF1B6B;padding:4px 12px;border-radius:6px;font-size:12px;">TikTok</span><span style="background:rgba(255,184,0,0.1);border:1px solid rgba(255,184,0,0.2);color:#FFB800;padding:4px 12px;border-radius:6px;font-size:12px;">Instagram</span><span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#A0AEC0;padding:4px 12px;border-radius:6px;font-size:12px;">Twitter</span><span style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);color:#00D4FF;padding:4px 12px;border-radius:6px;font-size:12px;">YouTube</span>
+                </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:24px;">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#5A6378;margin-bottom:16px;">Actores monitoreados</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <span style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);color:#00D4FF;padding:4px 12px;border-radius:6px;font-size:12px;">Cossio</span><span style="background:rgba(255,27,107,0.1);border:1px solid rgba(255,27,107,0.2);color:#FF1B6B;padding:4px 12px;border-radius:6px;font-size:12px;">Otros</span><span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#A0AEC0;padding:4px 12px;border-radius:6px;font-size:12px;">Avianca</span>
+                </div>
+            </div>
+        </div>
+        <div class="fade-up stagger-4" style="text-align:center;margin-top:48px;">
+            <div style="display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px 24px;">
+                <img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:13px;object-fit:contain;opacity:0.6;" onerror="this.style.display='none'">
+                <span style="color:#5A6378;font-size:12px;">Social &amp; Consumer Intelligence</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SEC-2: EXECUTIVE SUMMARY -->
+<section class="section" id="sec-2">
+    <div class="section-inner">
+        <h2 class="section-title fade-up">LO QUE NECESITÁS SABER</h2>
+        <div class="exec-grid fade-up stagger-2">
+            <div class="exec-card exec-card-paso"><h3>LO QUE PASÓ</h3><p>El 29 de marzo, la conversación sobre Avianca se multiplicó por 21 en 24 horas — de 173 menciones a 3,384. Pero el 68% de esas menciones no discutieron el contenido del comunicado sino que lo usaron como pretexto para defender a Cossio o atacar a la aerolínea. TikTok se convirtió en el epicentro de resistencia: concentra el 34% de las menciones totales y es la única plataforma donde Cossio mantiene ventaja narrativa 3:1 sobre Avianca.</p></div><div class="exec-card exec-card-juego"><h3>LO QUE ESTÁ EN JUEGO</h3><p>La velocidad de propagación superó la capacidad de control del mensaje corporativo. Avianca genera 1,040 menciones negativas (21.1% de su conversación directa) pero el verdadero riesgo está en los 17,029 menciones de Cossio — donde solo el 16.9% es negativo hacia él. El engagement promedio de menciones anti-Avianca es 166.94, mientras que las pro-Avianca promedian 31.76 — una diferencia de 5x en capacidad de amplificación.</p></div><div class="exec-card exec-card-viene"><h3>LO QUE SE DEBE DECIDIR AHORA</h3><p>En la intersección directa entre ambos actores (1,483 menciones), el 77.6% es neutral y el 20.5% negativo — lo que indica que cuando se enfrentan directamente, Avianca no pierde, pero tampoco gana territorio emocional. Esta semana: Identificar los 3 formatos de contenido pro-Avianca con mayor engagement orgánico y amplificarlos con pauta micro-segmentada en TikTok — la plataforma perdida.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- SEC-3: KPIs -->
+<section class="section" id="sec-3">
+    <div class="section-inner">
+        <div class="editorial-question fade-up">&iquest;QUÉ TAN GRANDE FUE EL IMPACTO?</div>
+        <h2 class="section-title fade-up stagger-1">IMPACTO</h2>
+        <div class="kpi-grid fade-up stagger-2">
+            <div class="kpi-card"><div class="kpi-label">Total Menciones</div><div class="kpi-value white countup font-mono" data-target="28501" data-commas="true">28,501</div></div>
+<div class="kpi-card"><div class="kpi-label">Sentimiento Positivo</div><div class="kpi-value cyan countup font-mono" data-target="13.6" data-suffix="%" data-decimals="1">13.6%</div></div>
+<div class="kpi-card"><div class="kpi-label">Sentimiento Negativo</div><div class="kpi-value magenta countup font-mono" data-target="17.8" data-suffix="%" data-decimals="1">17.8%</div></div>
+<div class="kpi-card"><div class="kpi-label">Alcance Promedio</div><div class="kpi-value white countup font-mono" data-target="746378.38" data-commas="true">746,378</div></div>
+<div class="kpi-card"><div class="kpi-label">Engagement Promedio</div><div class="kpi-value white countup font-mono" data-target="61.24" data-suffix="" data-decimals="1">61.2</div></div>
+<div class="kpi-card"><div class="kpi-label">Total Likes</div><div class="kpi-value gold countup font-mono" data-target="1627480" data-commas="true">1,627,480</div></div>
+<div class="kpi-card" style="grid-column: span 1;"><div class="kpi-label">Distribución de Actores</div><div class="actor-bar-container"><div class="actor-bar"><div class="actor-bar-segment" style="width:59.7%;background:#FF1B6B;"></div><div class="actor-bar-segment" style="width:22.9%;background:#00D4FF;"></div><div class="actor-bar-segment" style="width:17.3%;background:#FFB800;"></div></div><div class="actor-legend"><span><span class="actor-legend-dot" style="background:#FF1B6B;"></span>Cossio <span class="font-mono" style="color:#5A6378;">60%</span></span><span><span class="actor-legend-dot" style="background:#00D4FF;"></span>Otros <span class="font-mono" style="color:#5A6378;">23%</span></span><span><span class="actor-legend-dot" style="background:#FFB800;"></span>Avianca <span class="font-mono" style="color:#5A6378;">17%</span></span></div></div></div>
+        </div>
+        <!-- Venn Diagram: Brand vs Actor intersection -->
+        <div class="fade-up stagger-3" style="margin-top:32px;">
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px;text-align:center;">
+                <h3 style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:8px;">MAPA DE CONVERSACIÓN</h3>
+                <p style="font-size:12px;color:#5A6378;margin-bottom:20px;">Menciones exclusivas vs. intersección</p>
+                <div id="vennDiagram" style="width:100%;max-width:500px;margin:0 auto;"></div>
+            </div>
+        </div>
+        <div class="insight-box fade-up stagger-4">
+            <p>Cossio generó el 59.7% de la conversación, Otros solo el 22.9%. El share of voice revela quién realmente controla la narrativa.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SEC-4: VOLUME CHART + SPIKE EXPLORER -->
+<section class="section" id="sec-4">
+    <div class="section-inner">
+        <div class="editorial-question fade-up">&iquest;CÓMO EVOLUCIONÓ LA CONVERSACIÓN DÍA A DÍA?</div>
+        <h2 class="section-title fade-up stagger-1">CRONOLOGÍA</h2>
+        <div class="chart-wrapper fade-up stagger-2">
+            <canvas id="volumeChart"></canvas>
+        </div>
+        <!-- Spike Explorer -->
+        <div class="spike-buttons fade-up stagger-3" id="spikeButtons">
+            <button class="spike-btn active" data-spike="0"><span class="spike-letter">A</span><span class="spike-dates">2026-03-15</span><span class="spike-pct">+76.7%</span></button>
+<button class="spike-btn" data-spike="1"><span class="spike-letter">B</span><span class="spike-dates">2026-03-23</span><span class="spike-pct">+58.2%</span></button>
+<button class="spike-btn" data-spike="2"><span class="spike-letter">C</span><span class="spike-dates">2026-03-29</span><span class="spike-pct">+400.6%</span></button>
+<button class="spike-btn" data-spike="3"><span class="spike-letter">D</span><span class="spike-dates">2026-03-30</span><span class="spike-pct">+290.8%</span></button>
+        </div>
+        <div class="spike-panel open" id="spikePanel">
+            <div class="spike-panel-title" id="spikePanelTitle"></div>
+            <div class="spike-panel-desc" id="spikePanelDesc"></div>
+            <div class="spike-panel-meta" id="spikePanelMeta"></div>
+        </div>
+        <div class="insight-box fade-up stagger-4">
+            <p>El pico del 2026-03-29 multiplicó el volumen 5x en 24 horas.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SEC-5: CRISIS TIMELINE (D3) -->
+<section class="section" id="sec-5">
+    <div class="section-inner">
+        <div class="editorial-question fade-up">&iquest;HUBO UNA VENTANA PARA ACTUAR ANTES?</div>
+        <h2 class="section-title fade-up stagger-1">LA EXPLOSIÓN</h2>
+        <div class="d3-card fade-up stagger-2">
+            <div id="crisisTimeline"></div>
+        </div>
+        <div class="insight-box fade-up stagger-3">
+            <p>Hubo 24 días de bajo volumen antes de la explosión.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SEC-6: SENTIMENT & SOURCES -->
+<section class="section" id="sec-6">
+    <div class="section-inner">
+        <div class="editorial-question fade-up">&iquest;QUÉ EMOCIÓN DOMINA LA CONVERSACIÓN?</div>
+        <h2 class="section-title fade-up stagger-1">SENTIMIENTO</h2>
+        <div class="two-col fade-up stagger-2">
+            <div class="chart-wrapper">
+                <h3 style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:20px;">DISTRIBUCIÓN DE SENTIMIENTO</h3>
+                <canvas id="sentimentChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <h3 style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:20px;">FUENTES PRINCIPALES</h3>
+                <canvas id="sourcesChart"></canvas>
+            </div>
+        </div>
+        <div class="insight-box fade-up stagger-3">
+            <p>El ratio negativo-positivo es 1.3:1. El 32% sin clasificar representa la audiencia más influenciable.</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- SEC-9: ACTOR GRAPH -->
+<section class="section" id="sec-9">
+    <div class="section-inner">
+        <div class="editorial-question fade-up">&iquest;CÓMO SE CONECTAN LOS ACTORES?</div>
+        <h2 class="section-title fade-up stagger-1">RED DE ACTORES</h2>
+        <div class="d3-card fade-up stagger-2 force-graph-container" style="margin-bottom:24px;">
+            <div id="actorGraph"></div>
+        </div>
+        <div class="force-legend fade-up stagger-3">
+            <div class="force-legend-item"><div class="force-legend-dot" style="background:#FF1B6B;"></div>Cossio</div><div class="force-legend-item"><div class="force-legend-dot" style="background:#00D4FF;"></div>Otros</div><div class="force-legend-item"><div class="force-legend-dot" style="background:#5A6378;"></div>Avianca</div>
+        </div>
+        <div class="insight-box fade-up stagger-4">
+            <p>Solo el 5.2% de las menciones referencia ambos actores simultáneamente.</p>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- SEC-10b: FINDINGS -->
+
+
+
+
+<!-- SEC-12: NARRATIVE 01 -->
+<section class="section" id="sec-12">
+    <div class="section-inner" style="position:relative;"><div class="narrative-mini-chart"><svg width="220" height="60"><text x="0" y="12" fill="#5A6378" font-size="10" font-family="IBM Plex Sans">NARRATIVA PRINCIPAL</text><rect x="0" y="20" width="150" height="14" rx="7" fill="#00D4FF" opacity="0.8"/><rect x="150" y="20" width="70" height="14" rx="0" ry="0" fill="#FF1B6B" opacity="0.8"/><text x="0" y="52" fill="#A0AEC0" font-size="10">Dominante</text><text x="160" y="52" fill="#A0AEC0" font-size="10">Secundaria</text></svg></div><div class="narrative-bg-number">01</div><h2 class="narrative-slide-title fade-up">La seguridad aérea es innegociable pero el castigo es desproporcionado</h2><div class="narrative-two-col fade-up stagger-2"><div class="narrative-col-left"><div class="subsection-label">CONTEXTO</div><div class="subsection-text"><p>Inició como apoyo total a Avianca (29-30 marzo), evolucionó hacia cuestionamiento de la proporcionalidad (31 marzo-2 abril), culminó en debate sobre límites corporativos</p>
+<p>&quot;Nea, jugar con la seguridad de un vuelo no es chistoso, más de 200 pasajeros viéndose afectados por una &#x27;bromita&#x27;&quot; [Instagram, 30 marzo, 2002 eng]</p>
+<p>&quot;dicen que en los aeropuertos ha mucha seguridad entonces porqué permitieron que este señor llevará algo con olor químico, los señores de la aerolínea están exagerando&quot; [TikTok, 30 marzo]</p>
+<p>&quot;Avianca tiene toda la razón y no exagero! Comprometió la seguridad de los pasajeros. Muy mal&quot; [TikTok, 30 marzo, 2869 eng]</p>
+<p>Esta narrativa bifurca generacionalmente — los adultos validan la respuesta de Avianca, los jóvenes cuestionan su severidad. Avianca gana en legitimidad legal pero pierde en territorio emocional millennial/Gen Z, crucial para su crecimiento futuro.</p></div></div><div class="narrative-col-right"></div></div></div>
+</section>
+
+<!-- SEC-13: NARRATIVE 02 -->
+<section class="section" id="sec-13">
+    <div class="section-inner" style="position:relative;"><div class="narrative-mini-chart"><svg width="220" height="60"><text x="0" y="12" fill="#5A6378" font-size="10">EVOLUCIÓN</text><rect x="0" y="20" width="73" height="14" rx="7" ry="7" fill="#FFB800" opacity="0.7"/><rect x="73" y="20" width="73" height="14" fill="#00D4FF" opacity="0.7"/><rect x="146" y="20" width="74" height="14" rx="7" ry="7" fill="#FF1B6B" opacity="0.7"/><text x="10" y="52" fill="#A0AEC0" font-size="9">Fase 1</text><text x="85" y="52" fill="#A0AEC0" font-size="9">Fase 2</text><text x="155" y="52" fill="#A0AEC0" font-size="9">Fase 3</text></svg></div><div class="narrative-bg-number">02</div><h2 class="narrative-slide-title fade-up">Las corporaciones persiguen a los creadores porque no entienden el mundo digital</h2><div class="narrative-two-col fade-up stagger-2"><div class="narrative-col-left"><div class="subsection-label">CONTEXTO</div><div class="subsection-text"><p>Emergió tardíamente (31 marzo-1 abril) cuando Cossio admitió culpa, se fortaleció en TikTok, permanece marginal en otras plataformas</p>
+<p>&quot;Avianca quiere sacar provecho de la figura pública de Cossío eso es todo. Es la peor aerolínea del país&quot; [Facebook, fecha na]</p>
+<p>&quot;Sigamos haciendo famosos a gente pendeja&quot; [Twitter, 30 marzo, 5 eng]</p>
+<p>&quot;lo que pasó en el avión fue un ACCIDENTE 🚨&quot; [TikTok, 31 marzo, 3278 eng]</p>
+<p>Esta contrarreativa no logró masa crítica porque Cossio admitió participación. Sin embargo, planta la semilla de &quot;persecución corporativa&quot; que podría reactivarse en futuros conflictos similares con otros creadores.</p></div></div><div class="narrative-col-right"></div></div></div>
+</section>
+
+<!-- SEC-14: NARRATIVE 03 -->
+<section class="section" id="sec-14">
+    <div class="section-inner" style="position:relative;"><div class="narrative-mini-chart"><svg width="220" height="70"><text x="0" y="12" fill="#5A6378" font-size="10">ENGAGEMENT</text><rect x="0" y="22" width="180" height="12" rx="6" fill="#FF1B6B" opacity="0.8"/><text x="185" y="32" fill="#FF1B6B" font-size="11" font-weight="bold">Alto</text><rect x="0" y="40" width="119" height="12" rx="6" fill="#5A6378" opacity="0.5"/><text x="124" y="50" fill="#5A6378" font-size="11">Medio</text></svg></div><div class="narrative-bg-number">03</div><h2 class="narrative-slide-title fade-up">Los influencers deben tener límites pero las marcas también</h2><div class="narrative-two-col fade-up stagger-2"><div class="narrative-col-left"><div class="subsection-label">CONTEXTO</div><div class="subsection-text"><p>Narrativa de síntesis que emerge post-admisión de Cossio (1-5 abril), busca equilibrio entre responsabilidad del creador y proporcionalidad corporativa</p>
+<p>&quot;Que no se normalice la falta de respeto 👍&quot; [TikTok, 31 marzo, 10711 eng]</p>
+<p>&quot;¿Justicia o exageración? Déjame tu opinión aquí abajo. ⚖️👇&quot; [TikTok, 30 marzo, 71311 eng]</p>
+<p>&quot;Usted es el que desinforma el video que usted está mostrando fue en el 2024 y la demanda es por el vuelo de el pasado 11 de marzo&quot; [TikTok, 30 marzo, 3 eng]</p>
+<p>Esta narrativa moderada representa el verdadero campo de batalla reputacional para Avianca. Aquí es donde se decide si la marca es vista como protectora legítima o como castigadora excesiva — y determina su relación futura con la cultura digital.</p></div></div><div class="narrative-col-right"></div></div></div>
+</section>
+
+
+
+<!-- SEC-16: PLATFORMS / AUDIENCIAS -->
+<section class="section" id="sec-16" style="justify-content: flex-start; padding-top: 80px;">
+    <div class="section-inner">
+        <div class="editorial-question fade-up">&iquest;DÓNDE ESTÁ EL RIESGO Y DÓNDE LA OPORTUNIDAD?</div>
+        <h2 class="section-title fade-up stagger-1">AUDIENCIAS</h2>
+
+        <div class="platform-grid fade-up stagger-2">
+            <div class="platform-card" style="border-top:4px solid #FFB800;"><div class="platform-name">Facebook</div><div class="platform-quadrant" style="color:#FFB800;">BASE SÓLIDA</div><ul class="platform-bullets"><li>13,816 menciones</li><li>Base institucional consolidada</li><li>Comunidad orgánica activa</li></ul></div>
+<div class="platform-card" style="border-top:4px solid #FF1B6B;"><div class="platform-name">TikTok</div><div class="platform-quadrant" style="color:#FF1B6B;">RIESGO ALTO</div><ul class="platform-bullets"><li>9,949 menciones</li><li>Audiencia joven dominante</li><li>Mayor viralidad potencial</li></ul></div>
+<div class="platform-card" style="border-top:4px solid #00D4FF;"><div class="platform-name">Instagram</div><div class="platform-quadrant" style="color:#00D4FF;">OPORTUNIDAD</div><ul class="platform-bullets"><li>2,992 menciones</li><li>Espacio visual clave</li><li>Potencial de crecimiento</li></ul></div>
+<div class="platform-card" style="border-top:4px solid #5A6378;"><div class="platform-name">Twitter</div><div class="platform-quadrant" style="color:#5A6378;">MONITOREAR</div><ul class="platform-bullets"><li>983 menciones</li><li>Formadores de opinión</li><li>Ciclo de noticias rápido</li></ul></div>
+        </div>
+
+        <div class="fade-up stagger-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:28px;margin-bottom:24px;"><h3 style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:4px;">VOCES M&Aacute;S ACTIVAS EN LA CONVERSACI&Oacute;N</h3><p style="font-size:13px;color:#5A6378;margin-bottom:20px;">Otros actores presentes en la conversaci&oacute;n</p><table style="width:100%;border-collapse:collapse;font-size:13px;"><thead><tr style="border-bottom:1px solid rgba(255,27,107,0.3);"><th style="text-align:left;padding:8px 12px;color:#FF1B6B;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:1px;">Nombre</th><th style="text-align:right;padding:8px 12px;color:#FF1B6B;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:1px;">Menciones</th><th style="text-align:left;padding:8px 12px;color:#FF1B6B;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:1px;">Rol en la conversaci&oacute;n</th></tr></thead><tbody><tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:10px 12px;color:#fff;">Wingo</td><td style="padding:10px 12px;color:#A0AEC0;text-align:right;font-family:'JetBrains Mono',monospace;">~97</td><td style="padding:10px 12px;color:#A0AEC0;">Menci&oacute;n en contexto de conversaci&oacute;n</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:10px 12px;color:#fff;">JetBlue</td><td style="padding:10px 12px;color:#A0AEC0;text-align:right;font-family:'JetBrains Mono',monospace;">~89</td><td style="padding:10px 12px;color:#A0AEC0;">Menci&oacute;n en contexto de conversaci&oacute;n</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:10px 12px;color:#fff;">Thejajfclips</td><td style="padding:10px 12px;color:#A0AEC0;text-align:right;font-family:'JetBrains Mono',monospace;">~77</td><td style="padding:10px 12px;color:#A0AEC0;">Menci&oacute;n en contexto de conversaci&oacute;n</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:10px 12px;color:#fff;">American Airlines</td><td style="padding:10px 12px;color:#A0AEC0;text-align:right;font-family:'JetBrains Mono',monospace;">~47</td><td style="padding:10px 12px;color:#A0AEC0;">Menci&oacute;n en contexto de conversaci&oacute;n</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:10px 12px;color:#fff;">ᴹᴿメLuisあ</td><td style="padding:10px 12px;color:#A0AEC0;text-align:right;font-family:'JetBrains Mono',monospace;">~46</td><td style="padding:10px 12px;color:#A0AEC0;">Menci&oacute;n en contexto de conversaci&oacute;n</td></tr><tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:10px 12px;color:#fff;">MSN Colombia</td><td style="padding:10px 12px;color:#A0AEC0;text-align:right;font-family:'JetBrains Mono',monospace;">~44</td><td style="padding:10px 12px;color:#A0AEC0;">Menci&oacute;n en contexto de conversaci&oacute;n</td></tr></tbody></table></div>
+
+        
+
+        <div class="insight-box fade-up stagger-4">
+            <p>Facebook concentra el 49% de las menciones. TikTok tiene 35%.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SCENARIO PROJECTION -->
+<section class="section" id="sec-scenarios" style="justify-content: flex-start; padding-top: 80px;">
+    <div class="section-inner">
+        <div class="editorial-question fade-up">&iquest;QU&Eacute; PASA EN LOS PR&Oacute;XIMOS 30 D&Iacute;AS?</div>
+        <h2 class="section-title fade-up stagger-1">TRES ESCENARIOS POSIBLES</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;" class="fade-up stagger-2">
+    <div style="background:rgba(255,27,107,0.03);border:1px solid rgba(255,27,107,0.15);border-top:3px solid #FF1B6B;border-radius:0 0 16px 16px;padding:28px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#FF1B6B;letter-spacing:2px;margin-bottom:4px;">ESCENARIO A</div>
+        <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;">Inacci&oacute;n</div>
+        <div style="font-size:11px;color:#FF1B6B;margin-bottom:16px;">Probabilidad: Alta si no hay decisi&oacute;n esta semana</div>
+        <p style="color:#A0AEC0;font-size:14px;line-height:1.8;margin-bottom:16px;">Sin intervenci&oacute;n, el ratio negativo/positivo (1.3:1) continuar&aacute; deterior&aacute;ndose. De las 28,501 menciones, la proporci&oacute;n negativa seguir&aacute; creciendo sin contrapeso.</p>
+        <div style="border-top:1px solid rgba(255,27,107,0.15);padding-top:12px;font-size:13px;color:#FF1B6B;font-weight:600;">El capital reputacional se diluye sin convertirse en ventaja.</div>
+    </div>
+    <div style="background:rgba(255,184,0,0.03);border:1px solid rgba(255,184,0,0.15);border-top:3px solid #FFB800;border-radius:0 0 16px 16px;padding:28px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#FFB800;letter-spacing:2px;margin-bottom:4px;">ESCENARIO B</div>
+        <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;">Respuesta t&aacute;ctica</div>
+        <div style="font-size:11px;color:#FFB800;margin-bottom:16px;">Probabilidad: Media &mdash; requiere decisi&oacute;n en 72 horas</div>
+        <p style="color:#A0AEC0;font-size:14px;line-height:1.8;margin-bottom:16px;">Con contenido proactivo, el sentimiento se estabiliza en 30 d&iacute;as. La audiencia sin posici&oacute;n se divide entre narrativas y el ratio negativo/positivo deja de crecer.</p>
+        <div style="border-top:1px solid rgba(255,184,0,0.15);padding-top:12px;font-size:13px;color:#FFB800;font-weight:600;">Crisis contenida. Reputaci&oacute;n estabilizada pero sin capitalizaci&oacute;n.</div>
+    </div>
+    <div style="background:rgba(0,212,255,0.03);border:1px solid rgba(0,212,255,0.15);border-top:3px solid #00D4FF;border-radius:0 0 16px 16px;padding:28px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#00D4FF;letter-spacing:2px;margin-bottom:4px;">ESCENARIO C</div>
+        <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;">Liderazgo proactivo</div>
+        <div style="font-size:11px;color:#00D4FF;margin-bottom:16px;">Probabilidad: Alta si se act&uacute;a esta semana</div>
+        <p style="color:#A0AEC0;font-size:14px;line-height:1.8;margin-bottom:16px;">Con estrategia integral, la crisis se convierte en oportunidad de posicionamiento. La audiencia sin posici&oacute;n migra hacia narrativa favorable en 15-20 d&iacute;as.</p>
+        <div style="border-top:1px solid rgba(0,212,255,0.15);padding-top:12px;font-size:13px;color:#00D4FF;font-weight:600;">Crisis convertida en activo reputacional.</div>
+    </div>
+</div>
+<div class="insight-box fade-up stagger-3" style="margin-top:32px;">
+    <p>La diferencia entre el Escenario A y el C no es presupuesto &mdash; es velocidad de decisi&oacute;n. El capital reputacional tiene fecha de vencimiento.</p>
+</div>
+    </div>
+</section>
+
+
+
+<!-- SEC-18: RECOMMENDATIONS -->
+<section class="section" id="sec-18" style="justify-content: flex-start; padding-top: 80px;">
+    <div class="section-inner">
+        <div class="editorial-question fade-up">&iquest;CUÁLES SON LAS 3 DECISIONES MÁS URGENTES?</div>
+        <h2 class="section-title fade-up stagger-1">DECISIONES</h2>
+        <div class="draft-badge fade-up stagger-1">Borrador &mdash; requiere revisión del analista</div>
+        <div class="fade-up stagger-2">
+            <div class="rec-card"><div class="rec-number font-mono">01</div><div class="rec-body"><h4>Amplificar voces orgánicas pro-Avianca en TikTok</h4><p class="rec-fundamento">Identificar los 10 posts orgánicos más exitosos que defienden la posición de Avianca, contactar a sus creadores para colaboraciones remuneradas, generar 3 respuestas de video por semana usando sus formatos exitosos
+TikTok concentra 34% de menciones totales con engagement 5x superior para contenido anti-Avianca, pero existe un 13.1% de menciones pro-Avianca con potencial de amplificación
+Engagement rate de contenido pro-Avianca en TikTok (target: igualar el 166.94 promedio actual de contenido crítico)</p></div></div>
+<div class="rec-card"><div class="rec-number font-mono">02</div><div class="rec-body"><h4>Protocolo de respuesta rápida para choques con personalidades digitales</h4><p class="rec-fundamento">Crear equipo de monitoreo 24/7, definir umbrales de respuesta (500+ menciones = alerta, 1000+ = escalación), preparar libreto de respuestas para 5 escenarios típicos de conflicto con creadores
+El pico de 21,050% en menciones el 29 marzo muestra que Avianca reaccionó a velocidad corporativa en un entorno que opera a velocidad digital
+Tiempo de respuesta corporativa a crisis digitales (target: menos de 4 horas)</p></div></div>
+<div class="rec-card"><div class="rec-number font-mono">03</div><div class="rec-body"><h4>Campaña de humanización de políticas de seguridad</h4><p class="rec-fundamento">Producir serie de 6 videos testimoniales de tripulantes explicando por qué las reglas de seguridad existen, mostrar casos reales donde protocols salvaron vidas, distribuir en Instagram y TikTok con influencers de aviación
+El 77.6% de neutralidad en menciones de intersección indica que la audiencia entiende la posición de Avianca pero no la abraza emocionalmente
+Shift en sentiment de neutral a positivo en menciones sobre políticas de seguridad aérea</p></div></div>
+        </div>
+        <div class="insight-box fade-up stagger-3">
+            <p>Las recomendaciones son secuenciales — el orden de ejecución importa tanto como la ejecución misma.</p>
+        </div>
+    </div>
+</section>
+
+<!-- EPICAL CAPABILITIES -->
+<section class="section" id="sec-epical" style="justify-content: flex-start; padding-top: 80px;">
+    <div class="section-inner">
+        <h2 class="section-title fade-up">C&Oacute;MO SE PRODUJO ESTE AN&Aacute;LISIS</h2>
+        <p class="fade-up stagger-1" style="color:#A0AEC0;font-size:15px;margin-bottom:40px;">Lo que viste en este reporte, cada mes</p>
+        <div style="display:grid;grid-template-columns:3fr 2fr;gap:48px;" class="fade-up stagger-2">
+            <div>
+                <div style="display:flex;gap:20px;margin-bottom:32px;">
+                    <div style="display:flex;flex-direction:column;align-items:center;min-width:40px;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.3);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;color:#00D4FF;font-weight:700;">1</div>
+                        <div style="width:1px;height:100%;background:rgba(0,212,255,0.15);margin-top:8px;"></div>
+                    </div>
+                    <div>
+                        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#00D4FF;margin-bottom:8px;">RECOLECCI&Oacute;N</div>
+                        <p style="color:#A0AEC0;font-size:14px;line-height:1.7;">28,501 menciones capturadas de 5 plataformas mediante social listening + scrapping directo. Procesamiento, limpieza y deduplicaci&oacute;n automatizada.</p>
+                    </div>
+                </div>
+                <div style="display:flex;gap:20px;margin-bottom:32px;">
+                    <div style="display:flex;flex-direction:column;align-items:center;min-width:40px;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.3);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;color:#00D4FF;font-weight:700;">2</div>
+                        <div style="width:1px;height:100%;background:rgba(0,212,255,0.15);margin-top:8px;"></div>
+                    </div>
+                    <div>
+                        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#00D4FF;margin-bottom:8px;">AN&Aacute;LISIS</div>
+                        <p style="color:#A0AEC0;font-size:14px;line-height:1.7;">Clustering tem&aacute;tico, detecci&oacute;n de anomal&iacute;as, an&aacute;lisis de actores y sentimiento sobre dataset completo. Muestreo estratificado para an&aacute;lisis narrativo profundo con IA.</p>
+                    </div>
+                </div>
+                <div style="display:flex;gap:20px;">
+                    <div style="display:flex;flex-direction:column;align-items:center;min-width:40px;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.3);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;color:#00D4FF;font-weight:700;">3</div>
+                    </div>
+                    <div>
+                        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#00D4FF;margin-bottom:8px;">INTELIGENCIA</div>
+                        <p style="color:#A0AEC0;font-size:14px;line-height:1.7;">S&iacute;ntesis narrativa, identificaci&oacute;n de hallazgos no obvios, proyecci&oacute;n de escenarios y recomendaciones accionables producidas por analistas especializados con asistencia de IA.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:24px;justify-content:center;">
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;text-align:center;">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;color:#fff;">28,501</div>
+                    <div style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#5A6378;margin-top:4px;">menciones procesadas</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;text-align:center;">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;color:#fff;">33</div>
+                    <div style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#5A6378;margin-top:4px;">d&iacute;as cubiertos</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;text-align:center;">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;color:#00D4FF;">&lt; 4h</div>
+                    <div style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#5A6378;margin-top:4px;">tiempo de producci&oacute;n</div>
+                </div>
+            </div>
+        </div>
+        <div class="fade-up stagger-3" style="margin-top:40px;text-align:center;">
+            <p style="color:#5A6378;font-size:13px;margin-bottom:16px;">Este reporte fue producido autom&aacute;ticamente con asistencia de IA, reduciendo significativamente el tiempo de an&aacute;lisis.</p>
+            <div style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px 24px;">
+                <img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:14px;object-fit:contain;opacity:0.7;" onerror="this.style.display='none'">
+                <span style="color:#A0AEC0;font-size:12px;">Social &amp; Consumer Intelligence para decisiones de negocio en LATAM</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- METHODOLOGY FOOTER -->
+<footer class="methodology" id="sec-19">
+    <div class="methodology-inner">
+        <div class="brand fade-up">EPICAL</div>
+        <div class="tagline fade-up stagger-1">Social &amp; Consumer Intelligence para decisiones de negocio</div>
+        <div class="stats fade-up stagger-2">Total menciones analizadas: 28,501 &bull; Período: Marzo de 2026</div>
+        <div class="stats fade-up stagger-3">Generado: 09/04/2026 09:36</div>
+        <div class="fade-up stagger-4" style="margin-top:20px;"><p>Análisis de 28,501 menciones del 6 marzo-7 abril 2026 en Facebook, TikTok, Instagram, Twitter y YouTube. Muestra estratificada de 134 menciones más relevantes, clasificación de actores por reglas + IA, reclasificación de sentimientos para reducir casos sin clasificar de 48.7% a 32.1%. Detección de anomalías de volumen y cambios de sentimiento. Métricas de engagement promedio: Cossio 29.23, Avianca 31.76, conversación general 166.94.</p></div>
+        <div class="confidential fade-up stagger-5">
+            Confidencial &mdash; uso interno<br>
+            &copy; 2026 Epical. Todos los derechos reservados.
+        </div>
+    </div>
+</footer>
+
+<script>
+/* ===== THEME CONFIG ===== */
+const THEME = {
+    isLight: false,
+    text: '#A0AEC0',
+    textMuted: '#5A6378',
+    bg: '#050D1A',
+    bgCard: 'rgba(255,255,255,0.03)',
+    border: 'rgba(255,255,255,0.06)',
+    accent: '#FF1B6B',
+    accentSecondary: '#00D4FF',
+    accentGold: '#FFB800',
+    grid: 'rgba(255,255,255,0.04)',
+    chartFill: 'rgba(0,212,255,0.25)',
+    chartFillEnd: 'rgba(0,212,255,0.0)',
+    tooltipBg: 'rgba(5,13,26,0.95)',
+    tooltipText: '#FFFFFF',
+    tooltipBorder: 'rgba(255,255,255,0.1)',
+};
+
+/* ===== DATA ===== */
+const volumeLabels = ["2026-03-06", "2026-03-07", "2026-03-08", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-28", "2026-03-29", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-03", "2026-04-04", "2026-04-05", "2026-04-06", "2026-04-07"];
+const volumeData = [145, 90, 134, 181, 241, 284, 201, 176, 227, 401, 302, 308, 301, 399, 244, 253, 213, 337, 398, 390, 387, 230, 173, 866, 3384, 2585, 765, 804, 358, 341, 228, 177, 27];
+const sentimentLabels = ["neutral", "Sin clasificar", "negativo", "positivo"];
+const sentimentCounts = [10378, 9161, 5080, 3882];
+const sentimentColors = ["#5A6378", "#3D4663", "#FF1B6B", "#00D4FF"];
+const sourceLabels = ["Facebook", "TikTok", "Instagram", "Twitter", "YouTube"];
+const sourceData = [13816, 9949, 2992, 983, 293];
+const anomalyDates = ["2026-03-15", "2026-03-23", "2026-03-29", "2026-03-30"];
+const anomalySeverity = {"2026-03-15": "warning", "2026-03-23": "warning", "2026-03-29": "critical", "2026-03-30": "critical"};
+const actorBreakdown = {"cossio": 17029, "otros": 6534, "avianca": 4938};
+const intersectionData = {"brand_only": 2167, "brand_only_pct": 7.6, "brand_only_sentiment": {"neutral": 42.8, "<na>": 21.6, "negativo": 21.5, "positivo": 14.1}, "actor_only": 790, "actor_only_pct": 2.8, "actor_only_sentiment": {"<na>": 47.2, "neutral": 22.7, "positivo": 18.0, "negativo": 12.2}, "intersection": 1483, "intersection_pct": 5.2, "intersection_sentiment": {"neutral": 77.6, "negativo": 20.5, "positivo": 1.3, "<na>": 0.6}, "neither": 24061, "neither_pct": 84.4, "total": 28501, "brand_label": "Avianca", "actor_label": "Cossio"};
+const topicClusters = [{"label": "yeferson cossio", "keywords": ["yeferson cossio", "avianca", "vuelo"], "mention_count": 1514, "percentage": 5.3}, {"label": "mini influencer", "keywords": ["mini influencer", "garena", "free"], "mention_count": 850, "percentage": 3.0}, {"label": "acciones legales", "keywords": ["acciones legales", "avianca", "contra"], "mention_count": 120, "percentage": 0.4}, {"label": "bogot\u00e1 madrid", "keywords": ["bogot\u00e1 madrid", "vuelo", "avianca"], "mention_count": 91, "percentage": 0.3}, {"label": "ruta bogot\u00e1", "keywords": ["ruta bogot\u00e1", "zona", "colombia"], "mention_count": 76, "percentage": 0.3}, {"label": "olor qu\u00edmico", "keywords": ["olor qu\u00edmico", "aerol\u00ednea", "avianca"], "mention_count": 11, "percentage": 0.0}, {"label": "pasado marzo", "keywords": ["pasado marzo", "petro", "desde"], "mention_count": 11, "percentage": 0.0}, {"label": "trayecto regreso", "keywords": ["trayecto regreso", "venezuela", "aerol\u00ednea"], "mention_count": 4, "percentage": 0.0}];
+const topAuthors = [["avianca", 233], ["Avianca", 141], ["Wingo", 97], ["JetBlue", 89], ["Thejajfclips", 77], ["American Airlines", 47], ["\u1d39\u1d3f\u30e1Luis\u3042", 46], ["MSN Colombia", 44], ["Copa Airlines", 31], ["\ufe0f", 30]];
+const normalizedSources = [["Facebook", 13816], ["TikTok", 9949], ["Instagram", 2992], ["Twitter", 983], ["YouTube", 293]];
+
+/* ===== SPIKE EXPLORER DATA ===== */
+const spikes = [
+    {
+        id: 'A', dates: '2026-03-15', pctChange: '+76.7%',
+        description: 'Incremento de volumen del 77% entre 2026-03-14 (227) y 2026-03-15 (401)',
+        volume: '',
+        platform: '',
+        tone: ''
+    },
+    {
+        id: 'B', dates: '2026-03-23', pctChange: '+58.2%',
+        description: 'Incremento de volumen del 58% entre 2026-03-22 (213) y 2026-03-23 (337)',
+        volume: '',
+        platform: '',
+        tone: ''
+    },
+    {
+        id: 'C', dates: '2026-03-29', pctChange: '+400.6%',
+        description: 'Incremento de volumen del 401% entre 2026-03-28 (173) y 2026-03-29 (866)',
+        volume: '',
+        platform: '',
+        tone: ''
+    },
+    {
+        id: 'D', dates: '2026-03-30', pctChange: '+290.8%',
+        description: 'Incremento de volumen del 291% entre 2026-03-29 (866) y 2026-03-30 (3384)',
+        volume: '',
+        platform: '',
+        tone: ''
+    }
+];
+
+/* ===== CHART DEFAULTS ===== */
+Chart.defaults.color = THEME.text;
+Chart.defaults.borderColor = THEME.border;
+Chart.defaults.font.family = "'IBM Plex Sans', system-ui, sans-serif";
+
+/* ===== VOLUME CHART ===== */
+(function() {
+    var ctx = document.getElementById('volumeChart');
+    if (!ctx || volumeLabels.length === 0) return;
+
+    var gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, THEME.chartFill);
+    gradient.addColorStop(1, THEME.chartFillEnd);
+
+    var anomalyPoints = volumeLabels.map(function(label) {
+        return anomalyDates.indexOf(label) >= 0 ? Math.max.apply(null, volumeData) * 1.05 : null;
+    });
+
+    var datasets = [
+        {
+            label: 'Menciones',
+            data: volumeData,
+            borderColor: THEME.accentSecondary,
+            backgroundColor: gradient,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: THEME.accentSecondary,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            borderWidth: 2.5,
+        }
+    ];
+
+    if (anomalyDates.length > 0) {
+        datasets.push({
+            label: 'Anomalía',
+            data: anomalyPoints,
+            type: 'bar',
+            backgroundColor: 'rgba(255,27,107,0.15)',
+            borderColor: 'rgba(255,27,107,0.5)',
+            borderWidth: 1,
+            borderDash: [5, 3],
+            barPercentage: 0.15,
+        });
+    }
+
+    new Chart(ctx, {
+        type: 'line',
+        data: { labels: volumeLabels, datasets: datasets },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: anomalyDates.length > 0, labels: { usePointStyle: true, padding: 16 } }
+            },
+            scales: {
+                x: { grid: { display: false }, ticks: { maxRotation: 45, font: { size: 11 } } },
+                y: { beginAtZero: true, grid: { color: THEME.grid }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+})();
+
+/* ===== SPIKE EXPLORER ===== */
+(function() {
+    if (spikes.length === 0) return;
+    var panel = document.getElementById('spikePanel');
+    var titleEl = document.getElementById('spikePanelTitle');
+    var descEl = document.getElementById('spikePanelDesc');
+    var metaEl = document.getElementById('spikePanelMeta');
+    var buttons = document.querySelectorAll('.spike-btn');
+    if (!panel || !titleEl || !descEl || !metaEl) return;
+    var activeIndex = 0;
+
+    function showSpike(index) {
+        var spike = spikes[index];
+        if (!spike) return;
+        titleEl.textContent = 'PICO ' + spike.id + ' — ' + spike.dates + ' (' + spike.pctChange + ')';
+        descEl.textContent = spike.description;
+        metaEl.innerHTML =
+            '<div class="spike-meta-item"><span class="spike-meta-label">VOLUMEN</span><span class="spike-meta-value">' + spike.volume + '</span></div>' +
+            '<div class="spike-meta-item"><span class="spike-meta-label">PLATAFORMA</span><span class="spike-meta-value">' + spike.platform + '</span></div>' +
+            '<div class="spike-meta-item"><span class="spike-meta-label">TONO</span><span class="spike-meta-value">' + spike.tone + '</span></div>';
+        panel.classList.add('open');
+        buttons.forEach(function(btn, i) {
+            btn.classList.toggle('active', parseInt(btn.getAttribute('data-spike')) === index);
+        });
+        activeIndex = index;
+    }
+
+    buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var idx = parseInt(this.getAttribute('data-spike'));
+            if (idx === activeIndex) {
+                /* Toggle off */
+                panel.classList.remove('open');
+                this.classList.remove('active');
+                activeIndex = -1;
+            } else {
+                showSpike(idx);
+            }
+        });
+    });
+
+    /* Show default spike 0 */
+    showSpike(0);
+})();
+
+/* ===== SENTIMENT CHART ===== */
+(function() {
+    var ctx = document.getElementById('sentimentChart');
+    if (!ctx || sentimentLabels.length === 0) return;
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: sentimentLabels,
+            datasets: [{
+                data: sentimentCounts,
+                backgroundColor: sentimentColors,
+                borderWidth: 0,
+                hoverOffset: 8,
+            }]
+        },
+        options: {
+            responsive: true,
+            cutout: '65%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { padding: 16, usePointStyle: true, pointStyleWidth: 8, font: { size: 12 } }
+                }
+            }
+        }
+    });
+})();
+
+/* ===== SOURCES CHART ===== */
+(function() {
+    var ctx = document.getElementById('sourcesChart');
+    if (!ctx || sourceLabels.length === 0) return;
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: sourceLabels,
+            datasets: [{
+                label: 'Menciones',
+                data: sourceData,
+                backgroundColor: function(context) {
+                    var chart = context.chart;
+                    var c = chart.ctx;
+                    var chartArea = chart.chartArea;
+                    if (!chartArea) return THEME.accent;
+                    var grad = c.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+                    grad.addColorStop(0, THEME.accent);
+                    grad.addColorStop(1, THEME.accentSecondary);
+                    return grad;
+                },
+                borderRadius: 6,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: THEME.grid }, ticks: { font: { size: 11 } } },
+                y: { grid: { display: false }, ticks: { font: { size: 12 } } }
+            }
+        }
+    });
+})();
+
+/* ===== D3 TOOLTIP HELPER ===== */
+var d3Tooltip = d3.select('#d3Tooltip');
+function showTooltip(event, html) {
+    d3Tooltip
+        .html(html)
+        .style('left', (event.pageX + 12) + 'px')
+        .style('top', (event.pageY - 28) + 'px')
+        .classed('visible', true);
+}
+function hideTooltip() {
+    d3Tooltip.classed('visible', false);
+}
+
+/* ===== D3 VIZ 1: CRISIS TIMELINE ===== */
+(function() {
+    var container = document.getElementById('crisisTimeline');
+    if (!container || volumeLabels.length === 0) return;
+
+    var margin = { top: 30, right: 30, bottom: 60, left: 60 };
+    var width = container.clientWidth - margin.left - margin.right;
+    var height = 360 - margin.top - margin.bottom;
+
+    var svg = d3.select(container).append('svg')
+        .attr('viewBox', '0 0 ' + (width + margin.left + margin.right) + ' ' + (height + margin.top + margin.bottom))
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+    var parseDate = d3.timeParse('%Y-%m-%d');
+    var data = volumeLabels.map(function(d, i) {
+        return { date: parseDate(d) || new Date(d), value: volumeData[i], label: d };
+    }).filter(function(d) { return d.date !== null; });
+
+    var x = d3.scaleTime()
+        .domain(d3.extent(data, function(d) { return d.date; }))
+        .range([0, width]);
+
+    var y = d3.scaleLinear()
+        .domain([0, d3.max(data, function(d) { return d.value; }) * 1.1])
+        .range([height, 0]);
+
+    /* Grid lines */
+    svg.append('g')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(d3.axisBottom(x).ticks(8).tickFormat(d3.timeFormat('%d/%m')))
+        .selectAll('text')
+        .style('fill', THEME.textMuted)
+        .style('font-size', '11px');
+
+    svg.append('g')
+        .call(d3.axisLeft(y).ticks(5))
+        .selectAll('text')
+        .style('fill', THEME.textMuted)
+        .style('font-size', '11px');
+
+    svg.selectAll('.domain').style('stroke', THEME.border);
+    svg.selectAll('.tick line').style('stroke', THEME.grid);
+
+    /* Area */
+    var area = d3.area()
+        .x(function(d) { return x(d.date); })
+        .y0(height)
+        .y1(function(d) { return y(d.value); })
+        .curve(d3.curveMonotoneX);
+
+    var defs = svg.append('defs');
+    var gradient = defs.append('linearGradient')
+        .attr('id', 'crisisGrad')
+        .attr('x1', '0%').attr('y1', '0%')
+        .attr('x2', '0%').attr('y2', '100%');
+    gradient.append('stop').attr('offset', '0%').attr('stop-color', THEME.accentSecondary).attr('stop-opacity', 0.3);
+    gradient.append('stop').attr('offset', '100%').attr('stop-color', THEME.accentSecondary).attr('stop-opacity', 0.0);
+
+    svg.append('path')
+        .datum(data)
+        .attr('fill', 'url(#crisisGrad)')
+        .attr('d', area);
+
+    /* Line */
+    var line = d3.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.value); })
+        .curve(d3.curveMonotoneX);
+
+    svg.append('path')
+        .datum(data)
+        .attr('fill', 'none')
+        .attr('stroke', THEME.accentSecondary)
+        .attr('stroke-width', 2.5)
+        .attr('d', line);
+
+    /* Anomaly markers */
+    var anomalySet = new Set(anomalyDates);
+    var anomalyData = data.filter(function(d) { return anomalySet.has(d.label); });
+
+    /* Pulse rings for critical */
+    anomalyData.forEach(function(d) {
+        var sev = anomalySeverity[d.label] || 'info';
+        if (sev === 'critical') {
+            svg.append('circle')
+                .attr('cx', x(d.date))
+                .attr('cy', y(d.value))
+                .attr('r', 8)
+                .attr('fill', 'none')
+                .attr('stroke', THEME.accent)
+                .attr('stroke-width', 2)
+                .attr('class', 'pulse-marker');
+        }
+    });
+
+    /* Solid markers */
+    svg.selectAll('.anomaly-marker')
+        .data(anomalyData)
+        .enter()
+        .append('circle')
+        .attr('class', 'anomaly-marker')
+        .attr('cx', function(d) { return x(d.date); })
+        .attr('cy', function(d) { return y(d.value); })
+        .attr('r', 6)
+        .attr('fill', function(d) {
+            var sev = anomalySeverity[d.label] || 'info';
+            return sev === 'critical' ? THEME.accent : THEME.accentGold;
+        })
+        .attr('stroke', THEME.bg)
+        .attr('stroke-width', 2)
+        .style('cursor', 'pointer')
+        .on('mouseover', function(event, d) {
+            showTooltip(event, '<strong>' + d.label + '</strong><br>Menciones: ' + d.value.toLocaleString('es-ES'));
+        })
+        .on('mousemove', function(event) {
+            d3Tooltip.style('left', (event.pageX + 12) + 'px').style('top', (event.pageY - 28) + 'px');
+        })
+        .on('mouseout', hideTooltip);
+
+    /* Phase labels */
+    if (data.length > 4) {
+        var maxVal = d3.max(data, function(d) { return d.value; });
+        var threshold = maxVal * 0.3;
+        var phases = [];
+        var spikeIndices = [];
+        data.forEach(function(d, i) {
+            if (d.value > threshold) spikeIndices.push(i);
+        });
+        if (spikeIndices.length > 0) {
+            var spikeStart = spikeIndices[0];
+            var spikeEnd = spikeIndices[spikeIndices.length - 1];
+            if (spikeStart > 1) {
+                phases.push({ label: 'Pre-crisis', start: 0, end: spikeStart - 1 });
+            }
+            phases.push({ label: 'Explosión', start: spikeStart, end: Math.min(spikeStart + Math.max(1, Math.floor((spikeEnd - spikeStart) / 2)), data.length - 1) });
+            if (spikeEnd < data.length - 2) {
+                phases.push({ label: 'Estabilización', start: spikeEnd + 1, end: data.length - 1 });
+            }
+        }
+        phases.forEach(function(p) {
+            var x1 = x(data[p.start].date);
+            var x2 = x(data[p.end].date);
+            var midX = (x1 + x2) / 2;
+            svg.append('text')
+                .attr('x', midX)
+                .attr('y', height + 42)
+                .attr('text-anchor', 'middle')
+                .style('fill', THEME.textMuted)
+                .style('font-size', '10px')
+                .style('letter-spacing', '1.5px')
+                .style('text-transform', 'uppercase')
+                .style('font-family', "'IBM Plex Sans', sans-serif")
+                .text(p.label);
+            /* Bracket line */
+            svg.append('line')
+                .attr('x1', x1).attr('x2', x2)
+                .attr('y1', height + 30).attr('y2', height + 30)
+                .attr('stroke', THEME.border)
+                .attr('stroke-width', 1);
+        });
+    }
+})();
+
+/* ===== D3 VIZ 2: NARRATIVE HEATMAP ===== */
+(function() {
+    var container = document.getElementById('narrativeHeatmap');
+    if (!container || topicClusters.length === 0 || volumeLabels.length === 0) return;
+
+    /* Divide dates into 4 phases */
+    var nDates = volumeLabels.length;
+    var phaseSize = Math.ceil(nDates / 4);
+    var phaseLabels = [];
+    var phaseVolumes = [];  /* total volume in each phase */
+    for (var p = 0; p < 4; p++) {
+        var start = p * phaseSize;
+        var end = Math.min((p + 1) * phaseSize, nDates);
+        if (start >= nDates) break;
+        var label = volumeLabels[start].slice(5) + ' — ' + volumeLabels[Math.min(end - 1, nDates - 1)].slice(5);
+        phaseLabels.push(label);
+        var total = 0;
+        for (var i = start; i < end; i++) total += volumeData[i];
+        phaseVolumes.push(total);
+    }
+    var totalVolume = phaseVolumes.reduce(function(a, b) { return a + b; }, 0) || 1;
+
+    /* Build grid data */
+    var clusters = topicClusters.slice(0, 10);  /* limit to top 10 */
+    var gridData = [];
+    var maxCount = 0;
+    clusters.forEach(function(cluster, ci) {
+        phaseLabels.forEach(function(phase, pi) {
+            var weight = phaseVolumes[pi] / totalVolume;
+            var count = Math.round(cluster.mention_count * weight);
+            if (count > maxCount) maxCount = count;
+            gridData.push({ cluster: cluster.label, phase: phase, count: count, ci: ci, pi: pi });
+        });
+    });
+
+    var margin = { top: 10, right: 20, bottom: 80, left: 180 };
+    var cellW = 90;
+    var cellH = 32;
+    var width = phaseLabels.length * cellW;
+    var height = clusters.length * cellH;
+
+    var svg = d3.select(container).append('svg')
+        .attr('viewBox', '0 0 ' + (width + margin.left + margin.right) + ' ' + (height + margin.top + margin.bottom))
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+    var colorScale = d3.scaleLinear()
+        .domain([0, maxCount])
+        .range([THEME.isLight ? '#F0F0F0' : '#0A1628', THEME.accent]);
+
+    /* Cells */
+    svg.selectAll('.hm-cell')
+        .data(gridData)
+        .enter()
+        .append('rect')
+        .attr('x', function(d) { return d.pi * cellW; })
+        .attr('y', function(d) { return d.ci * cellH; })
+        .attr('width', cellW - 3)
+        .attr('height', cellH - 3)
+        .attr('rx', 4)
+        .attr('fill', function(d) { return colorScale(d.count); })
+        .style('cursor', 'pointer')
+        .on('mouseover', function(event, d) {
+            showTooltip(event, '<strong>' + d.cluster + '</strong><br>' + d.phase + '<br>Menciones: ~' + d.count.toLocaleString('es-ES'));
+        })
+        .on('mousemove', function(event) {
+            d3Tooltip.style('left', (event.pageX + 12) + 'px').style('top', (event.pageY - 28) + 'px');
+        })
+        .on('mouseout', hideTooltip);
+
+    /* Y axis labels */
+    clusters.forEach(function(c, i) {
+        svg.append('text')
+            .attr('x', -10)
+            .attr('y', i * cellH + cellH / 2 + 4)
+            .attr('text-anchor', 'end')
+            .style('fill', THEME.text)
+            .style('font-size', '11px')
+            .style('font-family', "'IBM Plex Sans', sans-serif")
+            .text(c.label.length > 22 ? c.label.slice(0, 20) + '…' : c.label);
+    });
+
+    /* X axis labels */
+    phaseLabels.forEach(function(label, i) {
+        svg.append('text')
+            .attr('x', i * cellW + cellW / 2)
+            .attr('y', height + 20)
+            .attr('text-anchor', 'middle')
+            .style('fill', THEME.textMuted)
+            .style('font-size', '10px')
+            .style('font-family', "'IBM Plex Sans', sans-serif")
+            .attr('transform', 'rotate(-30,' + (i * cellW + cellW / 2) + ',' + (height + 20) + ')')
+            .text(label);
+    });
+})();
+
+/* ===== D3 VIZ 3: ACTOR RELATIONSHIP GRAPH ===== */
+(function() {
+    var container = document.getElementById('actorGraph');
+    if (!container) return;
+
+    var w = container.clientWidth || 700;
+    var h = 450;
+
+    var svg = d3.select(container).append('svg')
+        .attr('viewBox', '0 0 ' + w + ' ' + h);
+
+    var defs = svg.append('defs');
+    /* Glow filter */
+    var filter = defs.append('filter').attr('id', 'glow');
+    filter.append('feGaussianBlur').attr('stdDeviation', '4').attr('result', 'coloredBlur');
+    var feMerge = filter.append('feMerge');
+    feMerge.append('feMergeNode').attr('in', 'coloredBlur');
+    feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+
+    /* Build nodes dynamically from actor breakdown */
+    var nodes = [];
+    var links = [];
+    var actorKeys = Object.keys(actorBreakdown);
+    var actorCounts = actorKeys.map(function(k) { return actorBreakdown[k]; });
+    var maxActor = Math.max.apply(null, actorCounts.concat([1]));
+    var actorNodeColors = [THEME.accent, THEME.accentSecondary, THEME.accentGold, '#8B5CF6', THEME.textMuted];
+
+    actorKeys.forEach(function(key, idx) {
+        var count = actorBreakdown[key];
+        var color = actorNodeColors[idx % actorNodeColors.length];
+        nodes.push({
+            id: key.charAt(0).toUpperCase() + key.slice(1),
+            count: count,
+            color: color,
+            r: Math.max(25, 55 * (count / maxActor))
+        });
+    });
+
+    /* Add links between actors */
+    if (nodes.length >= 2) {
+        links.push({ source: nodes[0].id, target: nodes[1].id, strength: 3 });
+    }
+
+    /* Add other top authors */
+    var existingNames = new Set(actorKeys.map(function(k) { return k.toLowerCase(); }));
+    var otherCount = 0;
+    topAuthors.forEach(function(a) {
+        if (otherCount >= 5) return;
+        if (existingNames.has(a[0].toLowerCase())) return;
+        var count = a[1] || 0;
+        nodes.push({ id: a[0], count: count, color: THEME.textMuted, r: Math.max(12, 30 * (count / maxActor)) });
+        /* Connect to the actor with highest count */
+        var target = nodes.length > 1 ? nodes[0].id : nodes[0].id;
+        links.push({ source: a[0], target: target, strength: 1 });
+        otherCount++;
+    });
+
+    if (nodes.length === 0) return;
+
+    var simulation = d3.forceSimulation(nodes)
+        .force('link', d3.forceLink(links).id(function(d) { return d.id; }).distance(120))
+        .force('charge', d3.forceManyBody().strength(-300))
+        .force('center', d3.forceCenter(w / 2, h / 2))
+        .force('collision', d3.forceCollide().radius(function(d) { return d.r + 10; }))
+        .alphaDecay(0.05);
+
+    var link = svg.append('g')
+        .selectAll('line')
+        .data(links)
+        .enter()
+        .append('line')
+        .attr('stroke', function(d) { return d.strength > 2 ? (THEME.accent + '66') : THEME.border; })
+        .attr('stroke-width', function(d) { return d.strength > 2 ? 3 : 1.5; });
+
+    var node = svg.append('g')
+        .selectAll('g')
+        .data(nodes)
+        .enter()
+        .append('g')
+        .style('cursor', 'grab')
+        .call(d3.drag()
+            .on('start', function(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x; d.fy = d.y;
+            })
+            .on('drag', function(event, d) {
+                d.fx = event.x; d.fy = event.y;
+            })
+            .on('end', function(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null; d.fy = null;
+            })
+        );
+
+    node.append('circle')
+        .attr('r', function(d) { return d.r; })
+        .attr('fill', function(d) { return d.color; })
+        .attr('fill-opacity', 0.8)
+        .attr('stroke', function(d) { return d.color; })
+        .attr('stroke-width', 2)
+        .attr('stroke-opacity', 0.4)
+        .style('filter', 'url(#glow)');
+
+    node.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.35em')
+        .style('fill', THEME.isLight ? '#1A1A2E' : '#FFFFFF')
+        .style('font-size', function(d) { return d.r > 30 ? '13px' : '10px'; })
+        .style('font-family', "'IBM Plex Sans', sans-serif")
+        .style('font-weight', '600')
+        .style('pointer-events', 'none')
+        .text(function(d) { return d.id; });
+
+    node.on('mouseover', function(event, d) {
+        showTooltip(event, '<strong>' + d.id + '</strong><br>Menciones: ' + d.count.toLocaleString('es-ES'));
+    })
+    .on('mousemove', function(event) {
+        d3Tooltip.style('left', (event.pageX + 12) + 'px').style('top', (event.pageY - 28) + 'px');
+    })
+    .on('mouseout', hideTooltip);
+
+    simulation.on('tick', function() {
+        link
+            .attr('x1', function(d) { return d.source.x; })
+            .attr('y1', function(d) { return d.source.y; })
+            .attr('x2', function(d) { return d.target.x; })
+            .attr('y2', function(d) { return d.target.y; });
+        node.attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
+    });
+})();
+
+/* ===== D3 VIZ 4: ENGAGEMENT BUBBLE CHART ===== */
+(function() {
+    var container = document.getElementById('platformBubbles');
+    if (!container || normalizedSources.length === 0) return;
+
+    var w = container.clientWidth || 700;
+    var h = 400;
+    var margin = { top: 20, right: 20, bottom: 20, left: 20 };
+    var innerW = w - margin.left - margin.right;
+    var innerH = h - margin.top - margin.bottom;
+
+    var svg = d3.select(container).append('svg')
+        .attr('viewBox', '0 0 ' + w + ' ' + h)
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+    var maxCount = d3.max(normalizedSources, function(d) { return d[1]; }) || 1;
+    var rScale = d3.scaleSqrt().domain([0, maxCount]).range([20, 70]);
+
+    var platformColors = {
+        'Facebook': '#1877F2',
+        'TikTok': '#FF0050',
+        'Instagram': '#E1306C',
+        'Twitter': '#1DA1F2',
+        'YouTube': '#FF0000',
+    };
+    var fallbackColors = [THEME.accent, THEME.accentSecondary, THEME.accentGold, '#8B5CF6', '#10B981', '#F59E0B', '#6366F1', '#EC4899'];
+
+    var bubbleData = normalizedSources.map(function(d, i) {
+        return {
+            name: d[0],
+            count: d[1],
+            r: rScale(d[1]),
+            color: platformColors[d[0]] || fallbackColors[i % fallbackColors.length],
+        };
+    });
+
+    /* Use force simulation to pack bubbles */
+    var simulation = d3.forceSimulation(bubbleData)
+        .force('x', d3.forceX(innerW / 2).strength(0.05))
+        .force('y', d3.forceY(innerH / 2).strength(0.05))
+        .force('collision', d3.forceCollide().radius(function(d) { return d.r + 4; }).strength(0.8))
+        .stop();
+
+    for (var i = 0; i < 120; i++) simulation.tick();
+
+    var bubbles = svg.selectAll('.bubble')
+        .data(bubbleData)
+        .enter()
+        .append('g')
+        .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
+
+    bubbles.append('circle')
+        .attr('r', function(d) { return d.r; })
+        .attr('fill', function(d) { return d.color; })
+        .attr('fill-opacity', 0.75)
+        .attr('stroke', function(d) { return d.color; })
+        .attr('stroke-width', 2)
+        .attr('stroke-opacity', 0.3);
+
+    bubbles.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '-0.2em')
+        .style('fill', THEME.isLight ? '#1A1A2E' : '#FFFFFF')
+        .style('font-size', function(d) { return d.r > 40 ? '13px' : '10px'; })
+        .style('font-family', "'IBM Plex Sans', sans-serif")
+        .style('font-weight', '600')
+        .style('pointer-events', 'none')
+        .text(function(d) { return d.name; });
+
+    bubbles.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '1.2em')
+        .style('fill', THEME.isLight ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.7)')
+        .style('font-size', '10px')
+        .style('font-family', "'JetBrains Mono', monospace")
+        .style('pointer-events', 'none')
+        .text(function(d) { return d.count.toLocaleString('es-ES'); });
+
+    bubbles.on('mouseover', function(event, d) {
+        showTooltip(event, '<strong>' + d.name + '</strong><br>Menciones: ' + d.count.toLocaleString('es-ES'));
+    })
+    .on('mousemove', function(event) {
+        d3Tooltip.style('left', (event.pageX + 12) + 'px').style('top', (event.pageY - 28) + 'px');
+    })
+    .on('mouseout', hideTooltip);
+})();
+
+/* ===== D3 VIZ 5: WORD CLOUD ===== */
+(function() {
+    var container = document.getElementById('wordCloud');
+    if (!container || topicClusters.length === 0) return;
+
+    var stopwords = new Set(['de', 'la', 'el', 'en', 'que', 'y', 'a', 'los', 'las', 'se', 'un', 'una', 'por', 'con', 'del', 'al']);
+    var cloudColors = [THEME.accent, THEME.accentSecondary, THEME.isLight ? '#1A1A2E' : '#FFFFFF', THEME.text, THEME.accentGold];
+
+    /* Collect words from cluster labels and keywords */
+    var wordMap = {};
+    topicClusters.forEach(function(cluster) {
+        var words = (cluster.keywords || []).concat([cluster.label]);
+        words.forEach(function(w) {
+            var tokens = w.toLowerCase().split(/\s+/);
+            tokens.forEach(function(token) {
+                token = token.replace(/[^a-záéíóúñü0-9]/gi, '');
+                if (token.length < 2 || stopwords.has(token)) return;
+                if (!wordMap[token]) wordMap[token] = 0;
+                wordMap[token] += cluster.mention_count || 1;
+            });
+        });
+    });
+
+    var wordList = Object.keys(wordMap).map(function(w) {
+        return { text: w, count: wordMap[w] };
+    });
+    wordList.sort(function(a, b) { return b.count - a.count; });
+    wordList = wordList.slice(0, 50);
+
+    if (wordList.length === 0) return;
+
+    var maxCount = wordList[0].count;
+    var minCount = wordList[wordList.length - 1].count;
+    var range = maxCount - minCount || 1;
+
+    wordList.forEach(function(w, i) {
+        var size = 14 + ((w.count - minCount) / range) * 42;  /* 14px to 56px */
+        var color = cloudColors[i % cloudColors.length];
+        var span = document.createElement('span');
+        span.className = 'wordcloud-word fade-up';
+        span.style.fontSize = size + 'px';
+        span.style.color = color;
+        span.style.fontFamily = "'IBM Plex Sans', sans-serif";
+        span.style.fontWeight = size > 36 ? '700' : '400';
+        span.style.transitionDelay = (i * 0.04) + 's';
+        span.textContent = w.text;
+        container.appendChild(span);
+    });
+})();
+
+/* ===== INTERSECTION OBSERVER: FADE UP ===== */
+(function() {
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach(function(el) {
+        observer.observe(el);
+    });
+})();
+
+/* ===== INTERSECTION OBSERVER: NAV DOTS ===== */
+(function() {
+    var sections = document.querySelectorAll('.section, .methodology');
+    var dots = document.querySelectorAll('.nav-dot');
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var idx = entry.target.id.replace('sec-', '');
+                dots.forEach(function(d) { d.classList.remove('active'); });
+                var activeDot = document.querySelector('.nav-dot[data-index="' + idx + '"]');
+                if (activeDot) activeDot.classList.add('active');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    sections.forEach(function(s) { observer.observe(s); });
+
+    dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+            var idx = this.getAttribute('data-index');
+            var target = document.getElementById('sec-' + idx);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+})();
+
+/* ===== COUNT-UP ANIMATION ===== */
+(function() {
+    function animateValue(el, start, end, duration) {
+        var startTime = performance.now();
+        var suffix = el.getAttribute('data-suffix') || '';
+        var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        var useCommas = el.getAttribute('data-commas') === 'true';
+
+        function update(currentTime) {
+            var elapsed = currentTime - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = start + (end - start) * eased;
+            var formatted;
+            if (decimals > 0) {
+                formatted = current.toFixed(decimals);
+            } else {
+                formatted = Math.round(current).toString();
+            }
+            if (useCommas) {
+                formatted = Number(formatted).toLocaleString('es-ES');
+            }
+            el.textContent = formatted + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                var target = parseFloat(entry.target.getAttribute('data-target'));
+                animateValue(entry.target, 0, target, 1500);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.countup').forEach(function(el) {
+        el.textContent = '0' + (el.getAttribute('data-suffix') || '');
+        observer.observe(el);
+    });
+})();
+
+/* ===== VENN DIAGRAM ===== */
+(function() {
+    const container = document.getElementById('vennDiagram');
+    if (!container || !intersectionData || !intersectionData.total) return;
+
+    const w = 460, h = 260;
+    const svg = d3.select(container).append('svg')
+        .attr('viewBox', '0 0 ' + w + ' ' + h)
+        .attr('width', '100%');
+
+    const brandOnly = intersectionData.brand_only || 0;
+    const actorOnly = intersectionData.actor_only || 0;
+    const inter = intersectionData.intersection || 0;
+    const brandPct = intersectionData.brand_only_pct || 0;
+    const actorPct = intersectionData.actor_only_pct || 0;
+    const interPct = intersectionData.intersection_pct || 0;
+    const brandLabel = intersectionData.brand_label || 'Avianca';
+    const actorLabel = intersectionData.actor_label || 'Cossio';
+
+    // Two overlapping circles
+    const cx1 = 165, cx2 = 295, cy = 120, r = 100;
+
+    // Brand circle
+    svg.append('circle').attr('cx', cx1).attr('cy', cy).attr('r', r)
+        .attr('fill', THEME.accentSecondary).attr('opacity', 0.15)
+        .attr('stroke', THEME.accentSecondary).attr('stroke-width', 1.5);
+
+    // Actor circle
+    svg.append('circle').attr('cx', cx2).attr('cy', cy).attr('r', r)
+        .attr('fill', THEME.accent).attr('opacity', 0.15)
+        .attr('stroke', THEME.accent).attr('stroke-width', 1.5);
+
+    // Labels
+    svg.append('text').attr('x', cx1 - 45).attr('y', cy - 10)
+        .attr('text-anchor', 'middle').attr('fill', THEME.accentSecondary)
+        .attr('font-family', 'JetBrains Mono').attr('font-size', '22px').attr('font-weight', '700')
+        .text(brandOnly.toLocaleString());
+    svg.append('text').attr('x', cx1 - 45).attr('y', cy + 12)
+        .attr('text-anchor', 'middle').attr('fill', THEME.text)
+        .attr('font-size', '10px').text(brandPct + '%');
+    svg.append('text').attr('x', cx1 - 45).attr('y', cy + 28)
+        .attr('text-anchor', 'middle').attr('fill', THEME.textMuted)
+        .attr('font-size', '9px').attr('text-transform', 'uppercase').text('Solo ' + brandLabel);
+
+    // Intersection
+    svg.append('text').attr('x', (cx1 + cx2) / 2).attr('y', cy - 10)
+        .attr('text-anchor', 'middle').attr('fill', THEME.accentGold)
+        .attr('font-family', 'JetBrains Mono').attr('font-size', '22px').attr('font-weight', '700')
+        .text(inter.toLocaleString());
+    svg.append('text').attr('x', (cx1 + cx2) / 2).attr('y', cy + 12)
+        .attr('text-anchor', 'middle').attr('fill', THEME.text)
+        .attr('font-size', '10px').text(interPct + '%');
+    svg.append('text').attr('x', (cx1 + cx2) / 2).attr('y', cy + 28)
+        .attr('text-anchor', 'middle').attr('fill', THEME.textMuted)
+        .attr('font-size', '9px').text('Ambos');
+
+    // Actor only
+    svg.append('text').attr('x', cx2 + 45).attr('y', cy - 10)
+        .attr('text-anchor', 'middle').attr('fill', THEME.accent)
+        .attr('font-family', 'JetBrains Mono').attr('font-size', '22px').attr('font-weight', '700')
+        .text(actorOnly.toLocaleString());
+    svg.append('text').attr('x', cx2 + 45).attr('y', cy + 12)
+        .attr('text-anchor', 'middle').attr('fill', THEME.text)
+        .attr('font-size', '10px').text(actorPct + '%');
+    svg.append('text').attr('x', cx2 + 45).attr('y', cy + 28)
+        .attr('text-anchor', 'middle').attr('fill', THEME.textMuted)
+        .attr('font-size', '9px').text('Solo ' + actorLabel);
+
+    // Top labels
+    svg.append('text').attr('x', cx1 - 30).attr('y', 18)
+        .attr('fill', THEME.accentSecondary).attr('font-family', 'Bebas Neue')
+        .attr('font-size', '14px').attr('letter-spacing', '2px').text(brandLabel.toUpperCase());
+    svg.append('text').attr('x', cx2 + 10).attr('y', 18)
+        .attr('fill', THEME.accent).attr('font-family', 'Bebas Neue')
+        .attr('font-size', '14px').attr('letter-spacing', '2px').text(actorLabel.toUpperCase());
+})();
+</script>
+</body>
+</html>

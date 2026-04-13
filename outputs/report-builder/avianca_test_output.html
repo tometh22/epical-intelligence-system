@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avianca — Inteligencia Reputacional | Epical</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F5FA;--surface:#FFFFFF;--border:#DDDDE8;--text:#3B3B58;--muted:#71718F;--dim:#A0A0B8;--dark:#0F1635;--magenta:#D6336C;--cyan:#1098AD;--amber:#C27803;--green:#2B8A3E;--red:#DC2626;--shadow:0 1px 8px rgba(0,0,0,0.05);--display:'Playfair Display',Georgia,serif;--body:'DM Sans','Helvetica Neue',sans-serif;--mono:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.78;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+@media print{.sl{min-height:auto!important;page-break-after:always;padding:40px!important}.cover{color:#0F1635!important;background:#fff!important}}
+.sl{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:64px 48px;position:relative}
+.si{max-width:1000px;width:100%}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta);margin-bottom:14px}
+.h1{font-family:var(--display);font-size:clamp(28px,4.5vw,46px);font-weight:700;color:var(--dark);line-height:1.15;margin-bottom:12px}
+.h2{font-family:var(--display);font-size:clamp(20px,3vw,30px);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:10px}
+.h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.sub{font-size:15px;color:var(--muted);font-style:italic;margin-bottom:30px;line-height:1.7;max-width:700px}
+.p{font-size:15px;color:var(--text);line-height:1.85;margin-bottom:14px}
+.p strong{color:var(--dark);font-weight:600}
+.sm{font-size:13px;color:var(--muted);line-height:1.7}
+.cover{flex-direction:column;background:linear-gradient(145deg,#0F1635,#1A2456);color:#fff}
+.cover .tag{color:rgba(255,255,255,0.5)}.cover .h1{color:#fff;font-size:clamp(34px,5.5vw,56px);margin-bottom:20px}.cover .h1 em{color:#FF4081;font-style:normal}
+.cover-sub{font-size:16px;color:rgba(255,255,255,0.6);max-width:620px;margin-bottom:48px;line-height:1.9;font-weight:300}
+.cover-meta{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px;border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;margin-top:32px}
+.tr{text-align:center;background:linear-gradient(145deg,#0F1635,#1A2456);color:#fff}
+.tr .h1{color:#fff;max-width:660px;margin:0 auto 14px}.tr .sub{color:rgba(255,255,255,0.45);margin:0 auto}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}.g2w{grid-template-columns:3fr 2fr}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:var(--shadow)}
+.card-a{border-left:3px solid var(--magenta)}.card-a .h3{color:var(--magenta)}
+.card-b{border-left:3px solid var(--cyan)}.card-b .h3{color:var(--cyan)}
+.card-c{border-left:3px solid var(--green)}.card-c .h3{color:var(--green)}
+.card-m{background:var(--bg);border-color:#D0D0E0}
+.kpi-row{display:flex;gap:14px;margin:22px 0;flex-wrap:wrap}
+.kpi{flex:1;min-width:125px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;box-shadow:var(--shadow)}
+.kpi-v{font-size:30px;font-weight:700;color:var(--dark)}.kpi-l{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-top:4px}
+.chart-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:var(--shadow)}
+.chart-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.insight{background:#E8F6FC;border:1px solid #B3DEF0;border-radius:10px;padding:18px 22px;margin-top:20px}
+.insight p{font-size:14px;color:#0A5975;line-height:1.75;margin:0}
+.sowhat{background:#FFF6EB;border:1px solid #FFD9A3;border-radius:10px;padding:18px 22px;margin-top:20px}
+.sowhat-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.sowhat p{font-size:14px;color:#6B3A00;line-height:1.75;margin:0}
+.risk-box{background:#FFF0F0;border:1px solid #FFC5C5;border-radius:10px;padding:18px 22px;margin-top:20px}
+.risk-box p{font-size:14px;color:#991B1B;line-height:1.75;margin:0}
+.bar{display:flex;height:30px;border-radius:6px;overflow:hidden;margin:10px 0}
+.bar div{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:#fff;letter-spacing:0.5px}
+.spost{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:10px 0;box-shadow:var(--shadow)}
+.spost-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.spost-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700}
+.spost-user{font-size:13px;font-weight:600;color:var(--dark)}.spost-handle{font-size:11px;color:var(--dim)}
+.spost-text{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:10px}
+.spost-meta{display:flex;gap:16px;font-size:11px;color:var(--dim)}
+.spost-meta span{display:flex;align-items:center;gap:4px}
+.nar{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}
+.nar-num{font-family:var(--display);font-size:56px;color:var(--bg);float:right;margin-top:-8px}
+.nar-title{font-family:var(--display);font-size:22px;font-weight:700;color:var(--dark);margin-bottom:6px;line-height:1.25;max-width:82%}
+.badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.badge-g{background:#E6F9EF;color:var(--green)}.badge-o{background:#FFF6EB;color:var(--amber)}.badge-b{background:#E8F6FC;color:var(--cyan)}
+.plat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:var(--shadow);border-top:3px solid var(--dim)}
+.plat-icon{margin-bottom:8px;color:var(--dim)}
+.plat-name{font-family:var(--display);font-size:20px;color:var(--dark)}.plat-n{font-family:var(--mono);font-size:15px;color:var(--cyan);margin:2px 0}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
+.sc{border-radius:12px;padding:22px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.sc-letter{font-family:var(--display);font-size:28px}.sc-name{font-size:16px;font-weight:700;color:var(--dark);margin:4px 0}
+.rec{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:14px;box-shadow:var(--shadow)}
+.rec h3{font-family:var(--display);font-size:18px;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.3}
+.rec-signal{font-family:var(--mono);font-size:10px;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.spike{display:flex;gap:14px;margin:10px 0;align-items:flex-start}
+.spike-dot{min-width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:14px;font-weight:700;color:#fff}
+table{width:100%;border-collapse:collapse;margin:14px 0}
+th{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-align:left;padding:8px 12px;border-bottom:2px solid var(--border)}
+td{font-size:13px;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+td:first-child{font-weight:600;color:var(--dark)}
+.fu{opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s ease}.fu.vis{opacity:1;transform:translateY(0)}
+.s2{transition-delay:.1s}.s3{transition-delay:.2s}.s4{transition-delay:.3s}
+@media(max-width:768px){.sl{padding:40px 20px}.g2,.g3,.g4,.sc-grid{grid-template-columns:1fr}.kpi-row{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<!-- ========== COVER ========== -->
+<section class="sl cover">
+<div class="si">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:48px">
+<img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:16px;opacity:0.6" onerror="this.style.display='none'">
+<div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px">CONFIDENCIAL</div>
+</div>
+<div class="tag">Análisis de inteligencia reputacional · preparado para Avianca</div>
+<h1 class="h1">El triángulo Corporación-Creador-Audiencia</h1>
+<p class="cover-sub">La reacción institucional de Avianca activó tres conversaciones paralelas que no se cruzan: la legitimidad corporativa en plataformas adultas, la rebeldía generacional en espacios jóvenes, y un campo de batalla narrativo donde ambos actores compiten por definir qué es &quot;seguridad aérea&quot;.</p>
+<div class="cover-meta">PERÍODO: MARZO — ABRIL 2026 &nbsp;·&nbsp; 14K MENCIONES PROCESADAS &nbsp;·&nbsp; 14K RELEVANTES &nbsp;·&nbsp; 73 PLATAFORMAS</div>
+
+</div>
+</section>
+
+<!-- ========== EXEC SUMMARY ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Resumen ejecutivo</div>
+<div class="h1 fu">Tres hallazgos que cambian la lectura</div>
+<p class="sub fu s2">Lo que distingue este análisis de un reporte de monitoreo estándar.</p>
+<div class="g3 fu s2">
+<div class="card card-a"><div class="h3">HALLAZGO 1</div><p class="p" style="font-size:14px;margin:0">El comunicado del 29 de marzo detonó un volumen 273 veces superior al baseline previo, pero la conversación se fragmentó en tres universos que no se hablan: el 83% del sentimiento negativo se dirigió contra Cossio, no contra Avianca. La plataforma determinó el veredicto: Facebook validó la posición corporativa con 22% de sentimiento positivo hacia la marca, mientras TikTok castigó la &quot;rigidez institucional&quot; con apenas 0.9% positivo en Twitter. El pico conversacional duró 72 horas, pero la narrat</p></div>
+<div class="card card-b"><div class="h3">HALLAZGO 2</div><p class="p" style="font-size:14px;margin:0">De las 14,403 menciones, solo 702 evalúan directamente a Avianca como actor principal, pero estas concentran el 33.9% de sentimiento positivo — la cifra más alta para la marca en meses. Sin embargo, en TikTok (48% del engagement total), Avianca solo captura 337 menciones directas contra 2,853 de Cossio, perdiendo 8:1 la batalla por la atención de la audiencia 18-30. Esta desproporción importa porque el 65% del volumen tangencial sobre &quot;aerolíneas&quot; y &quot;servicio&quot; se mantiene negativo, indicando que</p></div>
+<div class="card card-c"><div class="h3">HALLAZGO 3</div><p class="p" style="font-size:14px;margin:0">Decisión 1: Antes del 15 de abril, definir si capitalizar los 238 comentarios positivos en TikTok para construir legitimidad generacional o mantener distancia de esa audiencia. Decisión 2: En 48 horas, evaluar si responder a la narrativa emergente de &quot;corporación abusiva&quot; que crece 23% diario en redes jóvenes. Decisión 3: Antes del 10 de abril, decidir el nivel de visibilidad del proceso legal — silencio conserva institucionalidad, publicidad activa alimenta la polarización que favorece el engag</p></div>
+</div>
+
+</div></section>
+
+<!-- ========== METHODOLOGY ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Nota metodológica</div>
+<div class="h1 fu">Cómo se produjo este análisis</div>
+<p class="sub fu s2">Transparencia sobre qué datos usamos, qué descartamos, y por qué.</p>
+<div class="g2 g2w fu s3">
+<div>
+<table>
+<thead><tr><th>Etapa</th><th>Descripción</th><th style="text-align:right">Resultado</th></tr></thead>
+<tbody>
+<tr><td>Recolección</td><td>Social listening + scrapping directo de perfiles</td><td style="text-align:right;font-family:var(--mono)">14K</td></tr>
+<tr><td>Clasificación IA</td><td>Modelos propietarios de clasificación: relevancia, sentimiento, dirección</td><td style="text-align:right;font-family:var(--mono)">14K</td></tr>
+<tr><td>Reclasificación</td><td>Reglas: 0, IA: 0</td><td style="text-align:right;font-family:var(--mono)">0.0% restante</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div></section>
+
+<!-- ========== THE DATA ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Los datos</div>
+<div class="h1 fu">14K menciones relevantes: la foto real</div>
+<div class="kpi-row fu s2">
+<div class="kpi"><div class="kpi-v">14K</div><div class="kpi-l">Relevantes</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">10K</div><div class="kpi-l">Negativas (70.9%)</div></div>
+<div class="kpi"><div class="kpi-v">2.6K</div><div class="kpi-l">Neutrales (18.0%)</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--green)">1.6K</div><div class="kpi-l">Positivas (11.0%)</div></div>
+<div class="kpi"><div class="kpi-v">17</div><div class="kpi-l">Neutrales (0.1%)</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--cyan)">0</div><div class="kpi-l">Alcance (dedup.)</div></div>
+</div>
+<div class="g2 fu s3">
+<div class="chart-box"><div class="chart-label">Distribución de sentimiento</div><div style="position:relative;height:280px"><canvas id="sentChart"></canvas></div></div>
+<div class="chart-box"><div class="chart-label">Volumen diario</div><div style="position:relative;height:280px"><canvas id="volMiniChart"></canvas></div></div>
+</div>
+
+</div></section>
+
+<section class="sl tr"><div class="h1 fu">La conversación tiene actores distintos.<br>Cada uno requiere una lectura diferente.</div><p class="sub fu s2">Actores analizados: Actor.</p></section>
+
+<!-- ========== ACTOR: ACTOR ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Sobre Actor — 0 menciones (0.0%)</div>
+<div class="h1 fu">Cossio absorbe el castigo pero conserva la base</div>
+<div class="g2 g2w fu s2">
+<div>
+<p class="p">Cossio recibe 9,617 menciones negativas de las 10,208 totales — se convierte en protagonista absoluto del castigo público. Los comentarios reflejan indignación moral: "ES UN AVIÓN !!!POR DIOS!! Q TIENES Q INVESTIGAR PARA ENTENDER QUE EN UN AVION CUALQUIER MAL COMPORTAMIENTO ES PELIGROSO!!" [TikTok, 31-mar, 8 eng] y "Este tipo debería de ir preso así como le pasó a epa Colombia por jugar con la seguridad de las personas" [Instagram, 30-mar, 933 eng].</p>
+<p class="p">Sin embargo, mantiene 1,337 menciones positivas que funcionan como base leal. Sus defensores reinterpretan el incidente: "lo que pasó en el avión fue un ACCIDENTE" [TikTok, 31-mar, 3278 eng] y cuestionan la reacción corporativa: "Avianca quiere sacar provecho de la figura pública de Cossío eso es todo" [Facebook, 31-mar].</p>
+<p class="p">La estrategia de victimización funciona parcialmente. Su respuesta legal genera simpatía: "Jajaja lo asesoraron bien los abogados" [Facebook, 31-mar, 1800 eng]. En TikTok, donde tiene mayor engagement (122.2 promedio), logra convertir castigo en contenido: "Yeferson cossio se cagó en avianca" [TikTok, 01-abr, 1949 eng].</p>
+<p class="p">El patrón es claro: acepta el rol de antagonista principal para proteger su base mientras Avianca gana respetabilidad institucional. Su sacrificio reputacional genera engagement 4x superior al de la aerolínea, sugiriendo que monetiza la controversia mejor que la resuelve.</p>
+
+<div class="sowhat"><div class="sowhat-label">Lectura estratégica</div><p>El 83% del rechazo lo convierte en escudo de la conversación</p></div>
+</div>
+<div>
+<div class="card" style="margin-bottom:10px"><div class="chart-label">Sentimiento sobre Actor</div><div class="bar"></div></div>
+
+</div>
+</div>
+</div></section>
+
+<!-- ========== CATALYST ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Hallazgo no obvio</div>
+<div class="h1 fu">El efecto catalizador: el incidente le dio micrófono a la insatisfacción acumulada</div>
+<p class="sub fu s2">3.9K menciones tangenciales negativas revelan un problema que trasciende el caso.</p>
+<div class="g2 fu s2">
+<div>
+<p class="p">Además de las menciones relevantes, detectamos <strong>2.1K menciones tangenciales negativas</strong> — quejas sin relación directa con el incidente pero que aparecieron durante el mismo período.</p>
+<p class="p">El incidente funcionó como <strong>catalizador de insatisfacción latente</strong>: personas que tenían una queja guardada vieron la marca era tendencia y aprovecharon para hacerla visible.</p>
+<p class="p">Composición: avianca, aerolínea, vuelo, colombia, servicio.</p>
+</div>
+<div>
+
+</div>
+</div>
+<div class="risk-box fu s3"><p><strong>Patrón predecible:</strong> cada vez que la marca sea tendencia en redes, este banco de insatisfacción se reactiva. No es un problema comunicacional — es un indicador operativo que se puede llevar como evidencia cuantificada.</p></div>
+</div></section>
+
+<!-- ========== PLATFORMS ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Lectura por plataforma</div>
+<div class="h1 fu">Cada plataforma juega un partido diferente</div>
+<div class="g4 fu s2">
+<div class="plat" style="border-top-color:var(--magenta)">
+<div class="plat-icon" style="color:var(--magenta)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></div>
+<div class="plat-name">TikTok</div>
+<div class="plat-n">3.6K (63.4% engagement)</div>
+
+</div>
+<div class="plat" style="border-top-color:#1877F2">
+<div class="plat-icon" style="color:#1877F2"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+<div class="plat-name">Facebook</div>
+<div class="plat-n">4.7K (16.8% engagement)</div>
+
+</div>
+<div class="plat" style="border-top-color:#E4405F">
+<div class="plat-icon" style="color:#E4405F"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+<div class="plat-name">Instagram</div>
+<div class="plat-n">783 (9.9% engagement)</div>
+
+</div>
+<div class="plat" style="border-top-color:var(--cyan)">
+<div class="plat-icon" style="color:var(--cyan)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+<div class="plat-name">Twitter</div>
+<div class="plat-n">5.0K (8.5% engagement)</div>
+
+</div>
+<div class="plat" style="border-top-color:#FF0000">
+<div class="plat-icon" style="color:#FF0000"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12z"/></svg></div>
+<div class="plat-name">YouTube</div>
+<div class="plat-n">177 (1.4% engagement)</div>
+
+</div>
+<div class="plat" style="border-top-color:var(--dim)">
+<div class="plat-icon" style="color:var(--dim)"></div>
+<div class="plat-name">360Radio.Com.Co</div>
+<div class="plat-n">2 (0.0% engagement)</div>
+
+</div>
+</div>
+
+</div></section>
+
+<!-- ========== TIMELINE ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Evolución temporal</div>
+<div class="h1 fu">La línea de tiempo de la conversación</div>
+<div class="chart-box fu s2"><div style="position:relative;height:200px"><canvas id="volChart"></canvas></div></div>
+<div class="g2 fu s3" style="margin-top:20px">
+<div><div class="spike"><div class="spike-dot" style="background:var(--dim)">A</div><div>
+<p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">2026-03-29 — 2.2K menciones</p>
+<p class="sm" style="margin:0">Incremento de 27138% entre 2026-03-28 (8) y 2026-03-29 (2179)</p>
+</div></div><div class="spike"><div class="spike-dot" style="background:var(--red)">C</div><div>
+<p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">2026-03-22 — 14 menciones</p>
+<p class="sm" style="margin:0">Incremento de 600% entre 2026-03-21 (2) y 2026-03-22 (14)</p>
+</div></div><div class="spike"><div class="spike-dot" style="background:var(--cyan)">E</div><div>
+<p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">2026-03-16 — 3 menciones</p>
+<p class="sm" style="margin:0">Incremento de 200% entre 2026-03-14 (1) y 2026-03-16 (3)</p>
+</div></div><div class="spike"><div class="spike-dot" style="background:var(--dim)">G</div><div>
+<p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">2026-03-28 — 8 menciones</p>
+<p class="sm" style="margin:0">Incremento de 167% entre 2026-03-27 (3) y 2026-03-28 (8)</p>
+</div></div></div>
+<div><div class="spike"><div class="spike-dot" style="background:var(--red)">B</div><div>
+<p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">2026-03-11 — 21 menciones</p>
+<p class="sm" style="margin:0">Incremento de 950% entre 2026-03-10 (2) y 2026-03-11 (21)</p>
+</div></div><div class="spike"><div class="spike-dot" style="background:var(--magenta)">D</div><div>
+<p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">2026-03-19 — 15 menciones</p>
+<p class="sm" style="margin:0">Incremento de 275% entre 2026-03-18 (4) y 2026-03-19 (15)</p>
+</div></div><div class="spike"><div class="spike-dot" style="background:var(--cyan)">F</div><div>
+<p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">2026-03-17 — 8 menciones</p>
+<p class="sm" style="margin:0">Incremento de 167% entre 2026-03-16 (3) y 2026-03-17 (8)</p>
+</div></div><div class="spike"><div class="spike-dot" style="background:var(--dim)">H</div><div>
+<p style="font-family:var(--mono);font-size:13px;margin:0;color:var(--dark)">2026-03-30 — 4.9K menciones</p>
+<p class="sm" style="margin:0">Incremento de 123% entre 2026-03-29 (2179) y 2026-03-30 (4863)</p>
+</div></div></div>
+</div>
+
+</div></section>
+
+<!-- ========== COMUNICADO IMPACT ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Impacto del comunicado</div>
+<div class="h1 fu">Antes y después del 2026-03-29</div>
+<div class="g2 fu s2">
+<div class="card"><div class="h3">Pre-evento</div>
+<div class="kpi-row">
+<div class="kpi"><div class="kpi-v">54</div><div class="kpi-l">Menciones</div></div>
+<div class="kpi"><div class="kpi-v">1.3K</div><div class="kpi-l">Engagement</div></div>
+<div class="kpi"><div class="kpi-v">8/día</div><div class="kpi-l">Promedio</div></div>
+</div></div>
+<div class="card"><div class="h3">Post-evento</div>
+<div class="kpi-row">
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">14K</div><div class="kpi-l">Menciones</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">691K</div><div class="kpi-l">Engagement</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">1779/día</div><div class="kpi-l">Promedio</div></div>
+</div></div>
+</div>
+<div class="kpi-row fu s3">
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">+26259.3%</div><div class="kpi-l">Δ Menciones</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">+51941.9%</div><div class="kpi-l">Δ Engagement</div></div>
+<div class="kpi"><div class="kpi-v">2026-03-31</div><div class="kpi-l">Pico (5.4K)</div></div>
+</div>
+<div class="insight fu s4"><p>Sin recuperación completa en el período analizado.</p></div>
+</div></section>
+
+<section class="sl tr"><div class="h1 fu">Los datos definen el presente.<br>Las narrativas definen cómo se recuerda.</div><p class="sub fu s2">3 narrativas compiten por dar forma a la memoria colectiva.</p></section>
+
+<!-- ========== NARRATIVES ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Las narrativas en juego</div>
+<div class="nar fu s2"><div class="nar-num">01</div>
+<div class="nar-title"></div>
+<div class="badge badge-g"></div>
+<p class="p">THESIS: La seguridad aérea versus el entretenimiento digital — dos códigos de valores irreconciliables
+EVOLUTION: Inició como debate sobre proporcionalidad (días 1-3), evolucionó hacia conflicto generacional sobre límites del entretenimiento (días 4-7), se solidifica como choque cultural entre responsabilidad institucional y libertad creativa
+EVIDENCE_1: "no ha exagerado, todos deben respetar a los demas pasajeros, pudo alterar el vuelo como tal, son muchos los que corren riesgo" [muestra, operacional, crítica brand] 
+EVIDENCE_2: "Total apoyo a Avianca" [TikTok, 30-mar, 2881 eng]
+EVIDENCE_3: "dicen que en los aeropuertos ha mucha seguridad entonces porqué permitieron que este señor llevará algo con olor químico, los señores de la aerolínea están exagerando" [TikTok, 30-mar]
+IMPLICATION: Av</p></div>
+<div class="nar fu s3"><div class="nar-num">02</div>
+<div class="nar-title"></div>
+<div class="badge badge-o"></div>
+<p class="p">THESIS: El influencer rico que cree que todo se puede comprar versus la corporación que defiende la dignidad del servicio público
+EVOLUTION: Emergió en día 3 cuando se conocieron detalles económicos, intensificó días 4-5 con comentarios sobre privilegio, se mantiene estable como subtema de justicia social
+EVIDENCE_1: "lo que pasa es que el niño pensaba que con tener dinero podía hacer lo que quiera. ahora está asustado porque si tienes un problema con una aerolínea es muy delicado" [muestra, precio_valor, crítica brand]
+EVIDENCE_2: "ese man como va a llevar algo de eso alli, en un viaje sea serio qué irresponsable" [muestra, reputacion_confianza, crítica brand]
+EVIDENCE_3: "Hablando de еstаfаdоrеs... ya le metieron metieron su buena demanda al еstаfаdоr de Cossio por Теrrоrismо?" [muestra,</p></div>
+<div class="nar fu s4"><div class="nar-num">03</div>
+<div class="nar-title"></div>
+<div class="badge badge-b"></div>
+<p class="p">THESIS: El accidente inevitable versus la broma premeditada — batalla por definir intencionalidad
+EVOLUTION: Cossio negó autoría días 1-2, admitió pero alegó accidente día 3, desarrolló narrativa de victimización días 4-7
+EVIDENCE_1: "lo que pasó en el avión fue un ACCIDENTE" [TikTok, 31-mar, 3278 eng]
+EVIDENCE_2: "Soltó un químico en un vuelo y accidente ??? No lo creo" [Facebook, 31-mar]
+EVIDENCE_3: "Avianca quiere sacar provecho de la figura pública de Cossío eso es todo" [Facebook, 31-mar]
+IMPLICATION: Esta batalla por intencionalidad es donde Avianca puede perder terreno si no maneja evidencia cuidadosamente. La narrativa del "accidente" le resta gravedad al caso y puede hacer ver la respuesta corporativa como desproporcionada.
+RISK_LEVEL: growing
+DOMINANT_PLATFORM: TikTok</p></div>
+
+</div></section>
+
+<!-- ========== SCENARIOS ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Proyección a 30 días</div>
+<div class="h1 fu">Tres escenarios según nivel de acción</div>
+<div class="sc-grid fu s2">
+<div class="sc" style="background:#FFF8F8;border-top:3px solid var(--red)">
+<div class="sc-letter" style="color:var(--red)">A</div>
+<div class="sc-name">La escalada legal que se vuelve mártir</div>
+<p class="p" style="font-size:13px;margin-top:6px">TRIGGER: Avianca procede legalmente y el caso genera cobertura mediática sostenida
+DESCRIPTION: El proceso judicial convierte a Cossio en símbolo de resistencia generacional contra &quot;corporaciones abusivas&quot;. TikTok y redes jóvenes amplifican narrativa David vs Goliat. El volumen de menciones crece 40% mensual con sentimiento cada vez más polarizado.
+CONSEQUENCE: Avianca gana el caso legal pero pierde la batalla cultural. Se posiciona permanentemente como &quot;la aerolínea que persigue influencers&quot; an</p>
+<p class="sm" style="color:var(--red);font-weight:600;padding-top:8px;border-top:1px solid var(--red)33;margin:0"></p>
+</div><div class="sc" style="background:#FFF8F0;border-top:3px solid var(--amber)">
+<div class="sc-letter" style="color:var(--amber)">B</div>
+<div class="sc-name">El silencio que normaliza</div>
+<p class="p" style="font-size:13px;margin-top:6px">TRIGGER: Avianca no alimenta más la controversia y deja que el ciclo se agote naturalmente
+DESCRIPTION: Sin combustible nuevo, el volumen decae 60% en dos semanas. Cossio pierde interés en alimentar el conflicto. Quedan solo 238 menciones positivas hacia Avianca en TikTok como base de recuperación generacional.
+CONSEQUENCE: Avianca preserva credibilidad institucional sin generar animosidad permanente. Mantiene opciones abiertas para reconciliación futura que pueda capitalizar para audiencias jóv</p>
+<p class="sm" style="color:var(--amber);font-weight:600;padding-top:8px;border-top:1px solid var(--amber)33;margin:0"></p>
+</div><div class="sc" style="background:#F0F8FF;border-top:3px solid var(--cyan)">
+<div class="sc-letter" style="color:var(--cyan)">C</div>
+<div class="sc-name">La imitación que destapa problemas operacionales</div>
+<p class="p" style="font-size:13px;margin-top:6px">TRIGGER: Otros influencers replican &quot;bromas&quot; similares en vuelos, usando el caso Cossio como precedente
+DESCRIPTION: El incidente se convierte en trend. Avianca debe responder a múltiples casos, exponiendo inconsistencias en protocolos de seguridad. El 53.6% de menciones tangenciales negativas sobre aerolíneas se activa como crítica sistemática.
+CONSEQUENCE: La crisis puntual se convierte en cuestionamiento integral de la operación de Avianca. Los problemas de servicio preexistentes usan estos i</p>
+<p class="sm" style="color:var(--cyan);font-weight:600;padding-top:8px;border-top:1px solid var(--cyan)33;margin:0"></p>
+</div>
+</div>
+</div></section>
+
+<!-- ========== CLOSING ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Cierre</div>
+<div class="h1 fu">La diferencia entre información y decisión</div>
+<div class="g2 fu s2">
+<div class="card card-m"><div class="h3" style="color:var(--dim)">Monitoreo estándar</div>
+<p class="p" style="font-size:14px">14K menciones procesadas con lectura superficial.</p>
+<p class="sm">Diagnóstico superficial. Estrategia reactiva.</p></div>
+<div class="card card-b"><div class="h3">Análisis profundo</div>
+<p class="p" style="font-size:14px">Análisis profundo que revela lo que un dashboard no muestra.</p>
+<p class="sm" style="color:var(--cyan)">Diagnóstico preciso. Estrategia informada.</p></div>
+</div>
+
+<div style="display:flex;justify-content:center;align-items:center;gap:40px;margin-top:56px" class="fu s4">
+<img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:16px;filter:brightness(0.3);opacity:0.5" onerror="this.style.display='none'">
+
+</div>
+<p style="text-align:center;font-size:11px;color:var(--dim);margin-top:12px">Social & Consumer Intelligence aplicada a decisiones de negocio · epical.digital</p>
+</div></section>
+
+<!-- ========== SCRIPTS ========== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+var RED='#DC2626',GREEN='#2B8A3E',GRAY='#B0B0C8',DARK='#0F1635',PINK='#D6336C',CYAN='#1098AD',AMBER='#C27803',BDR='#E0E0EE';
+
+/* Sentiment chart */
+(function(){
+var el=document.getElementById('sentChart');
+if(!el)return;
+new Chart(el,{type:'doughnut',data:{labels:["Negativo", "Neutral", "Positivo", "Neutro", "Mixto"],datasets:[{data:[10208, 2597, 1580, 17, 1],backgroundColor:["#DC2626", "#B0B0C8", "#2B8A3E", "#B0B0C8", "#B0B0C8"],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:DARK,font:{family:'DM Sans',size:11},padding:16,usePointStyle:true,pointStyle:'circle'}}}}});
+})();
+
+/* Volume mini chart (in data slide) */
+(function(){
+var el=document.getElementById('volMiniChart');
+if(!el)return;
+new Chart(el,{type:'bar',data:{labels:["03-07", "03-10", "03-11", "03-12", "03-14", "03-16", "03-17", "03-18", "03-19", "03-20", "03-21", "03-22", "03-23", "03-24", "03-25", "03-26", "03-27", "03-28", "03-29", "03-30", "03-31", "04-01", "04-02", "04-03", "04-04", "04-05", "04-06", "04-07"],datasets:[{data:[2, 2, 21, 2, 1, 3, 8, 4, 15, 17, 2, 14, 14, 6, 7, 2, 3, 8, 2179, 4863, 5354, 958, 515, 194, 87, 84, 33, 5],backgroundColor:CYAN+'44',borderColor:CYAN,borderWidth:1,borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:DARK,font:{family:'JetBrains Mono',size:9},maxRotation:45},grid:{display:false}},y:{ticks:{color:GRAY,font:{family:'JetBrains Mono',size:9}},grid:{color:BDR}}}}});
+})();
+
+/* Volume timeline chart (full) */
+(function(){
+var el=document.getElementById('volChart');
+if(!el)return;
+new Chart(el,{type:'line',data:{labels:["03-07", "03-10", "03-11", "03-12", "03-14", "03-16", "03-17", "03-18", "03-19", "03-20", "03-21", "03-22", "03-23", "03-24", "03-25", "03-26", "03-27", "03-28", "03-29", "03-30", "03-31", "04-01", "04-02", "04-03", "04-04", "04-05", "04-06", "04-07"],datasets:[{data:[2, 2, 21, 2, 1, 3, 8, 4, 15, 17, 2, 14, 14, 6, 7, 2, 3, 8, 2179, 4863, 5354, 958, 515, 194, 87, 84, 33, 5],borderColor:CYAN,backgroundColor:'rgba(16,152,173,0.08)',fill:true,tension:0.35,borderWidth:2.5,pointRadius:[2, 2, 6, 2, 2, 6, 6, 2, 6, 2, 2, 6, 2, 2, 2, 2, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2],pointBackgroundColor:["#B0B0C8", "#B0B0C8", "#DC2626", "#B0B0C8", "#B0B0C8", "#DC2626", "#DC2626", "#B0B0C8", "#DC2626", "#B0B0C8", "#B0B0C8", "#DC2626", "#B0B0C8", "#B0B0C8", "#B0B0C8", "#B0B0C8", "#DC2626", "#DC2626", "#DC2626", "#DC2626", "#B0B0C8", "#B0B0C8", "#B0B0C8", "#B0B0C8", "#B0B0C8", "#B0B0C8", "#B0B0C8", "#B0B0C8"],pointBorderColor:'transparent'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:DARK,font:{family:'JetBrains Mono',size:10}},grid:{color:BDR}},y:{ticks:{color:GRAY,font:{family:'JetBrains Mono',size:9}},grid:{color:BDR}}}}});
+})();
+
+/* Fade-in observer */
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')});},{threshold:0.08});
+document.querySelectorAll('.fu').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

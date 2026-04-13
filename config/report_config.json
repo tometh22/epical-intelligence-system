@@ -1,0 +1,13 @@
+{
+  "client_name": "Avianca",
+  "client_logo_path": "inputs/avianca_logo.svg",
+  "primary_brand": "Avianca",
+  "secondary_actors": ["Cossio", "Yeferson"],
+  "brand_color": "#FF0000",
+  "report_type": "crisis",
+  "language": "es",
+  "analyst_name": "",
+  "is_demo": true,
+  "report_title": "INFORME DE CRISIS REPUTACIONAL",
+  "theme": "dark"
+}

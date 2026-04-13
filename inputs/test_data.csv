@@ -1,0 +1,50 @@
+date,text,sentiment,source,author,topic,reach,engagement
+2026-03-01,Me encanta la nueva campaña de la marca. Muy creativa y original.,positive,Twitter,@usuario1,Campaña,15000,230
+2026-03-01,Pésimo servicio al cliente. Esperé 40 minutos y nadie me atendió.,negative,Twitter,@usuario2,Servicio,8500,180
+2026-03-01,Acabo de probar el nuevo producto y la verdad está bastante bien.,positive,Instagram,@influencer1,Producto,45000,1200
+2026-03-02,No entiendo por qué cambiaron el packaging. El anterior era mejor.,negative,Twitter,@usuario3,Producto,3200,45
+2026-03-02,La marca siempre innovando. Esto es lo que necesitábamos.,positive,Facebook,usuario4,Innovación,12000,320
+2026-03-02,Alguien más tiene problemas con la app? No me deja hacer login.,negative,Twitter,@usuario5,Tecnología,6700,89
+2026-03-03,Excelente atención en la sucursal de Palermo. Muy recomendable.,positive,Google Reviews,usuario6,Servicio,2100,15
+2026-03-03,La competencia tiene mejor precio por el mismo producto.,negative,Twitter,@usuario7,Precio,9800,156
+2026-03-03,Me llegó el pedido antes de lo esperado. Muy conforme.,positive,Instagram,@usuario8,Logística,18000,445
+2026-03-04,Terrible experiencia online. La página se cae todo el tiempo.,negative,Twitter,@usuario9,Tecnología,11000,234
+2026-03-04,Vi el nuevo spot publicitario y me pareció genial. Muy emotivo.,positive,YouTube,usuario10,Campaña,52000,3100
+2026-03-04,El producto no cumple con lo que promete. Muy decepcionado.,negative,Facebook,usuario11,Producto,7600,98
+2026-03-05,Increíble el evento de lanzamiento. Todo muy bien organizado.,positive,Instagram,@influencer2,Evento,89000,5600
+2026-03-05,Los precios subieron demasiado. Ya no es accesible para todos.,negative,Twitter,@usuario12,Precio,14500,312
+2026-03-05,La marca se está posicionando muy bien en sustentabilidad.,positive,LinkedIn,usuario13,Sustentabilidad,8900,167
+2026-03-05,Me regalaron el producto y la verdad me sorprendió la calidad.,positive,Instagram,@usuario14,Producto,22000,890
+2026-03-06,Otra vez problemas con el delivery. Tercera vez que pasa.,negative,Twitter,@usuario15,Logística,5400,76
+2026-03-06,El nuevo sabor está espectacular. Mi favorito de la marca.,positive,Instagram,@foodblogger1,Producto,67000,4200
+2026-03-06,No recomiendo para nada. La calidad bajó muchísimo.,negative,Facebook,usuario16,Producto,4300,55
+2026-03-07,La marca escucha a sus consumidores. Eso se valora mucho.,positive,Twitter,@usuario17,Marca,16000,278
+2026-03-07,Imposible comunicarse con atención al cliente. Nadie responde.,negative,Twitter,@usuario18,Servicio,9200,189
+2026-03-07,Excelente relación calidad-precio. Los recomiendo totalmente.,positive,Google Reviews,usuario19,Precio,3500,28
+2026-03-07,La app necesita urgente una actualización. Funciona muy mal.,negative,Twitter,@usuario20,Tecnología,7800,134
+2026-03-07,Me encantó la collab con el artista local. Muy buena movida.,positive,Instagram,@usuario21,Campaña,34000,2100
+2026-03-08,La campaña nueva es controversial pero efectiva. Todo el mundo habla.,neutral,Twitter,@periodista1,Campaña,78000,5400
+2026-03-08,Buenos productos pero el precio no acompaña la calidad.,mixed,Facebook,usuario22,Precio,6100,82
+2026-03-08,Sigo esperando mi reembolso desde hace 3 semanas. Inaceptable.,negative,Twitter,@usuario23,Servicio,12000,445
+2026-03-08,La marca lidera la innovación en la categoría sin dudas.,positive,LinkedIn,usuario24,Innovación,5600,94
+2026-03-08,El packaging nuevo es hermoso. Se nota el rediseño.,positive,Instagram,@designblog1,Producto,41000,2800
+2026-03-09,Hoy compré por primera vez y la experiencia fue impecable.,positive,Twitter,@usuario25,Servicio,4200,56
+2026-03-09,La publicidad es engañosa. El producto no es como lo muestran.,negative,Facebook,usuario26,Campaña,8700,178
+2026-03-09,Se nota que la marca invierte en calidad. Muy bien.,positive,Instagram,@usuario27,Producto,19000,670
+2026-03-09,Amo esta marca. Siempre con novedades interesantes.,positive,Twitter,@usuario28,Marca,7300,112
+2026-03-09,El evento estuvo increíble. Ojalá hagan más seguido.,positive,Instagram,@usuario29,Evento,56000,3800
+2026-03-09,La verdad que el servicio post venta deja mucho que desear.,negative,Twitter,@usuario30,Servicio,10500,201
+2026-03-10,No hay marca que se compare. Son los mejores del mercado.,positive,Twitter,@usuario31,Marca,8900,145
+2026-03-10,La app se actualizó y ahora funciona perfecto. Gracias!,positive,Twitter,@usuario5,Tecnología,6700,98
+2026-03-10,Precios cada vez más altos y la calidad igual o peor.,negative,Facebook,usuario32,Precio,5100,67
+2026-03-10,La estrategia de sustentabilidad me parece excelente.,positive,LinkedIn,usuario33,Sustentabilidad,4800,73
+2026-03-10,Otro problema con el envío. Ya me estoy cansando.,negative,Twitter,@usuario34,Logística,7200,134
+2026-03-10,El nuevo producto es exactamente lo que buscaba. Muy satisfecho.,positive,Instagram,@usuario35,Producto,25000,1100
+2026-03-10,La campaña en redes está muy bien hecha. Felicitaciones al equipo.,positive,Twitter,@marketer1,Campaña,13000,267
+2026-03-10,Vi que abrieron nueva sucursal en Córdoba. Buenísimo!,positive,Facebook,usuario36,Expansión,3400,42
+2026-03-10,El chatbot no sirve para nada. Necesito hablar con una persona.,negative,Twitter,@usuario37,Tecnología,8100,156
+2026-03-10,Best brand ever. Always innovating and surprising us.,positive,Twitter,@usuario38,Marca,11000,198
+2026-03-10,La nueva línea de productos es espectacular. Quiero todo!,positive,Instagram,@influencer3,Producto,92000,7800
+2026-03-10,Me decepcionó mucho la calidad del último pedido.,negative,Facebook,usuario39,Producto,4600,58
+2026-03-10,Excelente presencia en el evento de la industria. Se lucieron.,positive,LinkedIn,usuario40,Evento,6200,89
+2026-03-10,Ya no compro más. La calidad cayó y los precios subieron.,negative,Twitter,@usuario41,Precio,9400,178

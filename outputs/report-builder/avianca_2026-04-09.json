@@ -1,0 +1,990 @@
+{
+  "client": "Avianca",
+  "period": "Marzo 2026",
+  "generated_date": "2026-04-09",
+  "input_files": [
+    "inputs/YouScan_MentionsWithFullText_Avianca_CO__Crisis_Cossio__06032026-07042026_48bfa.xlsx",
+    "inputs/Scrapped Comments.xlsx"
+  ],
+  "source_counts": {
+    "youscan": 20756,
+    "scrapping": 15116,
+    "total_unified": 28501,
+    "duplicates_removed": 7371
+  },
+  "metrics": {
+    "total_mentions": 28501,
+    "sentiment_breakdown": {
+      "neutral": {
+        "count": 10378,
+        "percentage": 36.4
+      },
+      "<na>": {
+        "count": 9161,
+        "percentage": 32.1
+      },
+      "negativo": {
+        "count": 5080,
+        "percentage": 17.8
+      },
+      "positivo": {
+        "count": 3882,
+        "percentage": 13.6
+      }
+    },
+    "volume_by_date": {
+      "2026-03-06": 145,
+      "2026-03-07": 90,
+      "2026-03-08": 134,
+      "2026-03-09": 181,
+      "2026-03-10": 241,
+      "2026-03-11": 284,
+      "2026-03-12": 201,
+      "2026-03-13": 176,
+      "2026-03-14": 227,
+      "2026-03-15": 401,
+      "2026-03-16": 302,
+      "2026-03-17": 308,
+      "2026-03-18": 301,
+      "2026-03-19": 399,
+      "2026-03-20": 244,
+      "2026-03-21": 253,
+      "2026-03-22": 213,
+      "2026-03-23": 337,
+      "2026-03-24": 398,
+      "2026-03-25": 390,
+      "2026-03-26": 387,
+      "2026-03-27": 230,
+      "2026-03-28": 173,
+      "2026-03-29": 866,
+      "2026-03-30": 3384,
+      "2026-03-31": 2585,
+      "2026-04-01": 765,
+      "2026-04-02": 804,
+      "2026-04-03": 358,
+      "2026-04-04": 341,
+      "2026-04-05": 228,
+      "2026-04-06": 177,
+      "2026-04-07": 27
+    },
+    "top_sources": [
+      [
+        "facebook",
+        9891
+      ],
+      [
+        "tiktok.com",
+        9411
+      ],
+      [
+        "facebook.com",
+        3205
+      ],
+      [
+        "instagram",
+        2522
+      ],
+      [
+        "twitter.com",
+        983
+      ],
+      [
+        "Facebook",
+        720
+      ],
+      [
+        "tiktok",
+        538
+      ],
+      [
+        "instagram.com",
+        308
+      ],
+      [
+        "youtube.com",
+        293
+      ],
+      [
+        "Instagram",
+        162
+      ]
+    ],
+    "top_authors": [
+      [
+        "avianca",
+        233
+      ],
+      [
+        "Avianca",
+        141
+      ],
+      [
+        "Wingo",
+        97
+      ],
+      [
+        "JetBlue",
+        89
+      ],
+      [
+        "Thejajfclips",
+        77
+      ],
+      [
+        "American Airlines",
+        47
+      ],
+      [
+        "ᴹᴿメLuisあ",
+        46
+      ],
+      [
+        "MSN Colombia",
+        44
+      ],
+      [
+        "Copa Airlines",
+        31
+      ],
+      [
+        "️",
+        30
+      ]
+    ],
+    "top_topics": [],
+    "actor_breakdown": {
+      "cossio": 17029,
+      "otros": 6534,
+      "avianca": 4938
+    },
+    "avg_reach": 746378.38,
+    "avg_engagement": 61.24,
+    "total_likes": 1627480,
+    "total_comments": 69015,
+    "total_shares": 29763,
+    "source_breakdown": {
+      "youscan": 20756,
+      "scrapping": 15116,
+      "total_unified": 28501,
+      "duplicates_removed": 7371
+    },
+    "actor_metrics": {
+      "cossio": {
+        "total_mentions": 17029,
+        "sentiment_breakdown": {
+          "<na>": {
+            "count": 7803,
+            "percentage": 45.8
+          },
+          "neutral": {
+            "count": 4127,
+            "percentage": 24.2
+          },
+          "negativo": {
+            "count": 2876,
+            "percentage": 16.9
+          },
+          "positivo": {
+            "count": 2223,
+            "percentage": 13.1
+          }
+        },
+        "volume_by_date": {
+          "2026-03-10": 21,
+          "2026-03-11": 49,
+          "2026-03-12": 17,
+          "2026-03-13": 1,
+          "2026-03-17": 1,
+          "2026-03-18": 1,
+          "2026-03-21": 1,
+          "2026-03-28": 2,
+          "2026-03-29": 423,
+          "2026-03-30": 2332,
+          "2026-03-31": 1433,
+          "2026-04-01": 471,
+          "2026-04-02": 455,
+          "2026-04-03": 118,
+          "2026-04-04": 43,
+          "2026-04-05": 41,
+          "2026-04-06": 15
+        },
+        "top_sources": [
+          [
+            "facebook",
+            9683
+          ],
+          [
+            "tiktok.com",
+            3891
+          ],
+          [
+            "instagram",
+            1669
+          ],
+          [
+            "twitter.com",
+            708
+          ],
+          [
+            "facebook.com",
+            303
+          ],
+          [
+            "youtube.com",
+            268
+          ],
+          [
+            "tiktok",
+            253
+          ],
+          [
+            "instagram.com",
+            123
+          ],
+          [
+            "msn.com",
+            17
+          ],
+          [
+            "lakalle.bluradio.com",
+            8
+          ]
+        ],
+        "top_authors": [
+          [
+            "Thejajfclips",
+            77
+          ],
+          [
+            "OPERATIVO POLIFACÉTICO 😏",
+            23
+          ],
+          [
+            "Rojas_laura",
+            23
+          ],
+          [
+            "🦇",
+            19
+          ],
+          [
+            "MSN Colombia",
+            17
+          ],
+          [
+            ".",
+            16
+          ],
+          [
+            "July Tatiana Morales Diaz",
+            15
+          ],
+          [
+            "juanes.m21",
+            13
+          ],
+          [
+            "La Kalle",
+            11
+          ],
+          [
+            "Newman Perez",
+            11
+          ]
+        ],
+        "top_topics": [],
+        "actor_breakdown": {
+          "cossio": 17029
+        },
+        "avg_reach": 567722.79,
+        "avg_engagement": 29.23,
+        "total_likes": 455817,
+        "total_comments": 33253,
+        "total_shares": 12139,
+        "anomalies": [
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 133% entre 2026-03-10 (21) y 2026-03-11 (49)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-11",
+              "previous_count": 21,
+              "current_count": 49,
+              "pct_change": 133.3
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 100% entre 2026-03-21 (1) y 2026-03-28 (2)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-28",
+              "previous_count": 1,
+              "current_count": 2,
+              "pct_change": 100.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 21050% entre 2026-03-28 (2) y 2026-03-29 (423)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-29",
+              "previous_count": 2,
+              "current_count": 423,
+              "pct_change": 21050.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 451% entre 2026-03-29 (423) y 2026-03-30 (2332)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-30",
+              "previous_count": 423,
+              "current_count": 2332,
+              "pct_change": 451.3
+            }
+          }
+        ]
+      },
+      "unknown": {
+        "total_mentions": 6534,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 4333,
+            "percentage": 66.3
+          },
+          "negativo": {
+            "count": 1164,
+            "percentage": 17.8
+          },
+          "positivo": {
+            "count": 1037,
+            "percentage": 15.9
+          }
+        },
+        "volume_by_date": {
+          "2026-03-06": 106,
+          "2026-03-07": 71,
+          "2026-03-08": 126,
+          "2026-03-09": 158,
+          "2026-03-10": 178,
+          "2026-03-11": 175,
+          "2026-03-12": 147,
+          "2026-03-13": 117,
+          "2026-03-14": 181,
+          "2026-03-15": 360,
+          "2026-03-16": 248,
+          "2026-03-17": 252,
+          "2026-03-18": 262,
+          "2026-03-19": 348,
+          "2026-03-20": 217,
+          "2026-03-21": 230,
+          "2026-03-22": 189,
+          "2026-03-23": 301,
+          "2026-03-24": 368,
+          "2026-03-25": 359,
+          "2026-03-26": 362,
+          "2026-03-27": 207,
+          "2026-03-28": 149,
+          "2026-03-29": 137,
+          "2026-03-30": 162,
+          "2026-03-31": 199,
+          "2026-04-01": 108,
+          "2026-04-02": 162,
+          "2026-04-03": 136,
+          "2026-04-04": 232,
+          "2026-04-05": 143,
+          "2026-04-06": 124,
+          "2026-04-07": 20
+        },
+        "top_sources": [
+          [
+            "tiktok.com",
+            3870
+          ],
+          [
+            "facebook.com",
+            2350
+          ],
+          [
+            "instagram.com",
+            117
+          ],
+          [
+            "twitter.com",
+            59
+          ],
+          [
+            "youtube.com",
+            18
+          ],
+          [
+            "linkedin.com",
+            12
+          ],
+          [
+            "msn.com",
+            12
+          ],
+          [
+            "eltiempo.com",
+            6
+          ],
+          [
+            "noticiasrcn.com",
+            5
+          ],
+          [
+            "aeroermo.com",
+            5
+          ]
+        ],
+        "top_authors": [
+          [
+            "Wingo",
+            97
+          ],
+          [
+            "JetBlue",
+            89
+          ],
+          [
+            "avianca",
+            62
+          ],
+          [
+            "American Airlines",
+            47
+          ],
+          [
+            "ᴹᴿメLuisあ",
+            46
+          ],
+          [
+            "Avianca",
+            33
+          ],
+          [
+            "Copa Airlines",
+            31
+          ],
+          [
+            "Sᴏʏzᴀʀκᴏ",
+            27
+          ],
+          [
+            "miniinfluenserdefreefire",
+            21
+          ],
+          [
+            "ﾚ†χKεllεr²²☂",
+            19
+          ]
+        ],
+        "top_topics": [],
+        "actor_breakdown": {
+          "otros": 6534
+        },
+        "avg_reach": 816268.5,
+        "avg_engagement": 166.94,
+        "total_likes": 1040116,
+        "total_comments": 27244,
+        "total_shares": 16044,
+        "anomalies": [
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 77% entre 2026-03-07 (71) y 2026-03-08 (126)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-08",
+              "previous_count": 71,
+              "current_count": 126,
+              "pct_change": 77.5
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 55% entre 2026-03-13 (117) y 2026-03-14 (181)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-14",
+              "previous_count": 117,
+              "current_count": 181,
+              "pct_change": 54.7
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 99% entre 2026-03-14 (181) y 2026-03-15 (360)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-15",
+              "previous_count": 181,
+              "current_count": 360,
+              "pct_change": 98.9
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 59% entre 2026-03-22 (189) y 2026-03-23 (301)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-23",
+              "previous_count": 189,
+              "current_count": 301,
+              "pct_change": 59.3
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 71% entre 2026-04-03 (136) y 2026-04-04 (232)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-04-04",
+              "previous_count": 136,
+              "current_count": 232,
+              "pct_change": 70.6
+            }
+          }
+        ]
+      },
+      "avianca": {
+        "total_mentions": 4938,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1918,
+            "percentage": 38.8
+          },
+          "<na>": {
+            "count": 1358,
+            "percentage": 27.5
+          },
+          "negativo": {
+            "count": 1040,
+            "percentage": 21.1
+          },
+          "positivo": {
+            "count": 622,
+            "percentage": 12.6
+          }
+        },
+        "volume_by_date": {
+          "2026-03-06": 39,
+          "2026-03-07": 19,
+          "2026-03-08": 8,
+          "2026-03-09": 23,
+          "2026-03-10": 42,
+          "2026-03-11": 60,
+          "2026-03-12": 37,
+          "2026-03-13": 58,
+          "2026-03-14": 46,
+          "2026-03-15": 41,
+          "2026-03-16": 54,
+          "2026-03-17": 55,
+          "2026-03-18": 38,
+          "2026-03-19": 51,
+          "2026-03-20": 27,
+          "2026-03-21": 22,
+          "2026-03-22": 24,
+          "2026-03-23": 36,
+          "2026-03-24": 30,
+          "2026-03-25": 31,
+          "2026-03-26": 25,
+          "2026-03-27": 23,
+          "2026-03-28": 22,
+          "2026-03-29": 306,
+          "2026-03-30": 890,
+          "2026-03-31": 953,
+          "2026-04-01": 186,
+          "2026-04-02": 187,
+          "2026-04-03": 104,
+          "2026-04-04": 66,
+          "2026-04-05": 44,
+          "2026-04-06": 38,
+          "2026-04-07": 7
+        },
+        "top_sources": [
+          [
+            "tiktok.com",
+            1650
+          ],
+          [
+            "instagram",
+            853
+          ],
+          [
+            "Facebook",
+            720
+          ],
+          [
+            "facebook.com",
+            552
+          ],
+          [
+            "tiktok",
+            285
+          ],
+          [
+            "twitter.com",
+            216
+          ],
+          [
+            "facebook",
+            208
+          ],
+          [
+            "Instagram",
+            162
+          ],
+          [
+            "instagram.com",
+            68
+          ],
+          [
+            "Tiktok",
+            52
+          ]
+        ],
+        "top_authors": [
+          [
+            "avianca",
+            171
+          ],
+          [
+            "Avianca",
+            108
+          ],
+          [
+            "Superintendencia de Industria y Comercio 🇨🇴",
+            22
+          ],
+          [
+            "lola890307",
+            15
+          ],
+          [
+            "MSN Colombia",
+            15
+          ],
+          [
+            "danimari2087",
+            15
+          ],
+          [
+            "auracadavid",
+            15
+          ],
+          [
+            "lifemiles",
+            15
+          ],
+          [
+            "i_like_it_curiosities",
+            14
+          ],
+          [
+            "julibeltran090",
+            14
+          ]
+        ],
+        "top_topics": [],
+        "actor_breakdown": {
+          "avianca": 4938
+        },
+        "avg_reach": 1054979.76,
+        "avg_engagement": 31.76,
+        "total_likes": 131547,
+        "total_comments": 8518,
+        "total_shares": 1580,
+        "anomalies": [
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 188% entre 2026-03-08 (8) y 2026-03-09 (23)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-09",
+              "previous_count": 8,
+              "current_count": 23,
+              "pct_change": 187.5
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 83% entre 2026-03-09 (23) y 2026-03-10 (42)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-10",
+              "previous_count": 23,
+              "current_count": 42,
+              "pct_change": 82.6
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 57% entre 2026-03-12 (37) y 2026-03-13 (58)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-13",
+              "previous_count": 37,
+              "current_count": 58,
+              "pct_change": 56.8
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 1291% entre 2026-03-28 (22) y 2026-03-29 (306)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-29",
+              "previous_count": 22,
+              "current_count": 306,
+              "pct_change": 1290.9
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 191% entre 2026-03-29 (306) y 2026-03-30 (890)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-30",
+              "previous_count": 306,
+              "current_count": 890,
+              "pct_change": 190.8
+            }
+          },
+          {
+            "type": "sentiment_shift",
+            "description": "Cambio de sentimiento negativo: aumento de 12.6% a 25.6% entre la primera y segunda mitad del periodo",
+            "severity": "warning",
+            "data": {
+              "negative_pct_first_half": 12.6,
+              "negative_pct_second_half": 25.6,
+              "shift": 13.1
+            }
+          }
+        ]
+      }
+    },
+    "reclassification_stats": {
+      "original_unclassified": 13885,
+      "rules": 2727,
+      "rules_pct": 19.6,
+      "ai": 1997,
+      "ai_pct": 14.4,
+      "remaining": 9161,
+      "remaining_pct": 32.1,
+      "new_breakdown": {
+        "neutral": {
+          "count": 10378,
+          "pct": 36.4
+        },
+        "negativo": {
+          "count": 5080,
+          "pct": 17.8
+        },
+        "positivo": {
+          "count": 3882,
+          "pct": 13.6
+        }
+      }
+    },
+    "actor_subcategory_breakdown": {
+      "opinion_publica": 4789,
+      "otros_influencers": 986,
+      "otros": 323,
+      "aviacion_industria": 183,
+      "medios": 150,
+      "humor_memes": 103
+    },
+    "intersection": {
+      "brand_only": 2167,
+      "brand_only_pct": 7.6,
+      "brand_only_sentiment": {
+        "neutral": 42.8,
+        "<na>": 21.6,
+        "negativo": 21.5,
+        "positivo": 14.1
+      },
+      "actor_only": 790,
+      "actor_only_pct": 2.8,
+      "actor_only_sentiment": {
+        "<na>": 47.2,
+        "neutral": 22.7,
+        "positivo": 18.0,
+        "negativo": 12.2
+      },
+      "intersection": 1483,
+      "intersection_pct": 5.2,
+      "intersection_sentiment": {
+        "neutral": 77.6,
+        "negativo": 20.5,
+        "positivo": 1.3,
+        "<na>": 0.6
+      },
+      "neither": 24061,
+      "neither_pct": 84.4,
+      "total": 28501,
+      "brand_label": "Avianca",
+      "actor_label": "Cossio"
+    },
+    "topic_clusters": [
+      {
+        "label": "yeferson cossio",
+        "keywords": [
+          "yeferson cossio",
+          "avianca",
+          "vuelo"
+        ],
+        "mention_count": 1514,
+        "percentage": 5.3
+      },
+      {
+        "label": "mini influencer",
+        "keywords": [
+          "mini influencer",
+          "garena",
+          "free"
+        ],
+        "mention_count": 850,
+        "percentage": 3.0
+      },
+      {
+        "label": "acciones legales",
+        "keywords": [
+          "acciones legales",
+          "avianca",
+          "contra"
+        ],
+        "mention_count": 120,
+        "percentage": 0.4
+      },
+      {
+        "label": "bogotá madrid",
+        "keywords": [
+          "bogotá madrid",
+          "vuelo",
+          "avianca"
+        ],
+        "mention_count": 91,
+        "percentage": 0.3
+      },
+      {
+        "label": "ruta bogotá",
+        "keywords": [
+          "ruta bogotá",
+          "zona",
+          "colombia"
+        ],
+        "mention_count": 76,
+        "percentage": 0.3
+      },
+      {
+        "label": "olor químico",
+        "keywords": [
+          "olor químico",
+          "aerolínea",
+          "avianca"
+        ],
+        "mention_count": 11,
+        "percentage": 0.0
+      },
+      {
+        "label": "pasado marzo",
+        "keywords": [
+          "pasado marzo",
+          "petro",
+          "desde"
+        ],
+        "mention_count": 11,
+        "percentage": 0.0
+      },
+      {
+        "label": "trayecto regreso",
+        "keywords": [
+          "trayecto regreso",
+          "venezuela",
+          "aerolínea"
+        ],
+        "mention_count": 4,
+        "percentage": 0.0
+      }
+    ]
+  },
+  "anomalies": [
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 77% entre 2026-03-14 (227) y 2026-03-15 (401)",
+      "severity": "warning",
+      "data": {
+        "date": "2026-03-15",
+        "previous_count": 227,
+        "current_count": 401,
+        "pct_change": 76.7
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 58% entre 2026-03-22 (213) y 2026-03-23 (337)",
+      "severity": "warning",
+      "data": {
+        "date": "2026-03-23",
+        "previous_count": 213,
+        "current_count": 337,
+        "pct_change": 58.2
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 401% entre 2026-03-28 (173) y 2026-03-29 (866)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-29",
+        "previous_count": 173,
+        "current_count": 866,
+        "pct_change": 400.6
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 291% entre 2026-03-29 (866) y 2026-03-30 (3384)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-30",
+        "previous_count": 866,
+        "current_count": 3384,
+        "pct_change": 290.8
+      }
+    },
+    {
+      "type": "sentiment_shift",
+      "description": "Cambio de sentimiento negativo: aumento de 16.5% a 27.1% entre la primera y segunda mitad del periodo",
+      "severity": "warning",
+      "data": {
+        "negative_pct_first_half": 16.5,
+        "negative_pct_second_half": 27.1,
+        "shift": 10.6
+      }
+    }
+  ],
+  "data_quality_issues": [
+    "[youscan] Dropped 283 rows with empty text",
+    "[Comentarios Cossio IG] 1 rows with unparseable dates",
+    "[Comentarios Cossio IG] Dropped 567 rows with empty text",
+    "[Comentarios Avianca IG] 10 rows with unparseable dates",
+    "[Comentarios Avianca IG] Dropped 196 rows with empty text",
+    "[Comentarios Tiktok Avianca] 112 rows with unparseable dates",
+    "[Comentarios Tiktok Avianca] Dropped 44 rows with empty text",
+    "[Comentarios Facebook Cossio] 9839 rows with unparseable dates",
+    "[Comentarios Facebook Cossio] Dropped 1194 rows with empty text",
+    "[Comentarios Facebbok Avianca] 145 rows with unparseable dates",
+    "[Comentarios Facebbok Avianca] Dropped 16 rows with empty text",
+    "Removed 7371 duplicate rows (same first 80 chars of text + platform + date)",
+    "Sentiment reclassification: rules=2727, ai=1997, remaining_unclassified=9161 (32.1%)",
+    "Actor classification: rules=2457, ai=1482, remaining_otros=323 (1.1%)",
+    "Sample composition: Topic-aware sample: 74 topic-aware [yeferson cossio(10), mini influencer(10), acciones legales(10), bogotá madrid(10), ruta bogotá(10), olor químico(10), pasado marzo(10), trayecto regreso(4)] + 30 high engagement + 4 spike day + 4 negative + 0 positive + 10 scrapping + 2 cossio + 10 random = 134 total (cap: 150)"
+  ],
+  "sample_composition": "Topic-aware sample: 74 topic-aware [yeferson cossio(10), mini influencer(10), acciones legales(10), bogotá madrid(10), ruta bogotá(10), olor químico(10), pasado marzo(10), trayecto regreso(4)] + 30 high engagement + 4 spike day + 4 negative + 0 positive + 10 scrapping + 2 cossio + 10 random = 134 total (cap: 150)",
+  "report_text": "FRAMEWORK_NAME: El Dilema de la Autoridad Digital\nFRAMEWORK_THESIS: Cuando una corporación tradicional enfrenta a un creador de contenido nativo digital, gana en legitimidad institucional pero pierde en territorio generacional — y es ahí donde se define el futuro de su reputación.\n\n===EXECUTIVE_CARD_1===\nTITLE: Qué le pasó a la conversación\nBODY: El 29 de marzo, la conversación sobre Avianca se multiplicó por 21 en 24 horas — de 173 menciones a 3,384. Pero el 68% de esas menciones no discutieron el contenido del comunicado sino que lo usaron como pretexto para defender a Cossio o atacar a la aerolínea. TikTok se convirtió en el epicentro de resistencia: concentra el 34% de las menciones totales y es la única plataforma donde Cossio mantiene ventaja narrativa 3:1 sobre Avianca. La velocidad de propagación superó la capacidad de control del mensaje corporativo.\n\n===EXECUTIVE_CARD_2===\nTITLE: Qué está en juego\nBODY: Avianca genera 1,040 menciones negativas (21.1% de su conversación directa) pero el verdadero riesgo está en los 17,029 menciones de Cossio — donde solo el 16.9% es negativo hacia él. El engagement promedio de menciones anti-Avianca es 166.94, mientras que las pro-Avianca promedian 31.76 — una diferencia de 5x en capacidad de amplificación. En la intersección directa entre ambos actores (1,483 menciones), el 77.6% es neutral y el 20.5% negativo — lo que indica que cuando se enfrentan directamente, Avianca no pierde, pero tampoco gana territorio emocional.\n\n===EXECUTIVE_CARD_3===\nTITLE: Qué decidir ahora\nBODY: Esta semana: Identificar los 3 formatos de contenido pro-Avianca con mayor engagement orgánico y amplificarlos con pauta micro-segmentada en TikTok — la plataforma perdida. En 2 semanas: Definir si continuar la estrategia legal-institucional o pivotear hacia humanización del mensaje, porque los datos muestran que la narrativa de \"seguridad aérea\" no está aterrizando en audiencias menores de 30. Este mes: Establecer protocolo de respuesta rápida para futuros choques con personalidades digitales — porque este patrón se repetirá.\n\n===SIGNALS===\nSIGNAL_1: El pico más alto de conversación (3,384 menciones el 30 de marzo) coincidió con el momento en que Cossio aún negaba su participación. Esto significa que la audiencia reaccionó más al misterio y la especulación que a los hechos confirmados — una dinámica que favorece a quien controla la narrativa emocional sobre quien controla los datos.\n\nSIGNAL_2: En las 1,483 menciones donde se mencionan ambos actores simultáneamente, el sentimiento neutral domina con 77.6%. Esto indica que cuando el conflicto se hace explícito, la audiencia adopta una postura de observador — ni celebra a Cossio ni condena a Avianca, simplemente consume el drama.\n\nSIGNAL_3: Las menciones clasificadas como \"humor_memes\" representan solo 103 casos pero concentran el engagement más alto por post. El conflicto no se está memificando masivamente — aún está en la fase de \"noticia seria\" — lo que significa que hay una ventana de oportunidad para influir en cómo evoluciona la percepción.\n\n===PERCEPTION_BRAND===\nEDITORIAL_TITLE: Avianca gana en credibilidad adulta pero pierde en territorio joven\nEDITORIAL_SUBTITLE: La estrategia corporativa funciona donde Avianca ya era fuerte, no donde necesita crecer\nBODY: En Facebook, el público adulto valida masivamente la posición de Avianca: \"Nea, jugar con la seguridad de un vuelo no es chistoso, más de 200 pasajeros viéndose afectados por una 'bromita'\" [Instagram, 30 marzo, 2002 eng]. La narrativa de responsabilidad corporativa resuena fuertemente en audiencias que valoran la institucionalidad: \"Que caiga el peso de la ley, un vuelo no es para estar jugando. Irresponsable\" [TikTok, 30 marzo]. Este público entiende y apoya las acciones legales como respuesta proporcional.\n\nSin embargo, en TikTok emerge una contrarreativa generacional. Los usuarios cuestionan la proporcionalidad: \"dicen que en los aeropuertos ha mucha seguridad entonces porqué permitieron que este señor llevará algo con olor químico, los señores de la aerolínea están exagerando\" [TikTok, 30 marzo]. Aquí, Avianca no es vista como víctima sino como corporación que sobre-reacciona. La diferencia es crucial: Facebook ve a una empresa protegiendo pasajeros, TikTok ve a una corporación atacando a un creador.\n\nEl sentimiento hacia Avianca evoluciona en forma de U invertida: neutral-defensivo al inicio, pico de apoyo el 30-31 de marzo, luego declive hacia escepticismo en audiencias jóvenes. La marca gana credibilidad institucional pero no conquista nuevos territorios emocionales donde necesita crecer para los próximos 5 años.\n\n===PERCEPTION_ACTOR===\nEDITORIAL_TITLE: Cossio mantiene lealtad tribal pese a admitir culpa\nEDITORIAL_SUBTITLE: Su audiencia separó al creador del acto — una ventaja que las marcas no tienen\nBODY: La percepción de Cossio muestra una arquitectura emocional que las corporaciones no pueden replicar. Incluso después de admitir su participación, conserva un núcleo de defensa incondicional: \"Botón para que yef sepa que estamos con el ❤️‍\" [Instagram, fecha na, 1781 eng]. Sus seguidores aplicaron una estrategia de separación: condenan el acto pero protegen a la persona.\n\nLa narrativa de victimización funcionó inicialmente: \"Avianca quiere sacar provecho de la figura pública de Cossío eso es todo. Es la peor aerolínea del país y su pésimo servicio siempre ha sido una problemática\" [Facebook, fecha na]. Sus defensores redirigieron la conversación hacia fallas históricas de Avianca — una táctica imposible para una marca corporativa.\n\nSin embargo, emerge una grieta generacional incluso dentro de su audiencia. Mientras sus fans más leales lo defienden, voces críticas ganan espacio: \"Eso es una falta de respeto y Avianca debería de tomar acciones legales\" [TikTok, 31 marzo, 1327 eng]. Cossio mantiene lealtad tribal pero no unanimidad — su mayor riesgo no es Avianca sino la erosión interna de su propia credibilidad.\n\n===COLLISION_ZONE===\nEDITORIAL_TITLE: En el choque directo, nadie gana territorio\nEDITORIAL_SUBTITLE: La intersección produce neutralidad — el peor escenario para ambos actores\nBODY: Cuando ambos actores aparecen en la misma conversación, el resultado es neutro en 77.6% de los casos — un empate que no favorece a ninguno. Las 1,483 menciones de intersección muestran una audiencia en modo observador, consumiendo el conflicto sin tomar partido: \"¿Justicia o exageración? Déjame tu opinión aquí abajo. ⚖️👇\" [TikTok, 30 marzo, 71311 eng].\n\nEsta neutralidad es estratégicamente peligrosa para Avianca porque implica que su mensaje no está convenciendo donde cuenta. En el espacio de colisión directa, la marca no logra traducir su legitimidad institucional en apoyo emocional. La audiencia entiende la posición de Avianca pero no la abraza, mientras que entiende la transgresión de Cossio pero no la condena completamente.\n\nEl único ganador en la intersección es el entretenimiento: las menciones que tratan el conflicto como espectáculo obtienen el mayor engagement. Esto significa que el choque está siendo commoditizado — convertido en contenido de consumo — más que resuelto en favor de alguna de las partes.\n\n===NARRATIVE_1===\nTHESIS: La seguridad aérea es innegociable pero el castigo es desproporcionado\nEVOLUTION: Inició como apoyo total a Avianca (29-30 marzo), evolucionó hacia cuestionamiento de la proporcionalidad (31 marzo-2 abril), culminó en debate sobre límites corporativos\nEVIDENCE_1: \"Nea, jugar con la seguridad de un vuelo no es chistoso, más de 200 pasajeros viéndose afectados por una 'bromita'\" [Instagram, 30 marzo, 2002 eng]\nEVIDENCE_2: \"dicen que en los aeropuertos ha mucha seguridad entonces porqué permitieron que este señor llevará algo con olor químico, los señores de la aerolínea están exagerando\" [TikTok, 30 marzo]\nEVIDENCE_3: \"Avianca tiene toda la razón y no exagero! Comprometió la seguridad de los pasajeros. Muy mal\" [TikTok, 30 marzo, 2869 eng]\nIMPLICATION: Esta narrativa bifurca generacionalmente — los adultos validan la respuesta de Avianca, los jóvenes cuestionan su severidad. Avianca gana en legitimidad legal pero pierde en territorio emocional millennial/Gen Z, crucial para su crecimiento futuro.\nRISK_LEVEL: stable\nDOMINANT_PLATFORM: Facebook\n\n===NARRATIVE_2===\nTHESIS: Las corporaciones persiguen a los creadores porque no entienden el mundo digital\nEVOLUTION: Emergió tardíamente (31 marzo-1 abril) cuando Cossio admitió culpa, se fortaleció en TikTok, permanece marginal en otras plataformas\nEVIDENCE_1: \"Avianca quiere sacar provecho de la figura pública de Cossío eso es todo. Es la peor aerolínea del país\" [Facebook, fecha na]\nEVIDENCE_2: \"Sigamos haciendo famosos a gente pendeja\" [Twitter, 30 marzo, 5 eng]\nEVIDENCE_3: \"lo que pasó en el avión fue un ACCIDENTE 🚨\" [TikTok, 31 marzo, 3278 eng]\nIMPLICATION: Esta contrarreativa no logró masa crítica porque Cossio admitió participación. Sin embargo, planta la semilla de \"persecución corporativa\" que podría reactivarse en futuros conflictos similares con otros creadores.\nRISK_LEVEL: fading\nDOMINANT_PLATFORM: TikTok\n\n===NARRATIVE_3===\nTHESIS: Los influencers deben tener límites pero las marcas también\nEVOLUTION: Narrativa de síntesis que emerge post-admisión de Cossio (1-5 abril), busca equilibrio entre responsabilidad del creador y proporcionalidad corporativa\nEVIDENCE_1: \"Que no se normalice la falta de respeto 👍\" [TikTok, 31 marzo, 10711 eng]\nEVIDENCE_2: \"¿Justicia o exageración? Déjame tu opinión aquí abajo. ⚖️👇\" [TikTok, 30 marzo, 71311 eng]\nEVIDENCE_3: \"Usted es el que desinforma el video que usted está mostrando fue en el 2024 y la demanda es por el vuelo de el pasado 11 de marzo\" [TikTok, 30 marzo, 3 eng]\nIMPLICATION: Esta narrativa moderada representa el verdadero campo de batalla reputacional para Avianca. Aquí es donde se decide si la marca es vista como protectora legítima o como castigadora excesiva — y determina su relación futura con la cultura digital.\nRISK_LEVEL: growing\nDOMINANT_PLATFORM: TikTok\n\n===PLATFORM_DEEPDIVE===\nEDITORIAL_TITLE: Dos mundos generacionales que no se hablan\nEDITORIAL_SUBTITLE: Facebook valida a Avianca, TikTok defiende la cultura digital — sin diálogo entre ambos\nTIKTOK_INSIGHT: TikTok es territorio hostil para Avianca: 59% de sus menciones totales, engagement 5x mayor en contenido anti-marca, audiencia que naturaliza las transgresiones como parte de la creatividad digital. Aquí, el \"stink bomb\" se enmarca como broma que salió mal, no como amenaza a la seguridad: \"ese mismo pedo fue el que tiro en avianca?\" [TikTok, 30 marzo, 1965 eng]. La plataforma opera con códigos culturales donde la espontaneidad vale más que el protocolo.\n\nFACEBOOK_INSIGHT: Facebook es la fortaleza de Avianca — 35% de las menciones totales, sentimiento mayoritariamente neutral-positivo hacia la marca, audiencia que comprende y valida las estructuras institucionales. Los usuarios ven el caso a través del lente de responsabilidad civil: \"Un comportamiento en pleno vuelo obligó a intervenir a la tripulación\" [Facebook, 30 marzo, 66 eng]. Aquí, las reglas corporativas tienen legitimidad moral automática.\n\nINSTAGRAM_INSIGHT: Instagram funciona como zona de síntesis — menos polarizada que TikTok, menos rígida que Facebook. Los usuarios buscan balance: condenan la acción pero cuestionan la respuesta. El formato visual favorece el storytelling emotivo sobre el debate racional, lo que beneficia marginalmente a Cossio pero sin llegar a los extremos de TikTok.\n\nTWITTER_INSIGHT: Twitter se comporta como amplificador de medios tradicionales más que como espacio de debate original. Las menciones tienden a ser retweets de noticias o links a cobertura periodística. No hay narrativa propia de la plataforma — funciona como distribuidor de contenido generado en otros espacios.\n\n===SCENARIO_A===\nNAME: La normalización silenciosa\nTRIGGER: Avianca no toma más acciones públicas, el tema se desvanece en 2-3 semanas\nDESCRIPTION: La conversación decae naturalmente, Cossio retoma actividad normal, el caso se archiva como \"incidente menor\". Las menciones bajan a niveles basales (100-200 diarias) para abril\nCONSEQUENCE: Avianca conserva legitimidad institucional pero no resuelve su desconexión con audiencias digitales jóvenes — el problema estructural que generó la crisis permanece latente para futuros choques similares\n\n===SCENARIO_B===\nNAME: La escalada memética\nTRIGGER: Cossio o sus aliados generan contenido viral que reenmarca el caso como persecución corporativa\nDESCRIPTION: TikTok produce memes masivos sobre \"corporaciones vs creadores\", otros influencers toman partido, el caso trasciende a Avianca y se convierte en símbolo de tensión generacional\nCONSEQUENCE: Avianca se convierte involuntariamente en representante del \"mundo viejo\" que no entiende la cultura digital — daño reputacional en demografías clave para su crecimiento de próxima década\n\n===SCENARIO_C===\nNAME: La demostración de fuerza\nTRIGGER: Avianca procede legalmente hasta las últimas consecuencias, obtiene sentencia favorable\nDESCRIPTION: Victoria legal clara refuerza mensaje de que la seguridad aérea no es negociable, otros creadores evitan comportamientos similares por efecto disuasivo\nCONSEQUENCE: Avianca consolida autoridad en temas de seguridad pero paga el costo de ser percibida como \"anti-diversión\" en plataformas donde necesita crecer — victoria táctica con costo estratégico\n\n===RECOMMENDATION_1===\nTITLE: Amplificar voces orgánicas pro-Avianca en TikTok\nDATA_SUPPORT: TikTok concentra 34% de menciones totales con engagement 5x superior para contenido anti-Avianca, pero existe un 13.1% de menciones pro-Avianca con potencial de amplificación\nACTION: Identificar los 10 posts orgánicos más exitosos que defienden la posición de Avianca, contactar a sus creadores para colaboraciones remuneradas, generar 3 respuestas de video por semana usando sus formatos exitosos\nMETRIC: Engagement rate de contenido pro-Avianca en TikTok (target: igualar el 166.94 promedio actual de contenido crítico)\nDEADLINE: esta semana\n\n===RECOMMENDATION_2===\nTITLE: Protocolo de respuesta rápida para choques con personalidades digitales\nDATA_SUPPORT: El pico de 21,050% en menciones el 29 marzo muestra que Avianca reaccionó a velocidad corporativa en un entorno que opera a velocidad digital\nACTION: Crear equipo de monitoreo 24/7, definir umbrales de respuesta (500+ menciones = alerta, 1000+ = escalación), preparar libreto de respuestas para 5 escenarios típicos de conflicto con creadores\nMETRIC: Tiempo de respuesta corporativa a crisis digitales (target: menos de 4 horas)\nDEADLINE: 2 semanas\n\n===RECOMMENDATION_3===\nTITLE: Campaña de humanización de políticas de seguridad\nDATA_SUPPORT: El 77.6% de neutralidad en menciones de intersección indica que la audiencia entiende la posición de Avianca pero no la abraza emocionalmente\nACTION: Producir serie de 6 videos testimoniales de tripulantes explicando por qué las reglas de seguridad existen, mostrar casos reales donde protocols salvaron vidas, distribuir en Instagram y TikTok con influencers de aviación\nMETRIC: Shift en sentiment de neutral a positivo en menciones sobre políticas de seguridad aérea\nDEADLINE: este mes\n\n===METHODOLOGY===\nBODY: Análisis de 28,501 menciones del 6 marzo-7 abril 2026 en Facebook, TikTok, Instagram, Twitter y YouTube. Muestra estratificada de 134 menciones más relevantes, clasificación de actores por reglas + IA, reclasificación de sentimientos para reducir casos sin clasificar de 48.7% a 32.1%. Detección de anomalías de volumen y cambios de sentimiento. Métricas de engagement promedio: Cossio 29.23, Avianca 31.76, conversación general 166.94."
+}

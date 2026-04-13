@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA Report — Avianca</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:#050D1A;color:#A0AEC0;line-height:1.6;padding:40px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;letter-spacing:3px;}
+h2{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:2px;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:10px 12px;color:#FF1B6B;font-size:11px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid rgba(255,27,107,0.3);}
+tr{border-bottom:1px solid rgba(255,255,255,0.04);}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>AUDITORÍA DE CALIDAD</h1>
+<p style="color:#5A6378;font-size:13px;margin-top:4px;">Avianca &bull; Marzo 2026 &bull; 08/04/2026 23:40</p>
+
+<div style="background:rgba(255,255,255,0.03);border:1px solid #FF1B6B44;border-left:4px solid #FF1B6B;border-radius:0 16px 16px 0;padding:24px;margin:32px 0;">
+    <div style="display:flex;align-items:center;gap:16px;">
+        <span style="font-size:32px;">&#10060;</span>
+        <div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#FF1B6B;letter-spacing:2px;">NO ENVIAR</div>
+            <div style="font-size:13px;color:#A0AEC0;">
+                <span style="color:#FF1B6B;font-weight:700;">3 errores</span> &bull;
+                <span style="color:#FFB800;font-weight:700;">10 advertencias</span> &bull;
+                <span style="color:#00D4FF;font-weight:700;">25 verificaciones pasadas</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>VERIFICACIONES NUMÉRICAS</h2>
+<table>
+<thead><tr><th>Verificación</th><th>Esperado</th><th>Encontrado</th><th>Estado</th></tr></thead>
+<tbody><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">coincide con dato conocido</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">28,501</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">total=28,501</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">3,384</td>
+            <td style="padding:10px 12px;"><span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">WARNING</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">coincide con dato conocido</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">28,501</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">coincide con dato conocido</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">1,483</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">coincide con dato conocido</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">866</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">total=28,501</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">3,384</td>
+            <td style="padding:10px 12px;"><span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">WARNING</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">total=28,501</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">3,384</td>
+            <td style="padding:10px 12px;"><span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">WARNING</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">total=28,501</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">500</td>
+            <td style="padding:10px 12px;"><span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">WARNING</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">coincide con dato conocido</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">28,501</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Mención numérica en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">total=28,501</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">134</td>
+            <td style="padding:10px 12px;"><span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">WARNING</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_negativo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_negativo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">20.5%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_cossio_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">59.7%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">59.8%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">17.3%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">17.3%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_otros_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">22.9%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">22.9%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: sentiment_neutral_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">36.3%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">34.8%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: sentiment_neutral_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">36.3%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">34.7%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_unknown_neutral_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">66.3%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">70.0%</td>
+            <td style="padding:10px 12px;"><span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">WARNING</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: inter_intersection_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">5.2%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">5.2%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_negativo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">20.5%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_positivo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">12.6%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">12.6%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_cossio_neutral_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">24.0%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">25.6%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_negativo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">20.5%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_unknown_positivo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">15.9%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">15.0%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_negativo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: sentiment_neutral_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">36.3%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">34.8%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_positivo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">12.6%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">12.6%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_negativo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">20.0%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: sentiment_&lt;na&gt;_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">32.1%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">32.1%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: actor_avianca_negativo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">21.0%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">19.6%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Porcentaje: sentiment_positivo_pct</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">13.7%</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">14.4%</td>
+            <td style="padding:10px 12px;"><span style="background:#00D4FF22;color:#00D4FF;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PASS</span></td>
+        </tr><tr>
+            <td style="padding:10px 12px;color:#fff;">Total menciones en texto</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">28,501</td>
+            <td style="padding:10px 12px;color:#A0AEC0;font-family:'JetBrains Mono',monospace;">No mencionado</td>
+            <td style="padding:10px 12px;"><span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">WARNING</span></td>
+        </tr></tbody>
+</table>
+
+<h2>CONTRADICCIONES NARRATIVAS</h2>
+<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FFB800;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">MEDIUM</span>
+                <p style="color:#A0AEC0;font-size:13px;margin-top:10px;"><strong>Sección A:</strong> RESUMEN EJECUTIVO</p>
+                <p style="color:#A0AEC0;font-size:13px;margin-top:6px;"><strong>Sección B:</strong> MÉTRICAS CLAVE</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;"></p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FFB800;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">MEDIUM</span>
+                <p style="color:#A0AEC0;font-size:13px;margin-top:10px;"><strong>Sección A:</strong> NARRATIVAS PRINCIPALES - Cuestionamiento de Proporcionalidad</p>
+                <p style="color:#A0AEC0;font-size:13px;margin-top:6px;"><strong>Sección B:</strong> RESUMEN EJECUTIVO</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;"></p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FFB800;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">MEDIUM</span>
+                <p style="color:#A0AEC0;font-size:13px;margin-top:10px;"><strong>Sección A:</strong> ANÁLISIS DE PICOS Y ANOMALÍAS - Pico Primario</p>
+                <p style="color:#A0AEC0;font-size:13px;margin-top:6px;"><strong>Sección B:</strong> MÉTRICAS CLAVE</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;"></p>
+            </div>
+
+<h2>AFIRMACIONES SIN SOPORTE</h2>
+<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #5A6378;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#5A637822;color:#5A6378;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">LOW</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"La crisis estalló públicamente el 29 de marzo cuando Avianca emitió un comunicado anunciando la cancelación del vuelo de regreso de Cossio"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">No se verifica en las métricas proporcionadas si Avianca emitió el comunicado el 29 de marzo. Las métricas solo muestran volumen de menciones por fecha, no la fecha del comunicado de Avianca.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Especificar la fuente del comunicado de Avianca o aclarar que el 29 de marzo fue cuando se registró el pico de menciones, no necesariamente cuando Avianca comunicó.</p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FF1B6B;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FF1B6B22;color:#FF1B6B;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">HIGH</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"El sentimiento negativo hacia la aerolínea alcanza 21% en conversaciones que la mencionan específicamente"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">Las métricas muestran 17.9% de sentimiento negativo general (5,089 menciones). No existe desglose específico de sentimiento para &#x27;Avianca&#x27; en las métricas proporcionadas. El 21% no se puede verificar.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Proporcionar el cálculo derivado de actor_metrics o desglose de sentimiento específico para Avianca, o ajustar el porcentaje al 17.9% del sentimiento negativo total.</p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FF1B6B;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FF1B6B22;color:#FF1B6B;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">HIGH</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"las menciones de intersección (Avianca + Cossio) muestran 20.5% de sentimiento negativo"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">Las métricas no incluyen datos específicos de intersección (sentiment breakdown para menciones que contengan ambos actores). El 20.5% no puede verificarse contra los datos proporcionados.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Incluir métricas de intersection con desglose de sentimiento, o documentar cómo se calculó este 20.5%.</p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #5A6378;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#5A637822;color:#5A6378;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">LOW</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"Distribución por actor: Cossio domina con 59.8% vs Avianca 17.3% vs conversación general 22.9%"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">Cálculo parcialmente verificable pero incompleto. Cossio: 17,029/28,501 = 59.8% ✓. Avianca: 4,938/28,501 = 17.3% ✓. Otros: 6,534/28,501 = 22.9% ✓. Sin embargo, &#x27;conversación general&#x27; es ambiguo: suma de &#x27;otros&#x27; (22.9%) no representa claramente una categoría de conversación independiente.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Aclarar que &#x27;conversación general&#x27; se refiere a menciones en categoría &#x27;otros&#x27; (6,534 menciones), no a una conversación sin actores específicos.</p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FF1B6B;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FF1B6B22;color:#FF1B6B;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">HIGH</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"Plataformas principales: TikTok (34.8%) y Facebook (34.7%) concentran 70% del volumen"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">Verificación de porcentajes: TikTok = (9,411 + 538)/28,501 = 34.8% ✓. Facebook = (9,891 + 3,205 + 720)/28,501 = 46.9%, NO 34.7%. La suma de TikTok + Facebook es 81.7%, no 70%.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Recalcular los porcentajes de plataformas. Si se refiere solo a &#x27;tiktok.com&#x27; (33.0%) + &#x27;facebook.com&#x27; (11.2%), sería 44.2%. Revisar metodología de agrupación.</p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FFB800;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">MEDIUM</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"Intersección crítica: 1,483 menciones (5.2%) donde colisionan ambos actores"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">No se puede verificar el número de 1,483 menciones de intersección en las métricas proporcionadas. El JSON no incluye un campo &#x27;intersection&#x27; con estos datos.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Proporcionar datos de intersección o explicar cómo se obtuvo esta cifra.</p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FFB800;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">MEDIUM</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"Engagement promedio: 61.24 con picos en conversación de Cossio (29.23) vs general (166.94)"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">El engagement general de 61.24 se verifica en las métricas (avg_engagement: 61.24) ✓. El engagement de Cossio (29.23) se verifica en actor_metrics (cossio avg_engagement: 29.23) ✓. Sin embargo, 166.94 para &#x27;general&#x27; no aparece en las métricas. No se verifica qué representa &#x27;166.94&#x27;.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Incluir la fuente del 166.94 (¿engagement de &#x27;otros&#x27;? ¿de Avianca?) o documentar cómo se calculó.</p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #5A6378;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#5A637822;color:#5A6378;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">LOW</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"volumen bajo hasta 28/03, explosión 29-30/03, normalización gradual"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">Parcialmente verificable. El volumen acumulado hasta 28/03 es bajo (4,236 menciones). El 29/03 registra 866 menciones y el 30/03 registra 3,384 menciones, confirmando explosión. Sin embargo, la &#x27;normalización gradual&#x27; es relativa: 2,585 el 31/03, luego 765 el 01/04, 804 el 02/04, etc. No es una normalización lineal clara.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Describir con más precisión el patrón post-explosión: desaceleración rápida seguida de estabilización, en lugar de &#x27;normalización gradual&#x27;.</p>
+            </div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid #FFB800;border-radius:0 12px 12px 0;padding:20px;margin-bottom:12px;">
+                <span style="background:#FFB80022;color:#FFB800;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">MEDIUM</span>
+                <p style="color:#FFB800;font-size:13px;margin-top:10px;font-style:italic;">"+401% pico el 29/03, +291% el 30/03"</p>
+                <p style="color:#fff;font-size:14px;margin-top:10px;">No se pueden verificar estos porcentajes de incremento sin una línea base clara. ¿Incremento respecto a qué fecha? ¿Respecto al promedio? El volumen diario anterior (28/03) fue 173 menciones. Si se calcula: 29/03 (866) vs 28/03 (173) = +400.6% ✓. Para 30/03: (3,384 vs 173) = +1,857%, no +291%. Si se compara 30/03 vs 29/03: (3,384 vs 866) = +290.6% ✓.</p>
+                <p style="color:#00D4FF;font-size:13px;margin-top:8px;"><strong>Sugerencia:</strong> Aclarar la línea base de comparación. Aparentemente &#x27;+291% el 30/03&#x27; se refiere a incremento respecto al 29/03, no respecto a línea base anterior.</p>
+            </div>
+
+<h2>VERIFICACIONES APROBADAS</h2>
+<details style="margin-top:8px;">
+<summary style="color:#00D4FF;cursor:pointer;font-size:14px;">25 verificaciones pasaron correctamente (click para expandir)</summary>
+<div style="margin-top:12px;">
+<p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Mención numérica en texto: coincide con dato conocido</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Mención numérica en texto: coincide con dato conocido</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Mención numérica en texto: coincide con dato conocido</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Mención numérica en texto: coincide con dato conocido</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Mención numérica en texto: coincide con dato conocido</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_negativo_pct: 21.0%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_negativo_pct: 21.0%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_cossio_pct: 59.7%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_pct: 17.3%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_otros_pct: 22.9%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: sentiment_neutral_pct: 36.3%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: sentiment_neutral_pct: 36.3%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: inter_intersection_pct: 5.2%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_negativo_pct: 21.0%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_positivo_pct: 12.6%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_cossio_neutral_pct: 24.0%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_negativo_pct: 21.0%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_unknown_positivo_pct: 15.9%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_negativo_pct: 21.0%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: sentiment_neutral_pct: 36.3%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_positivo_pct: 12.6%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_negativo_pct: 21.0%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: sentiment_&lt;na&gt;_pct: 32.1%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: actor_avianca_negativo_pct: 21.0%</p><p style="color:#5A6378;font-size:12px;margin:4px 0;">✓ Porcentaje: sentiment_positivo_pct: 13.7%</p>
+</div>
+</details>
+
+<div style="margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.04);text-align:center;">
+    <p style="color:#5A6378;font-size:12px;">Este reporte fue auditado por el Sistema de QA de Epical Intelligence.</p>
+    <p style="color:#5A6378;font-size:12px;">Revisión final requerida antes de envío al cliente.</p>
+    <p style="color:#FF1B6B;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;margin-top:12px;">EPICAL</p>
+</div>
+</div>
+</body>
+</html>

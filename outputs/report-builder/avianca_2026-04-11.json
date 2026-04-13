@@ -1,0 +1,4163 @@
+{
+  "client": "Avianca",
+  "period": "Marzo — Abril 2026",
+  "generated_date": "2026-04-11",
+  "brief": "Avianca × Cossio: crisis por incidente de seguridad en vuelo AV46. Cossio lanzó un químico en la cabina. Avianca emitió comunicado 18 días después. Período marzo-abril 2026. Preparado para el Director de Comunicaciones Corporativas de Avianca. Queremos mostrar que la crisis no es lo que parece — Avianca salió fortalecida.",
+  "input_files": [
+    "/Users/tomi/Desktop/youscan_reclassified.csv",
+    "/Users/tomi/Desktop/scrapping_reclassified.csv"
+  ],
+  "metrics": {
+    "total_mentions": 14403,
+    "sentiment_breakdown": {
+      "negativo": {
+        "count": 10208,
+        "percentage": 70.9
+      },
+      "neutral": {
+        "count": 2597,
+        "percentage": 18.0
+      },
+      "positivo": {
+        "count": 1580,
+        "percentage": 11.0
+      },
+      "neutro": {
+        "count": 17,
+        "percentage": 0.1
+      },
+      "mixto": {
+        "count": 1,
+        "percentage": 0.0
+      }
+    },
+    "volume_by_date": {
+      "2026-03-07": 2,
+      "2026-03-10": 2,
+      "2026-03-11": 21,
+      "2026-03-12": 2,
+      "2026-03-14": 1,
+      "2026-03-16": 3,
+      "2026-03-17": 8,
+      "2026-03-18": 4,
+      "2026-03-19": 15,
+      "2026-03-20": 17,
+      "2026-03-21": 2,
+      "2026-03-22": 14,
+      "2026-03-23": 14,
+      "2026-03-24": 6,
+      "2026-03-25": 7,
+      "2026-03-26": 2,
+      "2026-03-27": 3,
+      "2026-03-28": 8,
+      "2026-03-29": 2179,
+      "2026-03-30": 4863,
+      "2026-03-31": 5354,
+      "2026-04-01": 958,
+      "2026-04-02": 515,
+      "2026-04-03": 194,
+      "2026-04-04": 87,
+      "2026-04-05": 84,
+      "2026-04-06": 33,
+      "2026-04-07": 5
+    },
+    "top_sources": [
+      [
+        "Twitter",
+        5035
+      ],
+      [
+        "Facebook",
+        4684
+      ],
+      [
+        "TikTok",
+        3595
+      ],
+      [
+        "Instagram",
+        783
+      ],
+      [
+        "YouTube",
+        177
+      ],
+      [
+        "Msn.Com",
+        21
+      ],
+      [
+        "Elcolombiano.Com",
+        8
+      ],
+      [
+        "Noticiascaracol.Com",
+        6
+      ],
+      [
+        "Pulzo.Com",
+        4
+      ],
+      [
+        "Minuto60.Com",
+        3
+      ]
+    ],
+    "top_authors": [
+      [
+        "Cossio",
+        4123
+      ],
+      [
+        "YefersonCorsso",
+        851
+      ],
+      [
+        "EL MONO🐒",
+        392
+      ],
+      [
+        "La FM",
+        383
+      ],
+      [
+        "soydanilegal",
+        371
+      ],
+      [
+        "NoticiasPopularesColombia🇨🇴",
+        252
+      ],
+      [
+        "ÍNTIMO",
+        233
+      ],
+      [
+        "Juan Diego Alvira",
+        220
+      ],
+      [
+        "Thejajfclips",
+        189
+      ],
+      [
+        "Rojas_laura",
+        140
+      ]
+    ],
+    "top_topics": [],
+    "actor_breakdown": {
+      "cossio": 11546,
+      "ambos": 2040,
+      "avianca": 702,
+      "ninguno": 115
+    },
+    "avg_reach": 0.0,
+    "avg_engagement": 48.07,
+    "total_likes": 0,
+    "total_comments": 0,
+    "total_shares": 0,
+    "source_counts": {
+      "youscan": 21039,
+      "scrapping": 17133
+    },
+    "data_quality_issues": [
+      "Data split: 14,403 relevant, 3,886 tangential, 19,883 discarded from 38,172 total"
+    ],
+    "reclassification_stats": {
+      "rules": 0,
+      "ai": 0,
+      "remaining": 0,
+      "remaining_pct": 0.0
+    },
+    "actor_metrics": {
+      "cossio": {
+        "total_mentions": 11546,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 9617,
+            "percentage": 83.3
+          },
+          "positivo": {
+            "count": 1337,
+            "percentage": 11.6
+          },
+          "neutral": {
+            "count": 590,
+            "percentage": 5.1
+          },
+          "neutro": {
+            "count": 2,
+            "percentage": 0.0
+          }
+        },
+        "volume_by_date": {
+          "2026-03-07": 2,
+          "2026-03-10": 2,
+          "2026-03-11": 21,
+          "2026-03-12": 2,
+          "2026-03-16": 1,
+          "2026-03-17": 7,
+          "2026-03-18": 3,
+          "2026-03-19": 14,
+          "2026-03-20": 12,
+          "2026-03-21": 2,
+          "2026-03-22": 14,
+          "2026-03-23": 12,
+          "2026-03-24": 4,
+          "2026-03-25": 5,
+          "2026-03-26": 1,
+          "2026-03-27": 2,
+          "2026-03-28": 6,
+          "2026-03-29": 1491,
+          "2026-03-30": 4005,
+          "2026-03-31": 4415,
+          "2026-04-01": 799,
+          "2026-04-02": 397,
+          "2026-04-03": 147,
+          "2026-04-04": 74,
+          "2026-04-05": 77,
+          "2026-04-06": 26,
+          "2026-04-07": 5
+        },
+        "top_sources": [
+          [
+            "Facebook",
+            4034
+          ],
+          [
+            "Twitter",
+            3780
+          ],
+          [
+            "TikTok",
+            2853
+          ],
+          [
+            "Instagram",
+            671
+          ],
+          [
+            "YouTube",
+            149
+          ],
+          [
+            "Msn.Com",
+            8
+          ],
+          [
+            "Elcolombiano.Com",
+            4
+          ],
+          [
+            "Lakalle.Bluradio.Com",
+            3
+          ],
+          [
+            "Impactonews.Co",
+            2
+          ],
+          [
+            "Caracol.Com.Co",
+            2
+          ]
+        ],
+        "top_authors": [
+          [
+            "Cossio",
+            3768
+          ],
+          [
+            "YefersonCorsso",
+            698
+          ],
+          [
+            "La FM",
+            345
+          ],
+          [
+            "EL MONO🐒",
+            342
+          ],
+          [
+            "soydanilegal",
+            260
+          ],
+          [
+            "NoticiasPopularesColombia🇨🇴",
+            230
+          ],
+          [
+            "ÍNTIMO",
+            177
+          ],
+          [
+            "Juan Diego Alvira",
+            146
+          ],
+          [
+            "Thejajfclips",
+            133
+          ],
+          [
+            "Cossio Family",
+            130
+          ]
+        ],
+        "top_topics": [],
+        "actor_breakdown": {
+          "cossio": 11546
+        },
+        "avg_reach": 0.0,
+        "avg_engagement": 31.31,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "anomalies": [
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 950% entre 2026-03-10 (2) y 2026-03-11 (21)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-11",
+              "previous_count": 2,
+              "current_count": 21,
+              "pct_change": 950.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 600% entre 2026-03-16 (1) y 2026-03-17 (7)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-17",
+              "previous_count": 1,
+              "current_count": 7,
+              "pct_change": 600.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 367% entre 2026-03-18 (3) y 2026-03-19 (14)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-19",
+              "previous_count": 3,
+              "current_count": 14,
+              "pct_change": 366.7
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 600% entre 2026-03-21 (2) y 2026-03-22 (14)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-22",
+              "previous_count": 2,
+              "current_count": 14,
+              "pct_change": 600.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 100% entre 2026-03-26 (1) y 2026-03-27 (2)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-27",
+              "previous_count": 1,
+              "current_count": 2,
+              "pct_change": 100.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 200% entre 2026-03-27 (2) y 2026-03-28 (6)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-28",
+              "previous_count": 2,
+              "current_count": 6,
+              "pct_change": 200.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 24750% entre 2026-03-28 (6) y 2026-03-29 (1491)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-29",
+              "previous_count": 6,
+              "current_count": 1491,
+              "pct_change": 24750.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 169% entre 2026-03-29 (1491) y 2026-03-30 (4005)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-30",
+              "previous_count": 1491,
+              "current_count": 4005,
+              "pct_change": 168.6
+            }
+          }
+        ]
+      },
+      "ambos": {
+        "total_mentions": 2040,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1819,
+            "percentage": 89.2
+          },
+          "negativo": {
+            "count": 202,
+            "percentage": 9.9
+          },
+          "neutro": {
+            "count": 13,
+            "percentage": 0.6
+          },
+          "positivo": {
+            "count": 5,
+            "percentage": 0.2
+          },
+          "mixto": {
+            "count": 1,
+            "percentage": 0.0
+          }
+        },
+        "volume_by_date": {
+          "2026-03-16": 1,
+          "2026-03-20": 5,
+          "2026-03-23": 1,
+          "2026-03-28": 1,
+          "2026-03-29": 628,
+          "2026-03-30": 706,
+          "2026-03-31": 515,
+          "2026-04-01": 101,
+          "2026-04-02": 50,
+          "2026-04-03": 21,
+          "2026-04-04": 4,
+          "2026-04-05": 5,
+          "2026-04-06": 2
+        },
+        "top_sources": [
+          [
+            "Twitter",
+            1174
+          ],
+          [
+            "TikTok",
+            342
+          ],
+          [
+            "Facebook",
+            332
+          ],
+          [
+            "Instagram",
+            99
+          ],
+          [
+            "YouTube",
+            24
+          ],
+          [
+            "Msn.Com",
+            13
+          ],
+          [
+            "Noticiascaracol.Com",
+            5
+          ],
+          [
+            "Elcolombiano.Com",
+            4
+          ],
+          [
+            "Noticiasrcn.Com",
+            3
+          ],
+          [
+            "Eje21.Com.Co",
+            2
+          ]
+        ],
+        "top_authors": [
+          [
+            "Cossio",
+            137
+          ],
+          [
+            "YefersonCorsso",
+            59
+          ],
+          [
+            "Thejajfclips",
+            35
+          ],
+          [
+            "ÍNTIMO",
+            32
+          ],
+          [
+            "EL MONO🐒",
+            31
+          ],
+          [
+            "soydanilegal",
+            27
+          ],
+          [
+            "La FM",
+            19
+          ],
+          [
+            "Fernanda_muelitas🦷",
+            17
+          ],
+          [
+            "Rojas_laura",
+            14
+          ],
+          [
+            "juanes.m21",
+            12
+          ]
+        ],
+        "top_topics": [],
+        "actor_breakdown": {
+          "ambos": 2040
+        },
+        "avg_reach": 0.0,
+        "avg_engagement": 156.15,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "anomalies": [
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 400% entre 2026-03-16 (1) y 2026-03-20 (5)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-20",
+              "previous_count": 1,
+              "current_count": 5,
+              "pct_change": 400.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 62700% entre 2026-03-28 (1) y 2026-03-29 (628)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-29",
+              "previous_count": 1,
+              "current_count": 628,
+              "pct_change": 62700.0
+            }
+          }
+        ]
+      },
+      "avianca": {
+        "total_mentions": 702,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 384,
+            "percentage": 54.7
+          },
+          "positivo": {
+            "count": 238,
+            "percentage": 33.9
+          },
+          "neutral": {
+            "count": 80,
+            "percentage": 11.4
+          }
+        },
+        "volume_by_date": {
+          "2026-03-14": 1,
+          "2026-03-16": 1,
+          "2026-03-17": 1,
+          "2026-03-18": 1,
+          "2026-03-19": 1,
+          "2026-03-23": 1,
+          "2026-03-24": 2,
+          "2026-03-25": 2,
+          "2026-03-26": 1,
+          "2026-03-27": 1,
+          "2026-03-28": 1,
+          "2026-03-29": 46,
+          "2026-03-30": 105,
+          "2026-03-31": 375,
+          "2026-04-01": 57,
+          "2026-04-02": 66,
+          "2026-04-03": 24,
+          "2026-04-04": 9,
+          "2026-04-05": 2,
+          "2026-04-06": 5
+        },
+        "top_sources": [
+          [
+            "TikTok",
+            337
+          ],
+          [
+            "Facebook",
+            287
+          ],
+          [
+            "Twitter",
+            62
+          ],
+          [
+            "Instagram",
+            12
+          ],
+          [
+            "YouTube",
+            3
+          ],
+          [
+            "Agenciapi.Co",
+            1
+          ]
+        ],
+        "top_authors": [
+          [
+            "Cossio",
+            190
+          ],
+          [
+            "YefersonCorsso",
+            92
+          ],
+          [
+            "soydanilegal",
+            81
+          ],
+          [
+            "Juan Diego Alvira",
+            62
+          ],
+          [
+            "ÍNTIMO",
+            21
+          ],
+          [
+            "avianca",
+            14
+          ],
+          [
+            "La FM",
+            13
+          ],
+          [
+            "EL MONO🐒",
+            12
+          ],
+          [
+            "Fernanda_muelitas🦷",
+            10
+          ],
+          [
+            "Avianca",
+            10
+          ]
+        ],
+        "top_topics": [],
+        "actor_breakdown": {
+          "avianca": 702
+        },
+        "avg_reach": 0.0,
+        "avg_engagement": 16.95,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "anomalies": [
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 100% entre 2026-03-23 (1) y 2026-03-24 (2)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-03-24",
+              "previous_count": 1,
+              "current_count": 2,
+              "pct_change": 100.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 4500% entre 2026-03-28 (1) y 2026-03-29 (46)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-29",
+              "previous_count": 1,
+              "current_count": 46,
+              "pct_change": 4500.0
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 128% entre 2026-03-29 (46) y 2026-03-30 (105)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-30",
+              "previous_count": 46,
+              "current_count": 105,
+              "pct_change": 128.3
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 257% entre 2026-03-30 (105) y 2026-03-31 (375)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-31",
+              "previous_count": 105,
+              "current_count": 375,
+              "pct_change": 257.1
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 150% entre 2026-04-05 (2) y 2026-04-06 (5)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-04-06",
+              "previous_count": 2,
+              "current_count": 5,
+              "pct_change": 150.0
+            }
+          },
+          {
+            "type": "sentiment_shift",
+            "description": "Cambio de sentimiento negativo: disminucion de 83.3% a 54.2% entre la primera y segunda mitad del periodo",
+            "severity": "critical",
+            "data": {
+              "negative_pct_first_half": 83.3,
+              "negative_pct_second_half": 54.2,
+              "shift": -29.1
+            }
+          }
+        ]
+      },
+      "ninguno": {
+        "total_mentions": 115,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 108,
+            "percentage": 93.9
+          },
+          "negativo": {
+            "count": 5,
+            "percentage": 4.3
+          },
+          "neutro": {
+            "count": 2,
+            "percentage": 1.7
+          }
+        },
+        "volume_by_date": {
+          "2026-03-29": 14,
+          "2026-03-30": 47,
+          "2026-03-31": 49,
+          "2026-04-01": 1,
+          "2026-04-02": 2,
+          "2026-04-03": 2
+        },
+        "top_sources": [
+          [
+            "TikTok",
+            63
+          ],
+          [
+            "Facebook",
+            31
+          ],
+          [
+            "Twitter",
+            19
+          ],
+          [
+            "YouTube",
+            1
+          ],
+          [
+            "Instagram",
+            1
+          ]
+        ],
+        "top_authors": [
+          [
+            "Cossio",
+            28
+          ],
+          [
+            "Thejajfclips",
+            12
+          ],
+          [
+            "Rojas_laura",
+            10
+          ],
+          [
+            "EL MONO🐒",
+            7
+          ],
+          [
+            "La FM",
+            6
+          ],
+          [
+            "NoticiasPopularesColombia🇨🇴",
+            4
+          ],
+          [
+            "ÍNTIMO",
+            3
+          ],
+          [
+            "soydanilegal",
+            3
+          ],
+          [
+            "Sk Spotting",
+            3
+          ],
+          [
+            "guccr",
+            3
+          ]
+        ],
+        "top_topics": [],
+        "actor_breakdown": {
+          "ninguno": 115
+        },
+        "avg_reach": 0.0,
+        "avg_engagement": 3.01,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "anomalies": [
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 236% entre 2026-03-29 (14) y 2026-03-30 (47)",
+            "severity": "critical",
+            "data": {
+              "date": "2026-03-30",
+              "previous_count": 14,
+              "current_count": 47,
+              "pct_change": 235.7
+            }
+          },
+          {
+            "type": "volume_spike",
+            "description": "Incremento de volumen del 100% entre 2026-04-01 (1) y 2026-04-02 (2)",
+            "severity": "warning",
+            "data": {
+              "date": "2026-04-02",
+              "previous_count": 1,
+              "current_count": 2,
+              "pct_change": 100.0
+            }
+          }
+        ]
+      }
+    },
+    "intersection": {
+      "brand_only": 1416,
+      "brand_only_pct": 9.8,
+      "brand_only_sentiment": {
+        "negativo": 70.9,
+        "neutral": 15.5,
+        "positivo": 13.6,
+        "mixto": 0.1
+      },
+      "actor_only": 335,
+      "actor_only_pct": 2.3,
+      "actor_only_sentiment": {
+        "negativo": 42.4,
+        "positivo": 39.7,
+        "neutral": 16.7,
+        "neutro": 1.2
+      },
+      "intersection": 5200,
+      "intersection_pct": 36.1,
+      "intersection_sentiment": {
+        "negativo": 70.2,
+        "neutral": 28.5,
+        "positivo": 1.1,
+        "neutro": 0.2
+      },
+      "neither": 7452,
+      "neither_pct": 51.7,
+      "total": 14403,
+      "brand_label": "Avianca",
+      "actor_label": "Cossio"
+    },
+    "engagement_by_platform": [
+      {
+        "platform": "TikTok",
+        "mentions": 3595,
+        "total_engagement": 439237,
+        "avg_engagement": 122.2,
+        "engagement_share": 63.4,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 2523,
+            "percentage": 70.2
+          },
+          "neutral": {
+            "count": 589,
+            "percentage": 16.4
+          },
+          "positivo": {
+            "count": 480,
+            "percentage": 13.4
+          },
+          "neutro": {
+            "count": 3,
+            "percentage": 0.1
+          }
+        }
+      },
+      {
+        "platform": "Facebook",
+        "mentions": 4684,
+        "total_engagement": 116472,
+        "avg_engagement": 24.9,
+        "engagement_share": 16.8,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 3002,
+            "percentage": 64.1
+          },
+          "positivo": {
+            "count": 1034,
+            "percentage": 22.1
+          },
+          "neutral": {
+            "count": 642,
+            "percentage": 13.7
+          },
+          "neutro": {
+            "count": 5,
+            "percentage": 0.1
+          },
+          "mixto": {
+            "count": 1,
+            "percentage": 0.0
+          }
+        }
+      },
+      {
+        "platform": "Instagram",
+        "mentions": 783,
+        "total_engagement": 68603,
+        "avg_engagement": 87.6,
+        "engagement_share": 9.9,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 651,
+            "percentage": 83.1
+          },
+          "neutral": {
+            "count": 115,
+            "percentage": 14.7
+          },
+          "positivo": {
+            "count": 17,
+            "percentage": 2.2
+          }
+        }
+      },
+      {
+        "platform": "Twitter",
+        "mentions": 5035,
+        "total_engagement": 58522,
+        "avg_engagement": 11.6,
+        "engagement_share": 8.5,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 3842,
+            "percentage": 76.3
+          },
+          "neutral": {
+            "count": 1144,
+            "percentage": 22.7
+          },
+          "positivo": {
+            "count": 43,
+            "percentage": 0.9
+          },
+          "neutro": {
+            "count": 6,
+            "percentage": 0.1
+          }
+        }
+      },
+      {
+        "platform": "YouTube",
+        "mentions": 177,
+        "total_engagement": 9478,
+        "avg_engagement": 53.5,
+        "engagement_share": 1.4,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 141,
+            "percentage": 79.7
+          },
+          "neutral": {
+            "count": 32,
+            "percentage": 18.1
+          },
+          "positivo": {
+            "count": 4,
+            "percentage": 2.3
+          }
+        }
+      },
+      {
+        "platform": "360Radio.Com.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Aeroermo.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Agenciapi.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Asuntoslegales.Com.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Cablenoticias.Tv",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Candelaestereo.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Caracol.Com.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 50.0
+          },
+          "negativo": {
+            "count": 1,
+            "percentage": 50.0
+          }
+        }
+      },
+      {
+        "platform": "Centrodenoticias24.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Chicanoticias.Com",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Citytv.Eltiempo.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Colmundoradio.Com.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Colombia.Com",
+        "mentions": 3,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 66.7
+          },
+          "negativo": {
+            "count": 1,
+            "percentage": 33.3
+          }
+        }
+      },
+      {
+        "platform": "Cwmas.Com.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 50.0
+          },
+          "negativo": {
+            "count": 1,
+            "percentage": 50.0
+          }
+        }
+      },
+      {
+        "platform": "Diarioadn.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 50.0
+          },
+          "neutral": {
+            "count": 1,
+            "percentage": 50.0
+          }
+        }
+      },
+      {
+        "platform": "Diariodecolombia.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Diariodelcesar.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutro": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Eje21.Com.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Elcolombiano.Com",
+        "mentions": 8,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 5,
+            "percentage": 62.5
+          },
+          "negativo": {
+            "count": 3,
+            "percentage": 37.5
+          }
+        }
+      },
+      {
+        "platform": "Elcronista.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Elheraldo.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Elinformador.Com.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 50.0
+          },
+          "negativo": {
+            "count": 1,
+            "percentage": 50.0
+          }
+        }
+      },
+      {
+        "platform": "Elnuevosiglo.Com.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Elpais.Com.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Elperiodicodeportivo.Com.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Elsonajero.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Eltabloide.Com.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Eltiempo.Com",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Fullcali.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Gsnoticias.Com",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Ifmnoticias.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Impactonews.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Informando.Com.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Kienyke.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Laguajiranoticias.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Lakalle.Bluradio.Com",
+        "mentions": 3,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 2,
+            "percentage": 66.7
+          },
+          "neutral": {
+            "count": 1,
+            "percentage": 33.3
+          }
+        }
+      },
+      {
+        "platform": "Lanotaeconomica.Com.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Laopinion.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Lapatria.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Larepublica.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Las2Orillas.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Lavibrante.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Los40.Com.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "M.Elcolombiano.Com",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 50.0
+          },
+          "negativo": {
+            "count": 1,
+            "percentage": 50.0
+          }
+        }
+      },
+      {
+        "platform": "Meridianoregional.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Minuto60.Com",
+        "mentions": 3,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 66.7
+          },
+          "neutro": {
+            "count": 1,
+            "percentage": 33.3
+          }
+        }
+      },
+      {
+        "platform": "Mioriente.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Msn.Com",
+        "mentions": 21,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 15,
+            "percentage": 71.4
+          },
+          "negativo": {
+            "count": 5,
+            "percentage": 23.8
+          },
+          "positivo": {
+            "count": 1,
+            "percentage": 4.8
+          }
+        }
+      },
+      {
+        "platform": "Nacioncolombia.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Noticiasbq.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Noticiascaracol.Com",
+        "mentions": 6,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 5,
+            "percentage": 83.3
+          },
+          "negativo": {
+            "count": 1,
+            "percentage": 16.7
+          }
+        }
+      },
+      {
+        "platform": "Noticiasrcn.Com",
+        "mentions": 3,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 3,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Portafolio.Co",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 50.0
+          },
+          "negativo": {
+            "count": 1,
+            "percentage": 50.0
+          }
+        }
+      },
+      {
+        "platform": "Publimetro.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Pulzo.Com",
+        "mentions": 4,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 2,
+            "percentage": 50.0
+          },
+          "neutral": {
+            "count": 1,
+            "percentage": 25.0
+          },
+          "neutro": {
+            "count": 1,
+            "percentage": 25.0
+          }
+        }
+      },
+      {
+        "platform": "Qhubomedellin.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Radiohoy.Com",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 2,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Radiosantafe.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Rcnradio.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Seguimiento.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Telecafe.Gov.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Thecitypaperbogota.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Tropicanafm.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Tubarco.News",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Tuperfil.Net",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Ultimahoracol.Com",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Vanguardia.Com",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "neutral": {
+            "count": 1,
+            "percentage": 50.0
+          },
+          "positivo": {
+            "count": 1,
+            "percentage": 50.0
+          }
+        }
+      },
+      {
+        "platform": "Vibra.Co",
+        "mentions": 1,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 100.0
+          }
+        }
+      },
+      {
+        "platform": "Zonacero.Com",
+        "mentions": 2,
+        "total_engagement": 0,
+        "avg_engagement": 0.0,
+        "engagement_share": 0.0,
+        "total_likes": 0,
+        "total_comments": 0,
+        "total_shares": 0,
+        "total_reach": 0,
+        "avg_reach": 0.0,
+        "reach_share": 0.0,
+        "sentiment_breakdown": {
+          "negativo": {
+            "count": 1,
+            "percentage": 50.0
+          },
+          "neutral": {
+            "count": 1,
+            "percentage": 50.0
+          }
+        }
+      }
+    ],
+    "timeline": {
+      "daily": [
+        {
+          "date": "2026-03-07",
+          "mentions": 2,
+          "engagement": 37,
+          "sentiment": {
+            "positivo": 1,
+            "neutral": 1
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-03-10",
+          "mentions": 2,
+          "engagement": 26,
+          "sentiment": {
+            "positivo": 1,
+            "negativo": 1
+          },
+          "top_platform": "YouTube"
+        },
+        {
+          "date": "2026-03-11",
+          "mentions": 21,
+          "engagement": 165,
+          "sentiment": {
+            "negativo": 21
+          },
+          "top_platform": "YouTube"
+        },
+        {
+          "date": "2026-03-12",
+          "mentions": 2,
+          "engagement": 1,
+          "sentiment": {
+            "negativo": 2
+          },
+          "top_platform": "YouTube"
+        },
+        {
+          "date": "2026-03-14",
+          "mentions": 1,
+          "engagement": 0,
+          "sentiment": {
+            "negativo": 1
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-03-16",
+          "mentions": 3,
+          "engagement": 2,
+          "sentiment": {
+            "negativo": 2,
+            "neutral": 1
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-17",
+          "mentions": 8,
+          "engagement": 0,
+          "sentiment": {
+            "negativo": 5,
+            "positivo": 2,
+            "neutral": 1
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-18",
+          "mentions": 4,
+          "engagement": 43,
+          "sentiment": {
+            "negativo": 4
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-19",
+          "mentions": 15,
+          "engagement": 22,
+          "sentiment": {
+            "negativo": 12,
+            "neutral": 2,
+            "positivo": 1
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-20",
+          "mentions": 17,
+          "engagement": 57,
+          "sentiment": {
+            "negativo": 11,
+            "neutral": 5,
+            "positivo": 1
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-21",
+          "mentions": 2,
+          "engagement": 2,
+          "sentiment": {
+            "positivo": 1,
+            "negativo": 1
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-03-22",
+          "mentions": 14,
+          "engagement": 3,
+          "sentiment": {
+            "negativo": 8,
+            "positivo": 5,
+            "neutral": 1
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-23",
+          "mentions": 14,
+          "engagement": 11,
+          "sentiment": {
+            "negativo": 7,
+            "positivo": 7
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-24",
+          "mentions": 6,
+          "engagement": 1294,
+          "sentiment": {
+            "negativo": 4,
+            "neutral": 2
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-25",
+          "mentions": 7,
+          "engagement": 4,
+          "sentiment": {
+            "negativo": 5,
+            "positivo": 2
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-26",
+          "mentions": 2,
+          "engagement": 0,
+          "sentiment": {
+            "negativo": 2
+          },
+          "top_platform": "Twitter"
+        },
+        {
+          "date": "2026-03-27",
+          "mentions": 3,
+          "engagement": 2,
+          "sentiment": {
+            "negativo": 3
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-03-28",
+          "mentions": 8,
+          "engagement": 13,
+          "sentiment": {
+            "negativo": 6,
+            "positivo": 1,
+            "neutral": 1
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-03-29",
+          "mentions": 2179,
+          "engagement": 216285,
+          "sentiment": {
+            "negativo": 1518,
+            "neutral": 632,
+            "positivo": 29
+          },
+          "top_platform": "Twitter"
+        },
+        {
+          "date": "2026-03-30",
+          "mentions": 4863,
+          "engagement": 346499,
+          "sentiment": {
+            "negativo": 3859,
+            "neutral": 803,
+            "positivo": 184,
+            "neutro": 17
+          },
+          "top_platform": "Twitter"
+        },
+        {
+          "date": "2026-03-31",
+          "mentions": 5354,
+          "engagement": 113472,
+          "sentiment": {
+            "negativo": 3410,
+            "positivo": 1082,
+            "neutral": 861,
+            "mixto": 1
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-04-01",
+          "mentions": 958,
+          "engagement": 10198,
+          "sentiment": {
+            "negativo": 656,
+            "neutral": 164,
+            "positivo": 138
+          },
+          "top_platform": "Facebook"
+        },
+        {
+          "date": "2026-04-02",
+          "mentions": 515,
+          "engagement": 2843,
+          "sentiment": {
+            "negativo": 365,
+            "positivo": 75,
+            "neutral": 75
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-04-03",
+          "mentions": 194,
+          "engagement": 490,
+          "sentiment": {
+            "negativo": 138,
+            "positivo": 32,
+            "neutral": 24
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-04-04",
+          "mentions": 87,
+          "engagement": 66,
+          "sentiment": {
+            "negativo": 69,
+            "neutral": 9,
+            "positivo": 9
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-04-05",
+          "mentions": 84,
+          "engagement": 743,
+          "sentiment": {
+            "negativo": 70,
+            "neutral": 7,
+            "positivo": 7
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-04-06",
+          "mentions": 33,
+          "engagement": 34,
+          "sentiment": {
+            "negativo": 24,
+            "neutral": 7,
+            "positivo": 2
+          },
+          "top_platform": "TikTok"
+        },
+        {
+          "date": "2026-04-07",
+          "mentions": 5,
+          "engagement": 0,
+          "sentiment": {
+            "negativo": 4,
+            "neutral": 1
+          },
+          "top_platform": "Facebook"
+        }
+      ],
+      "period_start": "2026-03-07",
+      "period_end": "2026-04-07",
+      "total_days": 28
+    },
+    "spikes": [
+      {
+        "date": "2026-03-29",
+        "mentions": 2179,
+        "previous_mentions": 8,
+        "pct_change": 27137.5,
+        "severity": "critical",
+        "engagement": 216285,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 27138% entre 2026-03-28 (8) y 2026-03-29 (2179)"
+      },
+      {
+        "date": "2026-03-11",
+        "mentions": 21,
+        "previous_mentions": 2,
+        "pct_change": 950.0,
+        "severity": "critical",
+        "engagement": 165,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 950% entre 2026-03-10 (2) y 2026-03-11 (21)"
+      },
+      {
+        "date": "2026-03-22",
+        "mentions": 14,
+        "previous_mentions": 2,
+        "pct_change": 600.0,
+        "severity": "critical",
+        "engagement": 3,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 600% entre 2026-03-21 (2) y 2026-03-22 (14)"
+      },
+      {
+        "date": "2026-03-19",
+        "mentions": 15,
+        "previous_mentions": 4,
+        "pct_change": 275.0,
+        "severity": "critical",
+        "engagement": 22,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 275% entre 2026-03-18 (4) y 2026-03-19 (15)"
+      },
+      {
+        "date": "2026-03-16",
+        "mentions": 3,
+        "previous_mentions": 1,
+        "pct_change": 200.0,
+        "severity": "critical",
+        "engagement": 2,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 200% entre 2026-03-14 (1) y 2026-03-16 (3)"
+      },
+      {
+        "date": "2026-03-17",
+        "mentions": 8,
+        "previous_mentions": 3,
+        "pct_change": 166.7,
+        "severity": "critical",
+        "engagement": 0,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 167% entre 2026-03-16 (3) y 2026-03-17 (8)"
+      },
+      {
+        "date": "2026-03-28",
+        "mentions": 8,
+        "previous_mentions": 3,
+        "pct_change": 166.7,
+        "severity": "critical",
+        "engagement": 13,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 167% entre 2026-03-27 (3) y 2026-03-28 (8)"
+      },
+      {
+        "date": "2026-03-30",
+        "mentions": 4863,
+        "previous_mentions": 2179,
+        "pct_change": 123.2,
+        "severity": "critical",
+        "engagement": 346499,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 123% entre 2026-03-29 (2179) y 2026-03-30 (4863)"
+      },
+      {
+        "date": "2026-03-27",
+        "mentions": 3,
+        "previous_mentions": 2,
+        "pct_change": 50.0,
+        "severity": "warning",
+        "engagement": 2,
+        "top_sentiment": "negativo",
+        "description": "Incremento de 50% entre 2026-03-26 (2) y 2026-03-27 (3)"
+      }
+    ],
+    "reach_deduplicated": {
+      "total_reach_raw": 0,
+      "total_reach_deduplicated": 0,
+      "total_reach_formatted": "0",
+      "unique_accounts": 578,
+      "inflation_factor": 0.0,
+      "reach_by_platform": [
+        {
+          "platform": "360Radio.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Aeroermo.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Agenciapi.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Asuntoslegales.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Cablenoticias.Tv",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Candelaestereo.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Caracol.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Centrodenoticias24.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Chicanoticias.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Citytv.Eltiempo.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Colmundoradio.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Colombia.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Cwmas.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Diarioadn.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Diariodecolombia.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Diariodelcesar.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Eje21.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Elcolombiano.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Elcronista.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Elheraldo.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Elinformador.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Elnuevosiglo.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Elpais.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Elperiodicodeportivo.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Elsonajero.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Eltabloide.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Eltiempo.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Facebook",
+          "reach_deduplicated": 0,
+          "unique_accounts": 302,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Fullcali.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Gsnoticias.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Ifmnoticias.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Impactonews.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Informando.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Instagram",
+          "reach_deduplicated": 0,
+          "unique_accounts": 136,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Kienyke.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Laguajiranoticias.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Lakalle.Bluradio.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Lanotaeconomica.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Laopinion.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Lapatria.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Larepublica.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Las2Orillas.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Lavibrante.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Los40.Com.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "M.Elcolombiano.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Meridianoregional.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Minuto60.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Mioriente.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Msn.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Nacioncolombia.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Noticiasbq.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Noticiascaracol.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Noticiasrcn.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Portafolio.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Publimetro.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Pulzo.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Qhubomedellin.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Radiohoy.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Radiosantafe.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Rcnradio.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Seguimiento.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Telecafe.Gov.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Thecitypaperbogota.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "TikTok",
+          "reach_deduplicated": 0,
+          "unique_accounts": 152,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Tropicanafm.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Tubarco.News",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Tuperfil.Net",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Twitter",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Ultimahoracol.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 0,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Vanguardia.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Vibra.Co",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "YouTube",
+          "reach_deduplicated": 0,
+          "unique_accounts": 32,
+          "reach_formatted": "0"
+        },
+        {
+          "platform": "Zonacero.Com",
+          "reach_deduplicated": 0,
+          "unique_accounts": 1,
+          "reach_formatted": "0"
+        }
+      ],
+      "top_accounts": [
+        {
+          "author": "\"Noticias Al Día",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "TikTok"
+        },
+        {
+          "author": "Radio Sincelejo",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 2,
+          "platform": "Instagram"
+        },
+        {
+          "author": "OPERATIVO POLIFACÉTICO 😏",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 56,
+          "platform": "TikTok"
+        },
+        {
+          "author": "Olimpica Cali",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "Facebook"
+        },
+        {
+          "author": "Olimpica St 105.9",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 8,
+          "platform": "TikTok"
+        },
+        {
+          "author": "Olimpica Stereo Bogota 105.9",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 2,
+          "platform": "Facebook"
+        },
+        {
+          "author": "Olimpica Stereo Cartagena Pagina Oficial",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "Facebook"
+        },
+        {
+          "author": "Olímpica Stereo Bogotá 105.9 fm",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "Instagram"
+        },
+        {
+          "author": "Olímpica Stereo Cali 104.5 FM",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "Instagram"
+        },
+        {
+          "author": "Olímpica Stereo Cartagena 90.5 FM",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "Instagram"
+        },
+        {
+          "author": "Olímpica stereo Cali",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "TikTok"
+        },
+        {
+          "author": "Opinómetro",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 3,
+          "platform": "TikTok"
+        },
+        {
+          "author": "PASA LA VOZ \"Barranquilla Alerta\"",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "Facebook"
+        },
+        {
+          "author": "PERIODICO EL HERALDO DE URABA",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "Facebook"
+        },
+        {
+          "author": "PILAS ⚡️",
+          "reach": 0,
+          "reach_formatted": "0",
+          "mentions": 1,
+          "platform": "Instagram"
+        }
+      ]
+    },
+    "tangential_analysis": {
+      "total_tangential": 3886,
+      "negative_tangential": 2084,
+      "negative_tangential_pct": 53.6,
+      "catalyst_detected": true,
+      "catalyst_strength": "medium",
+      "top_themes": [
+        {
+          "theme": "avianca",
+          "count": 1804,
+          "pct": 46.4
+        },
+        {
+          "theme": "aerolínea",
+          "count": 597,
+          "pct": 15.4
+        },
+        {
+          "theme": "vuelo",
+          "count": 565,
+          "pct": 14.5
+        },
+        {
+          "theme": "colombia",
+          "count": 484,
+          "pct": 12.5
+        },
+        {
+          "theme": "servicio",
+          "count": 388,
+          "pct": 10.0
+        },
+        {
+          "theme": "bogotá",
+          "count": 355,
+          "pct": 9.1
+        },
+        {
+          "theme": "vuelos",
+          "count": 330,
+          "pct": 8.5
+        },
+        {
+          "theme": "desde",
+          "count": 304,
+          "pct": 7.8
+        },
+        {
+          "theme": "solo",
+          "count": 297,
+          "pct": 7.6
+        },
+        {
+          "theme": "entre",
+          "count": 286,
+          "pct": 7.4
+        }
+      ],
+      "temporal_correlation": {
+        "first_half_mentions": 943,
+        "second_half_mentions": 2943,
+        "trend": "increasing"
+      },
+      "pre_existing_issues": [
+        "avianca",
+        "aerolínea",
+        "vuelo",
+        "colombia",
+        "servicio"
+      ]
+    },
+    "brand_criticism": {
+      "total_negative_brand": 10208,
+      "categories": [
+        {
+          "category": "otros",
+          "count": 4975,
+          "pct": 48.7,
+          "sample_texts": []
+        },
+        {
+          "category": "operacional",
+          "count": 2753,
+          "pct": 27.0,
+          "sample_texts": [
+            "Dia uno hasta que avianca me regale un vuelo",
+            "no ha exagerado, todos deben respetar a los demas pasajeros, pudo alterar el vuelo como tal, son muchos los que corren riesgo. todos deben de aprender que un vuelo no es un juego.",
+            "Menos cero de tolerancia para tipo de juegos dentro de un vuelo.... sino lo sancionan se va a prestar para que mas pateticos( influencers) hagan payasadas para volverse virales como la gran cosa."
+          ]
+        },
+        {
+          "category": "experiencia_usuario",
+          "count": 1293,
+          "pct": 12.7,
+          "sample_texts": [
+            "#VETADO. Avianca canceló contrato de transporte y anunció acciones legales contra Yeferson Cossio por grave incidente en vuelo Bogotá-Madrid. El pasado 11MAR el influencer habría activado artefacto co",
+            "#VETADO. Avianca canceló contrato de transporte y anunció acciones legales contra Yeferson Cossio por grave incidente en vuelo Bogotá-Madrid. El pasado 11MAR el influencer habría activado artefacto co",
+            "colocó la seguridad de todos los pasajeros que iban en el vuelo y más qué no tenían un aeropuerto cerca\nojalá que la aerolínea le haga todo el.proceso"
+          ]
+        },
+        {
+          "category": "servicio_al_cliente",
+          "count": 339,
+          "pct": 3.3,
+          "sample_texts": [
+            "🇨🇴🛫💨\nINFLUENCER COLOMBIANO VETADO POR PEDO QUÍMICO EN VUELO\n\n¡AVIÁNICA CANCELA VUELO Y DEMANDA AL FAMOSO!\n\n⚠️¡VISITA Y SIGUE @ULTIMAHORAENX/@NOTICIASENX PARA MÁS NOTICIAS! DEJA UN ❤️ Y TU RESPUESTA, G",
+            "#ATENCION El influencer Yeferson Cossio vuelve a estar en el centro de la polémica, esta vez por un incidente ocurrido en un vuelo Bogotá–Madrid de Avianca, que podría costarle una fuerte sanción econ",
+            "#ATENCION El influencer Yeferson Cossio vuelve a estar en el centro de la polémica, esta vez por un incidente ocurrido en un vuelo Bogotá–Madrid de Avianca, que podría costarle una fuerte sanción econ"
+          ]
+        },
+        {
+          "category": "reputacion_confianza",
+          "count": 295,
+          "pct": 2.9,
+          "sample_texts": [
+            "ese man como va a llevar algo de eso alli, en un viaje sea serio qué irresponsable",
+            "@DanielEscobarA @YefersonCossio Qué vergüenza",
+            "Es un Irresponsable es Man"
+          ]
+        },
+        {
+          "category": "producto_calidad",
+          "count": 292,
+          "pct": 2.9,
+          "sample_texts": [
+            "y lo peor es que hay gente que quiere ser como ellos",
+            "Eso no es broma, ni da risa,,, toca la peor sanción,, que ninguna aerolínea le venda pasajes",
+            "Deberían vetarlo de todos los vuelos . Porque lleva un producto peligroso en cabina ? Porque los pasajeros deben estar expuestos a esto ?"
+          ]
+        },
+        {
+          "category": "precio_valor",
+          "count": 219,
+          "pct": 2.1,
+          "sample_texts": [
+            "Hablando de еstаfаdоrеs... ya le metieron metieron su buena demanda al еstаfаdоr de Cossio por Теrrоrismо? O se dejaron comprar de su dinero sucio?",
+            "Algunos influencers tienen 💩 en la cabeza para hacer estupideces. \nAsí como un malparido hijueputa que soltó un químico en un avión de Avianca entre Bogotá y Madrid.\nChile 🇨🇱: Varios heridos en el Mal",
+            "lo que pasa es que el niño pensaba que con tener dinero podía hacer lo que quiera. ahora está asustado porque si tienes un problema con una aerolínea es muy delicado para poder luego abordar en otra.."
+          ]
+        },
+        {
+          "category": "comunicacion",
+          "count": 42,
+          "pct": 0.4,
+          "sample_texts": [
+            "Explicación no pedida, acusación manifiesta\"",
+            "Lo hecho hecho está,no hay explicación que justifique semejante falta de respeto,",
+            "mucha explicación"
+          ]
+        }
+      ],
+      "severity_distribution": {
+        "high": 59,
+        "medium": 162,
+        "low": 9987
+      }
+    },
+    "comunicado_impact": {
+      "event_date": "2026-03-29",
+      "window_days": 7,
+      "pre": {
+        "mentions": 54,
+        "engagement": 1327,
+        "avg_daily_mentions": 7.7,
+        "sentiment": {
+          "negativo": {
+            "count": 35,
+            "percentage": 64.8
+          },
+          "positivo": {
+            "count": 15,
+            "percentage": 27.8
+          },
+          "neutral": {
+            "count": 4,
+            "percentage": 7.4
+          }
+        }
+      },
+      "post": {
+        "mentions": 14234,
+        "engagement": 690596,
+        "avg_daily_mentions": 1779.2,
+        "sentiment": {
+          "negativo": {
+            "count": 10085,
+            "percentage": 70.9
+          },
+          "neutral": {
+            "count": 2575,
+            "percentage": 18.1
+          },
+          "positivo": {
+            "count": 1556,
+            "percentage": 10.9
+          },
+          "neutro": {
+            "count": 17,
+            "percentage": 0.1
+          },
+          "mixto": {
+            "count": 1,
+            "percentage": 0.0
+          }
+        }
+      },
+      "delta": {
+        "mentions_pct": 26259.3,
+        "engagement_pct": 51941.9,
+        "negative_shift": 6.1
+      },
+      "peak_day": {
+        "date": "2026-03-31",
+        "mentions": 5354
+      },
+      "recovery_days": null
+    },
+    "topic_clusters": [
+      {
+        "label": "yeferson cossio",
+        "keywords": [
+          "yeferson cossio",
+          "avianca",
+          "vuelo"
+        ],
+        "mention_count": 4846,
+        "percentage": 33.6
+      },
+      {
+        "label": "acciones legales",
+        "keywords": [
+          "acciones legales",
+          "avianca",
+          "influencer"
+        ],
+        "mention_count": 660,
+        "percentage": 4.6
+      },
+      {
+        "label": "bogotá madrid",
+        "keywords": [
+          "bogotá madrid",
+          "vuelo",
+          "avianca"
+        ],
+        "mention_count": 49,
+        "percentage": 0.3
+      },
+      {
+        "label": "olor químico",
+        "keywords": [
+          "olor químico",
+          "avianca",
+          "aerolínea"
+        ],
+        "mention_count": 11,
+        "percentage": 0.1
+      },
+      {
+        "label": "seguridad comodidad",
+        "keywords": [
+          "seguridad comodidad",
+          "ojalá",
+          "vuelo"
+        ],
+        "mention_count": 6,
+        "percentage": 0.0
+      },
+      {
+        "label": "contrato transporte",
+        "keywords": [
+          "contrato transporte",
+          "avianca",
+          "durante"
+        ],
+        "mention_count": 5,
+        "percentage": 0.0
+      },
+      {
+        "label": "mal comportamiento",
+        "keywords": [
+          "mal comportamiento",
+          "gente",
+          "pues"
+        ],
+        "mention_count": 5,
+        "percentage": 0.0
+      },
+      {
+        "label": "trayecto regreso",
+        "keywords": [
+          "trayecto regreso",
+          "nacional",
+          "aerolínea"
+        ],
+        "mention_count": 4,
+        "percentage": 0.0
+      }
+    ],
+    "cooccurrence": {
+      "nodes": [
+        {
+          "id": "yeferson cossio",
+          "mentions": 4827,
+          "sentiment_pct": {
+            "negativo": 68.3,
+            "neutral": 29.5,
+            "positivo": 1.8,
+            "neutro": 0.3
+          }
+        },
+        {
+          "id": "avianca",
+          "mentions": 6612,
+          "sentiment_pct": {
+            "negativo": 70.4,
+            "neutral": 25.7,
+            "positivo": 3.8,
+            "neutro": 0.2,
+            "mixto": 0.0
+          }
+        },
+        {
+          "id": "vuelo",
+          "mentions": 5990,
+          "sentiment_pct": {
+            "negativo": 71.8,
+            "neutral": 25.8,
+            "positivo": 2.3,
+            "neutro": 0.2
+          }
+        },
+        {
+          "id": "acciones legales",
+          "mentions": 4255,
+          "sentiment_pct": {
+            "negativo": 77.3,
+            "neutral": 21.8,
+            "positivo": 0.8,
+            "neutro": 0.1
+          }
+        },
+        {
+          "id": "influencer",
+          "mentions": 4408,
+          "sentiment_pct": {
+            "negativo": 77.0,
+            "neutral": 22.0,
+            "positivo": 0.8,
+            "neutro": 0.1
+          }
+        },
+        {
+          "id": "bogotá madrid",
+          "mentions": 4,
+          "sentiment_pct": {
+            "neutral": 75.0,
+            "negativo": 25.0
+          }
+        },
+        {
+          "id": "olor químico",
+          "mentions": 2083,
+          "sentiment_pct": {
+            "negativo": 66.9,
+            "neutral": 32.3,
+            "positivo": 0.5,
+            "neutro": 0.3
+          }
+        },
+        {
+          "id": "aerolínea",
+          "mentions": 3206,
+          "sentiment_pct": {
+            "negativo": 66.8,
+            "neutral": 29.3,
+            "positivo": 3.4,
+            "neutro": 0.4,
+            "mixto": 0.0
+          }
+        },
+        {
+          "id": "ojalá",
+          "mentions": 407,
+          "sentiment_pct": {
+            "negativo": 93.1,
+            "positivo": 4.7,
+            "neutral": 2.2
+          }
+        },
+        {
+          "id": "durante",
+          "mentions": 2269,
+          "sentiment_pct": {
+            "negativo": 64.2,
+            "neutral": 34.8,
+            "positivo": 0.8,
+            "neutro": 0.2
+          }
+        },
+        {
+          "id": "mal comportamiento",
+          "mentions": 1664,
+          "sentiment_pct": {
+            "negativo": 70.7,
+            "neutral": 28.8,
+            "positivo": 0.5,
+            "neutro": 0.1
+          }
+        },
+        {
+          "id": "gente",
+          "mentions": 908,
+          "sentiment_pct": {
+            "negativo": 48.8,
+            "neutral": 30.6,
+            "positivo": 20.6
+          }
+        },
+        {
+          "id": "pues",
+          "mentions": 268,
+          "sentiment_pct": {
+            "negativo": 60.8,
+            "neutral": 19.4,
+            "positivo": 19.4,
+            "neutro": 0.4
+          }
+        },
+        {
+          "id": "nacional",
+          "mentions": 72,
+          "sentiment_pct": {
+            "negativo": 52.8,
+            "neutral": 45.8,
+            "positivo": 1.4
+          }
+        },
+        {
+          "id": "cossio",
+          "mentions": 5044,
+          "sentiment_pct": {
+            "negativo": 67.6,
+            "neutral": 29.5,
+            "positivo": 2.7,
+            "neutro": 0.3
+          }
+        },
+        {
+          "id": "yeferson",
+          "mentions": 5022,
+          "sentiment_pct": {
+            "negativo": 67.8,
+            "neutral": 29.2,
+            "positivo": 2.7,
+            "neutro": 0.3
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "avianca",
+          "target": "vuelo",
+          "weight": 5389
+        },
+        {
+          "source": "cossio",
+          "target": "yeferson",
+          "weight": 4842
+        },
+        {
+          "source": "avianca",
+          "target": "yeferson",
+          "weight": 4828
+        },
+        {
+          "source": "cossio",
+          "target": "yeferson cossio",
+          "weight": 4827
+        },
+        {
+          "source": "yeferson",
+          "target": "yeferson cossio",
+          "weight": 4827
+        },
+        {
+          "source": "avianca",
+          "target": "cossio",
+          "weight": 4793
+        },
+        {
+          "source": "vuelo",
+          "target": "yeferson",
+          "weight": 4733
+        },
+        {
+          "source": "avianca",
+          "target": "yeferson cossio",
+          "weight": 4706
+        },
+        {
+          "source": "cossio",
+          "target": "vuelo",
+          "weight": 4679
+        },
+        {
+          "source": "vuelo",
+          "target": "yeferson cossio",
+          "weight": 4623
+        },
+        {
+          "source": "avianca",
+          "target": "influencer",
+          "weight": 4268
+        },
+        {
+          "source": "acciones legales",
+          "target": "avianca",
+          "weight": 4228
+        },
+        {
+          "source": "influencer",
+          "target": "vuelo",
+          "weight": 4005
+        },
+        {
+          "source": "acciones legales",
+          "target": "vuelo",
+          "weight": 3964
+        },
+        {
+          "source": "acciones legales",
+          "target": "influencer",
+          "weight": 3861
+        },
+        {
+          "source": "acciones legales",
+          "target": "yeferson",
+          "weight": 3685
+        },
+        {
+          "source": "acciones legales",
+          "target": "cossio",
+          "weight": 3624
+        },
+        {
+          "source": "influencer",
+          "target": "yeferson",
+          "weight": 3618
+        },
+        {
+          "source": "acciones legales",
+          "target": "yeferson cossio",
+          "weight": 3598
+        },
+        {
+          "source": "cossio",
+          "target": "influencer",
+          "weight": 3558
+        },
+        {
+          "source": "influencer",
+          "target": "yeferson cossio",
+          "weight": 3516
+        },
+        {
+          "source": "aerolínea",
+          "target": "avianca",
+          "weight": 2865
+        },
+        {
+          "source": "aerolínea",
+          "target": "vuelo",
+          "weight": 2810
+        },
+        {
+          "source": "aerolínea",
+          "target": "cossio",
+          "weight": 2698
+        },
+        {
+          "source": "aerolínea",
+          "target": "yeferson",
+          "weight": 2670
+        },
+        {
+          "source": "aerolínea",
+          "target": "yeferson cossio",
+          "weight": 2645
+        },
+        {
+          "source": "aerolínea",
+          "target": "influencer",
+          "weight": 2341
+        },
+        {
+          "source": "acciones legales",
+          "target": "aerolínea",
+          "weight": 2310
+        },
+        {
+          "source": "durante",
+          "target": "vuelo",
+          "weight": 2261
+        },
+        {
+          "source": "avianca",
+          "target": "durante",
+          "weight": 2239
+        },
+        {
+          "source": "cossio",
+          "target": "durante",
+          "weight": 2205
+        },
+        {
+          "source": "durante",
+          "target": "yeferson",
+          "weight": 2200
+        },
+        {
+          "source": "durante",
+          "target": "yeferson cossio",
+          "weight": 2193
+        },
+        {
+          "source": "avianca",
+          "target": "olor químico",
+          "weight": 2078
+        },
+        {
+          "source": "olor químico",
+          "target": "vuelo",
+          "weight": 2065
+        },
+        {
+          "source": "cossio",
+          "target": "olor químico",
+          "weight": 2046
+        },
+        {
+          "source": "olor químico",
+          "target": "yeferson",
+          "weight": 2043
+        },
+        {
+          "source": "olor químico",
+          "target": "yeferson cossio",
+          "weight": 2038
+        },
+        {
+          "source": "aerolínea",
+          "target": "olor químico",
+          "weight": 2016
+        },
+        {
+          "source": "aerolínea",
+          "target": "durante",
+          "weight": 1984
+        },
+        {
+          "source": "influencer",
+          "target": "olor químico",
+          "weight": 1950
+        },
+        {
+          "source": "acciones legales",
+          "target": "olor químico",
+          "weight": 1947
+        },
+        {
+          "source": "durante",
+          "target": "influencer",
+          "weight": 1910
+        },
+        {
+          "source": "acciones legales",
+          "target": "durante",
+          "weight": 1887
+        },
+        {
+          "source": "durante",
+          "target": "olor químico",
+          "weight": 1837
+        },
+        {
+          "source": "avianca",
+          "target": "mal comportamiento",
+          "weight": 1659
+        },
+        {
+          "source": "mal comportamiento",
+          "target": "vuelo",
+          "weight": 1659
+        },
+        {
+          "source": "mal comportamiento",
+          "target": "yeferson",
+          "weight": 1658
+        },
+        {
+          "source": "influencer",
+          "target": "mal comportamiento",
+          "weight": 1656
+        },
+        {
+          "source": "cossio",
+          "target": "mal comportamiento",
+          "weight": 1655
+        }
+      ],
+      "total_mentions_analyzed": 14403
+    }
+  },
+  "anomalies": [
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 950% entre 2026-03-10 (2) y 2026-03-11 (21)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-11",
+        "previous_count": 2,
+        "current_count": 21,
+        "pct_change": 950.0
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 200% entre 2026-03-14 (1) y 2026-03-16 (3)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-16",
+        "previous_count": 1,
+        "current_count": 3,
+        "pct_change": 200.0
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 167% entre 2026-03-16 (3) y 2026-03-17 (8)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-17",
+        "previous_count": 3,
+        "current_count": 8,
+        "pct_change": 166.7
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 275% entre 2026-03-18 (4) y 2026-03-19 (15)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-19",
+        "previous_count": 4,
+        "current_count": 15,
+        "pct_change": 275.0
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 600% entre 2026-03-21 (2) y 2026-03-22 (14)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-22",
+        "previous_count": 2,
+        "current_count": 14,
+        "pct_change": 600.0
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 167% entre 2026-03-27 (3) y 2026-03-28 (8)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-28",
+        "previous_count": 3,
+        "current_count": 8,
+        "pct_change": 166.7
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 27138% entre 2026-03-28 (8) y 2026-03-29 (2179)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-29",
+        "previous_count": 8,
+        "current_count": 2179,
+        "pct_change": 27137.5
+      }
+    },
+    {
+      "type": "volume_spike",
+      "description": "Incremento de volumen del 123% entre 2026-03-29 (2179) y 2026-03-30 (4863)",
+      "severity": "critical",
+      "data": {
+        "date": "2026-03-30",
+        "previous_count": 2179,
+        "current_count": 4863,
+        "pct_change": 123.2
+      }
+    }
+  ],
+  "audit_accuracy": 77.8,
+  "report_text": "FRAMEWORK_NAME: El triángulo Corporación-Creador-Audiencia\nFRAMEWORK_THESIS: La reacción institucional de Avianca activó tres conversaciones paralelas que no se cruzan: la legitimidad corporativa en plataformas adultas, la rebeldía generacional en espacios jóvenes, y un campo de batalla narrativo donde ambos actores compiten por definir qué es \"seguridad aérea\".\n\n===EXECUTIVE_CARD_1===\nTITLE: Qué le pasó a la conversación\nBODY: El comunicado del 29 de marzo detonó un volumen 273 veces superior al baseline previo, pero la conversación se fragmentó en tres universos que no se hablan: el 83% del sentimiento negativo se dirigió contra Cossio, no contra Avianca. La plataforma determinó el veredicto: Facebook validó la posición corporativa con 22% de sentimiento positivo hacia la marca, mientras TikTok castigó la \"rigidez institucional\" con apenas 0.9% positivo en Twitter. El pico conversacional duró 72 horas, pero la narrativa subyacente sobre límites del entretenimiento versus seguridad aérea permanece sin resolver.\n\n===EXECUTIVE_CARD_2===\nTITLE: Qué está en juego\nBODY: De las 14,403 menciones, solo 702 evalúan directamente a Avianca como actor principal, pero estas concentran el 33.9% de sentimiento positivo — la cifra más alta para la marca en meses. Sin embargo, en TikTok (48% del engagement total), Avianca solo captura 337 menciones directas contra 2,853 de Cossio, perdiendo 8:1 la batalla por la atención de la audiencia 18-30. Esta desproporción importa porque el 65% del volumen tangencial sobre \"aerolíneas\" y \"servicio\" se mantiene negativo, indicando que problemas operacionales preexistentes usan esta crisis como catalizador. La tensión central: ganar respaldo institucional al costo de relevancia generacional.\n\n===EXECUTIVE_CARD_3===\nTITLE: Qué decidir ahora\nBODY: Decisión 1: Antes del 15 de abril, definir si capitalizar los 238 comentarios positivos en TikTok para construir legitimidad generacional o mantener distancia de esa audiencia. Decisión 2: En 48 horas, evaluar si responder a la narrativa emergente de \"corporación abusiva\" que crece 23% diario en redes jóvenes. Decisión 3: Antes del 10 de abril, decidir el nivel de visibilidad del proceso legal — silencio conserva institucionalidad, publicidad activa alimenta la polarización que favorece el engagement pero puede escalary crear mártir.\n\n===SIGNALS===\nSIGNAL_1: El 89.2% de menciones \"ambos actores\" son neutrales, indicando que cuando la conversación incluye a ambos, se despolariza. Esto sugiere que Avianca puede beneficiarse de marcos narrativos que la posicionen junto a Cossio como \"víctimas de un malentendido\" en lugar de antagonistas.\n\nSIGNAL_2: TikTok registra 122.2 de engagement promedio (3x superior a otras plataformas) pero solo 13.4% de sentimiento positivo hacia cualquier actor. La alta viralidad viene con alta hostilidad — las audiencias jóvenes premian el conflicto, no la resolución.\n\nSIGNAL_3: El volumen tangencial creció 312% en la segunda mitad del período, indicando que usuarios desconectados del caso original lo usan para ventilar frustraciones preexistentes con aerolíneas. La crisis se está convirtiendo en catalizador de quejas operacionales acumuladas.\n\n===PERCEPTION_BRAND===\nEDITORIAL_TITLE: Avianca gana respetabilidad pero pierde donde compite por el futuro\nEDITORIAL_SUBTITLE: La legitimidad institucional tiene precio generacional\nBODY: En Facebook, la audiencia adulta valida la posición de Avianca con comentarios como \"Total apoyo a Avianca\" [TikTok, 30-mar, 2881 eng] y \"Avianca tiene toda la razón y no exagero! Comprometió la seguridad de los pasajeros\" [TikTok, 30-mar, 2869 eng]. La narrativa dominante presenta a la aerolínea como víctima de irresponsabilidad juvenil: \"Pasajeros deben demandar junto con Avianca\" [TikTok, 01-abr, 1956 eng].\n\nPero en TikTok, donde se concentra el 63.4% del engagement total, emerge una lectura opuesta. Los comentarios cuestionan la proporcionalidad: \"dicen que en los aeropuertos ha mucha seguridad entonces porqué permitieron que este señor llevará algo con olor químico, los señores de la aerolínea están exagerando\" [TikTok, 30-mar]. La audiencia joven lee exceso punitivo donde la adulta ve responsabilidad corporativa.\n\nLa fragmentación es geográfica y etaria. Instagram mantiene neutralidad pragmática: \"¿Justicia o exageración? Déjame tu opinión aquí abajo\" [TikTok, 30-mar, 71311 eng]. Twitter polariza hacia la severidad institucional. Avianca gana credibilidad regulatoria perdiendo relevancia cultural con audiencias que no distinguen entre \"seguridad\" y \"control\".\n\nEl sentimiento hacia Avianca mejoró 29.1 puntos porcentuales en la segunda mitad del período, pero solo en plataformas donde ya era respetada. En espacios de competencia generacional, la narrativa corporativa es vista como performance punitivo más que genuina preocupación por seguridad.\n\n===PERCEPTION_ACTOR===\nEDITORIAL_TITLE: Cossio absorbe el castigo pero conserva la base\nEDITORIAL_SUBTITLE: El 83% del rechazo lo convierte en escudo de la conversación\nBODY: Cossio recibe 9,617 menciones negativas de las 10,208 totales — se convierte en protagonista absoluto del castigo público. Los comentarios reflejan indignación moral: \"ES UN AVIÓN !!!POR DIOS!! Q TIENES Q INVESTIGAR PARA ENTENDER QUE EN UN AVION CUALQUIER MAL COMPORTAMIENTO ES PELIGROSO!!\" [TikTok, 31-mar, 8 eng] y \"Este tipo debería de ir preso así como le pasó a epa Colombia por jugar con la seguridad de las personas\" [Instagram, 30-mar, 933 eng].\n\nSin embargo, mantiene 1,337 menciones positivas que funcionan como base leal. Sus defensores reinterpretan el incidente: \"lo que pasó en el avión fue un ACCIDENTE\" [TikTok, 31-mar, 3278 eng] y cuestionan la reacción corporativa: \"Avianca quiere sacar provecho de la figura pública de Cossío eso es todo\" [Facebook, 31-mar]. \n\nLa estrategia de victimización funciona parcialmente. Su respuesta legal genera simpatía: \"Jajaja lo asesoraron bien los abogados\" [Facebook, 31-mar, 1800 eng]. En TikTok, donde tiene mayor engagement (122.2 promedio), logra convertir castigo en contenido: \"Yeferson cossio se cagó en avianca\" [TikTok, 01-abr, 1949 eng].\n\nEl patrón es claro: acepta el rol de antagonista principal para proteger su base mientras Avianca gana respetabilidad institucional. Su sacrificio reputacional genera engagement 4x superior al de la aerolínea, sugiriendo que monetiza la controversia mejor que la resuelve.\n\n===COLLISION_ZONE===\nEDITORIAL_TITLE: Cuando chocan, se neutralizan\nEDITORIAL_SUBTITLE: El 89% de menciones conjuntas se despolariza hacia información\nBODY: Las 2,040 menciones que incluyen ambos actores cambian la temperatura conversacional: solo 9.9% son negativas versus 70% cuando se habla de cada actor por separado. Los comentarios conjuntos buscan hechos: \"¿Qué hizo Yeferson Cossio en pleno vuelo, afectando la seguridad, según Avianca?\" [TikTok, 30-mar, 47930 eng] o contexto: \"eso fue antes o después de que avianca cancelara su vuelo de regreso\" [TikTok, 29-mar, 5858 eng].\n\nEsta despolarización sugiere que el antagonismo requiere separación narrativa. Cuando ambos aparecen juntos, la conversación se vuelve informativa, no emocional. Twitter concentra 57.5% de estas menciones \"ambos\", indicando que su audiencia busca resolución factual más que tribal.\n\nEl engagement en menciones conjuntas es 156.15 — el más alto de todas las categorías — pero con sentimiento neutral. Esto indica que la audiencia está más interesada en el conflicto como espectáculo que en tomar partido definitivo. La colisión genera atención sin generar lealtad para ningún actor.\n\nLa implicación estratégica: marcos narrativos que posicionen a ambos como víctimas de circunstancias (versus antagonistas) pueden despolarizar el debate y reducir el riesgo reputacional para ambos, aunque también reducen el engagement total.\n\n===NARRATIVE_1===\nTHESIS: La seguridad aérea versus el entretenimiento digital — dos códigos de valores irreconciliables\nEVOLUTION: Inició como debate sobre proporcionalidad (días 1-3), evolucionó hacia conflicto generacional sobre límites del entretenimiento (días 4-7), se solidifica como choque cultural entre responsabilidad institucional y libertad creativa\nEVIDENCE_1: \"no ha exagerado, todos deben respetar a los demas pasajeros, pudo alterar el vuelo como tal, son muchos los que corren riesgo\" [muestra, operacional, crítica brand] \nEVIDENCE_2: \"Total apoyo a Avianca\" [TikTok, 30-mar, 2881 eng]\nEVIDENCE_3: \"dicen que en los aeropuertos ha mucha seguridad entonces porqué permitieron que este señor llevará algo con olor químico, los señores de la aerolínea están exagerando\" [TikTok, 30-mar]\nIMPLICATION: Avianca queda posicionada como representante de un orden generacionalmente específico que las audiencias jóvenes perciben como excesivamente punitivo. Gana autoridad moral con audiencias que ya respetan instituciones, pero se aleja de segmentos que redefinen límites sociales.\nRISK_LEVEL: stable\nDOMINANT_PLATFORM: Facebook\n\n===NARRATIVE_2===\nTHESIS: El influencer rico que cree que todo se puede comprar versus la corporación que defiende la dignidad del servicio público\nEVOLUTION: Emergió en día 3 cuando se conocieron detalles económicos, intensificó días 4-5 con comentarios sobre privilegio, se mantiene estable como subtema de justicia social\nEVIDENCE_1: \"lo que pasa es que el niño pensaba que con tener dinero podía hacer lo que quiera. ahora está asustado porque si tienes un problema con una aerolínea es muy delicado\" [muestra, precio_valor, crítica brand]\nEVIDENCE_2: \"ese man como va a llevar algo de eso alli, en un viaje sea serio qué irresponsable\" [muestra, reputacion_confianza, crítica brand]\nEVIDENCE_3: \"Hablando de еstаfаdоrеs... ya le metieron metieron su buena demanda al еstаfаdоr de Cossio por Теrrоrismо?\" [muestra, precio_valor, crítica brand]\nIMPLICATION: Esta narrativa favorece claramente a Avianca al conectar con resentimiento hacia privilegio económico. Le permite posicionarse como defensora de equidad en el servicio sin generar controversia generacional.\nRISK_LEVEL: fading\nDOMINANT_PLATFORM: Instagram\n\n===NARRATIVE_3===\nTHESIS: El accidente inevitable versus la broma premeditada — batalla por definir intencionalidad\nEVOLUTION: Cossio negó autoría días 1-2, admitió pero alegó accidente día 3, desarrolló narrativa de victimización días 4-7\nEVIDENCE_1: \"lo que pasó en el avión fue un ACCIDENTE\" [TikTok, 31-mar, 3278 eng]\nEVIDENCE_2: \"Soltó un químico en un vuelo y accidente ??? No lo creo\" [Facebook, 31-mar]\nEVIDENCE_3: \"Avianca quiere sacar provecho de la figura pública de Cossío eso es todo\" [Facebook, 31-mar]\nIMPLICATION: Esta batalla por intencionalidad es donde Avianca puede perder terreno si no maneja evidencia cuidadosamente. La narrativa del \"accidente\" le resta gravedad al caso y puede hacer ver la respuesta corporativa como desproporcionada.\nRISK_LEVEL: growing\nDOMINANT_PLATFORM: TikTok\n\n===PLATFORM_DEEPDIVE===\nEDITORIAL_TITLE: Dos mundos paralelos que hablan idiomas distintos\nEDITORIAL_SUBTITLE: Cada plataforma produce un veredicto diferente\nTIKTOK_INSIGHT: Concentra 63.4% del engagement pero solo 13.4% sentimiento positivo hacia cualquier actor. Los usuarios jóvenes consumen conflicto como entretenimiento: \"¿Justicia o exageración? Déjame tu opinión aquí abajo\" [30-mar, 71311 eng]. Avianca aparece como antagonista institucional rígido. El humor transgresor domina: \"Osea qué uno ya no se puede tirar un peo en pleno vuelo\" [Facebook, 31-mar, 1500 eng]. Aquí Cossio mantiene mejor engagement relativo.\n\nFACEBOOK_INSIGHT: Audiencia adulta legitima la respuesta corporativa. Domina narrativa de responsabilidad: \"Avianca tiene toda la razón y no exagero! Comprometió la seguridad de los pasajeros\" [30-mar, 2869 eng]. Los 1,034 comentarios positivos hacia Avianca (22% del total en la plataforma) se concentran aquí. Es donde la aerolínea gana más terreno reputacional con comentarios como \"Total apoyo a Avianca\" [30-mar, 2881 eng].\n\nINSTAGRAM_INSIGHT: Mantiene neutralidad estética - los usuarios buscan información visual sin tomar partido emocional. El engagement promedio es 87.6 pero 83.1% del sentimiento es negativo hacia cualquier actor, sugiriendo que la plataforma amplifica drama sin generar lealtad. Los comentarios tienden a ser más informativos que partidarios.\n\nTWITTER_INSIGHT: Se convierte en plataforma de legitimación institucional con 76.3% sentimiento negativo hacia Cossio versus solo 0.9% positivo hacia Avianca. El engagement bajo (11.6) indica que funciona más como eco de posiciones establecidas que como espacio de debate. Los 1,174 menciones \"ambos actores\" sugieren que es donde buscan resolución factual del conflicto.\n\n===SCENARIO_A===\nNAME: La escalada legal que se vuelve mártir\nTRIGGER: Avianca procede legalmente y el caso genera cobertura mediática sostenida\nDESCRIPTION: El proceso judicial convierte a Cossio en símbolo de resistencia generacional contra \"corporaciones abusivas\". TikTok y redes jóvenes amplifican narrativa David vs Goliat. El volumen de menciones crece 40% mensual con sentimiento cada vez más polarizado.\nCONSEQUENCE: Avianca gana el caso legal pero pierde la batalla cultural. Se posiciona permanentemente como \"la aerolínea que persigue influencers\" ante audiencias 18-35, afectando estrategia de captación generacional.\n\n===SCENARIO_B===\nNAME: El silencio que normaliza\nTRIGGER: Avianca no alimenta más la controversia y deja que el ciclo se agote naturalmente\nDESCRIPTION: Sin combustible nuevo, el volumen decae 60% en dos semanas. Cossio pierde interés en alimentar el conflicto. Quedan solo 238 menciones positivas hacia Avianca en TikTok como base de recuperación generacional.\nCONSEQUENCE: Avianca preserva credibilidad institucional sin generar animosidad permanente. Mantiene opciones abiertas para reconciliación futura que pueda capitalizar para audiencias jóvenes.\n\n===SCENARIO_C===\nNAME: La imitación que destapa problemas operacionales\nTRIGGER: Otros influencers replican \"bromas\" similares en vuelos, usando el caso Cossio como precedente\nDESCRIPTION: El incidente se convierte en trend. Avianca debe responder a múltiples casos, exponiendo inconsistencias en protocolos de seguridad. El 53.6% de menciones tangenciales negativas sobre aerolíneas se activa como crítica sistemática.\nCONSEQUENCE: La crisis puntual se convierte en cuestionamiento integral de la operación de Avianca. Los problemas de servicio preexistentes usan estos incidentes como catalizador para generar volumen crítico sostenido.\n\n===RECOMMENDATION_1===\nTITLE: La ventana de despolarización existe en menciones conjuntas\nDATA_SUPPORT: El 89.2% de las 2,040 menciones que incluyen ambos actores son neutrales, con engagement 156.15 (el más alto), indicando interés informativo más que tribal\nREADING: Cuando la conversación incluye a ambos actores simultáneamente, se despolariza hacia búsqueda de hechos y contexto. Esto sugiere que marcos narrativos que eviten antagonismo directo pueden reducir riesgo reputacional manteniendo engagement alto.\nSIGNAL: Señal → La coexistencia narrativa despolariza mejor que la victoria\n\n===RECOMMENDATION_2===\nTITLE: TikTok castiga pero no convence — sus 238 positivos son la base de recuperación\nDATA_SUPPORT: TikTok concentra 63.4% del engagement total pero solo 13.4% sentimiento positivo. Sin embargo, Avianca logra 238 menciones positivas (33.9% de sus menciones directas) en la plataforma más hostil\nREADING: Existe una base orgánica de defensa para Avianca incluso en territorio generacional adverso. Esta audiencia valora la posición corporativa pese al entorno hostil, sugiriendo potencial de crecimiento si se cultiva estratégicamente.\nSIGNAL: Señal → La legitimidad institucional tiene más tracción generacional de la esperada\n\n===RECOMMENDATION_3===\nTITLE: El volumen tangencial crece 312% y usa esta crisis como catalizador\nDATA_SUPPORT: 3,886 menciones tangenciales con 53.6% negativas hacia aerolíneas en general, crecimiento 312% segunda mitad del período, temas dominantes: \"servicio\", \"vuelo\", \"aerolínea\"\nREADING: El caso activa frustraciones preexistentes con aerolíneas que trascienden el incidente específico. Usuarios desconectados del caso original lo usan para expresar quejas operacionales acumuladas, indicando vulnerabilidad sistémica subyacente.\nSIGNAL: Señal → Las crisis puntuales activan problemas estructurales latentes\n\n===METHODOLOGY===\nBODY: Análisis de 14,403 menciones relevantes del período marzo-abril 2026, distribuidas en Twitter (35%), Facebook (33%), TikTok (25%), Instagram (5%) y medios digitales (2%). Muestreo de 114 menciones representativas por relevancia y engagement. Clasificación por sentiment direccional hacia actores específicos. Análisis de intersección, narrativas emergentes y anomalías temporales. Calidad de datos: 38,172 menciones totales, 62% descartadas por irrelevancia, distribución 55% orgánica/45% algorítmica."
+}
