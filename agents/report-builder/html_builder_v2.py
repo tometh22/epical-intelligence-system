@@ -16,6 +16,8 @@ Design rules enforced (from spec):
 
 import html as _html
 import json as _json
+import math
+import re as _re_module
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
@@ -40,7 +42,71 @@ _PLATFORM_COLORS: Dict[str, str] = {
     "TikTok": "var(--magenta)",
     "Instagram": "#E4405F",
     "YouTube": "#FF0000",
+    "Web / Otros": "var(--dim)",
 }
+
+# ── Fix 5/6: Platform name normalization ────────────────────────────
+
+_PLATFORM_NAME_MAP: Dict[str, str] = {
+    "tiktok.com": "TikTok",
+    "tiktok": "TikTok",
+    "facebook.com": "Facebook",
+    "facebook": "Facebook",
+    "twitter.com": "Twitter",
+    "twitter": "Twitter",
+    "x.com": "Twitter",
+    "x": "Twitter",
+    "X": "Twitter",
+    "instagram.com": "Instagram",
+    "instagram": "Instagram",
+    "youtube.com": "YouTube",
+    "youtube": "YouTube",
+    "reddit.com": "Reddit",
+    "reddit": "Reddit",
+}
+
+
+def _normalize_platform_name(raw: str) -> str:
+    """Normalize a platform name to its canonical display form."""
+    lower = raw.strip().lower()
+    return _PLATFORM_NAME_MAP.get(lower, _PLATFORM_NAME_MAP.get(raw, raw))
+
+
+def _normalize_platforms(platforms: List[Dict[str, Any]], top_n: int = 5) -> List[Dict[str, Any]]:
+    """Fix 5: Normalize platform names, group outside top_n into 'Web / Otros'."""
+    # Merge by normalized name
+    merged: Dict[str, Dict[str, Any]] = {}
+    for p in platforms:
+        name = _normalize_platform_name(p.get("platform", ""))
+        if name in merged:
+            merged[name]["mentions"] = merged[name].get("mentions", 0) + p.get("mentions", 0)
+            merged[name]["engagement_share"] = merged[name].get("engagement_share", 0) + p.get("engagement_share", 0)
+            merged[name]["total_engagement"] = merged[name].get("total_engagement", 0) + p.get("total_engagement", 0)
+        else:
+            merged[name] = {
+                "platform": name,
+                "mentions": p.get("mentions", 0),
+                "engagement_share": p.get("engagement_share", 0),
+                "total_engagement": p.get("total_engagement", 0),
+                "sentiment_breakdown": p.get("sentiment_breakdown", {}),
+            }
+
+    sorted_platforms = sorted(merged.values(), key=lambda x: x.get("mentions", 0), reverse=True)
+
+    if len(sorted_platforms) <= top_n:
+        return sorted_platforms
+
+    top = sorted_platforms[:top_n]
+    others = sorted_platforms[top_n:]
+    otros_entry = {
+        "platform": "Web / Otros",
+        "mentions": sum(o.get("mentions", 0) for o in others),
+        "engagement_share": sum(o.get("engagement_share", 0) for o in others),
+        "total_engagement": sum(o.get("total_engagement", 0) for o in others),
+    }
+    top.append(otros_entry)
+    return top
+
 
 # ── Number formatting (spec rule 7) ──────────────────────────────────
 
@@ -60,6 +126,13 @@ def _fmt(n: float) -> str:
     if abs_n >= 1_000:
         return f"{n / 1_000:.1f}K"
     return f"{int(n):,}".replace(",", ".")
+
+
+def _fmt_exact(n: int) -> str:
+    """Fix 7: Format with comma separator for exact display: 14,403."""
+    if n is None:
+        return "—"
+    return f"{int(n):,}"
 
 
 def _pct(value: float) -> str:
@@ -176,6 +249,7 @@ def _slide_cover(
     if client_logo_url:
         logo_img = f'<img src="{_esc(client_logo_url)}" alt="{_esc(client_name)}" style="height:24px;opacity:0.7" onerror="this.style.display=\'none\'">'
 
+    # Fix 7: Use exact numbers with comma separator for mentions on cover
     return f"""\
 <!-- ========== COVER ========== -->
 <section class="sl cover">
@@ -184,10 +258,10 @@ def _slide_cover(
 <img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:16px;opacity:0.6" onerror="this.style.display='none'">
 <div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px">CONFIDENCIAL</div>
 </div>
-<div class="tag">Análisis de inteligencia reputacional · preparado para {_esc(client_name)}</div>
+<div class="tag">Analisis de inteligencia reputacional · preparado para {_esc(client_name)}</div>
 <h1 class="h1">{title}</h1>
 <p class="cover-sub">{_esc(subtitle)}</p>
-<div class="cover-meta">PERÍODO: {_esc(period.upper())} &nbsp;·&nbsp; {_fmt(total_raw)} MENCIONES PROCESADAS &nbsp;·&nbsp; {_fmt(total_relevant)} RELEVANTES &nbsp;·&nbsp; {platforms_count} PLATAFORMAS</div>
+<div class="cover-meta">PERIODO: {_esc(period.upper())} &nbsp;·&nbsp; {_fmt_exact(total_raw)} MENCIONES PROCESADAS &nbsp;·&nbsp; {_fmt_exact(total_relevant)} RELEVANTES &nbsp;·&nbsp; {platforms_count} PLATAFORMAS</div>
 {f'<div style="margin-top:28px">{logo_img}</div>' if logo_img else ''}
 </div>
 </section>"""
@@ -211,7 +285,7 @@ def _slide_exec_summary(
 
     sowhat_html = ""
     if implication_body:
-        label = f"Implicancia para {_esc(client_role)}" if client_role else "Implicancia estratégica"
+        label = f"Implicancia para {_esc(client_role)}" if client_role else "Implicancia estrategica"
         sowhat_html = f"""\
 <div class="sowhat fu s3" style="margin-top:24px"><div class="sowhat-label">{label}</div>
 <p>{implication_body}</p></div>"""
@@ -221,7 +295,7 @@ def _slide_exec_summary(
 <section class="sl"><div class="si">
 <div class="tag fu">Resumen ejecutivo</div>
 <div class="h1 fu">Tres hallazgos que cambian la lectura</div>
-<p class="sub fu s2">Lo que distingue este análisis de un reporte de monitoreo estándar.</p>
+<p class="sub fu s2">Lo que distingue este analisis de un reporte de monitoreo estandar.</p>
 <div class="g3 fu s2">
 {cards_html}</div>
 {sowhat_html}
@@ -251,13 +325,13 @@ def _slide_methodology(
     return f"""\
 <!-- ========== METHODOLOGY ========== -->
 <section class="sl"><div class="si">
-<div class="tag fu">Nota metodológica</div>
-<div class="h1 fu">Cómo se produjo este análisis</div>
-<p class="sub fu s2">Transparencia sobre qué datos usamos, qué descartamos, y por qué.</p>
+<div class="tag fu">Nota metodologica</div>
+<div class="h1 fu">Como se produjo este analisis</div>
+<p class="sub fu s2">Transparencia sobre que datos usamos, que descartamos, y por que.</p>
 <div class="g2 g2w fu s3">
 <div>
 <table>
-<thead><tr><th>Etapa</th><th>Descripción</th><th style="text-align:right">Resultado</th></tr></thead>
+<thead><tr><th>Etapa</th><th>Descripcion</th><th style="text-align:right">Resultado</th></tr></thead>
 <tbody>
 {rows_html}</tbody>
 </table>
@@ -275,14 +349,17 @@ def _slide_data_kpis(
     insight_text: str = "",
 ) -> str:
     """Slide 5: The Data — KPIs + sentiment charts."""
-    # Build KPI cards (rule 16: DM Sans bold for big numbers, not JetBrains Mono)
-    kpis = [{"value": _fmt(total_relevant), "label": "Relevantes", "color": ""}]
+    # Fix 7: Use exact number with comma separator for total mentions
+    kpis = [{"value": _fmt_exact(total_relevant), "label": "Relevantes", "color": ""}]
 
     for key, val in sentiment.items():
         if not isinstance(val, dict):
             continue
         count = val.get("count", 0)
         pct = val.get("percentage", 0)
+        # Fix 8: Skip sentiment entries where percentage < 1.0%
+        if pct < 1.0:
+            continue
         klower = key.lower()
         if klower in ("negative", "negativo"):
             kpis.append({"value": _fmt(count), "label": f"Negativas ({_pct(pct)})", "color": "var(--red)"})
@@ -291,11 +368,15 @@ def _slide_data_kpis(
         elif klower in ("positive", "positivo"):
             kpis.append({"value": _fmt(count), "label": f"Positivas ({_pct(pct)})", "color": "var(--green)"})
 
+    # Fix 9: Only add reach if non-zero
     if reach_data:
-        dedup = reach_data.get("total_reach_formatted", _fmt(reach_data.get("total_reach_deduplicated", 0)))
-        kpis.append({"value": dedup, "label": "Alcance (dedup.)", "color": "var(--cyan)"})
+        total_reach = reach_data.get("total_reach_deduplicated", 0)
+        if total_reach and total_reach > 0:
+            dedup = reach_data.get("total_reach_formatted", _fmt(total_reach))
+            kpis.append({"value": dedup, "label": "Alcance (dedup.)", "color": "var(--cyan)"})
 
-    if engagement_total:
+    # Fix 9: Only add engagement if non-zero
+    if engagement_total and engagement_total > 0:
         kpis.append({"value": _fmt(engagement_total), "label": "Interacciones", "color": ""})
 
     kpi_html = ""
@@ -311,11 +392,11 @@ def _slide_data_kpis(
 <!-- ========== THE DATA ========== -->
 <section class="sl"><div class="si">
 <div class="tag fu">Los datos</div>
-<div class="h1 fu">{_fmt(total_relevant)} menciones relevantes: la foto real</div>
+<div class="h1 fu">{_fmt_exact(total_relevant)} menciones relevantes: la foto real</div>
 <div class="kpi-row fu s2">
 {kpi_html}</div>
 <div class="g2 fu s3">
-<div class="chart-box"><div class="chart-label">Distribución de sentimiento</div><div style="position:relative;height:280px"><canvas id="sentChart"></canvas></div></div>
+<div class="chart-box"><div class="chart-label">Distribucion de sentimiento</div><div style="position:relative;height:280px"><canvas id="sentChart"></canvas></div></div>
 <div class="chart-box"><div class="chart-label">Volumen diario</div><div style="position:relative;height:280px"><canvas id="volMiniChart"></canvas></div></div>
 </div>
 {insight_html}
@@ -348,32 +429,36 @@ def _slide_actor(
 
     # Criticism breakdown table
     if criticism_table:
-        body_html += '<table><thead><tr><th>Tipo de crítica</th><th style="text-align:right">%</th></tr></thead><tbody>\n'
+        body_html += '<table><thead><tr><th>Tipo de critica</th><th style="text-align:right">%</th></tr></thead><tbody>\n'
         for row in criticism_table:
             body_html += f'<tr><td>{_esc(row["type"])}</td><td style="text-align:right">{_esc(row["pct"])}</td></tr>\n'
         body_html += '</tbody></table>\n'
 
-    # So-what reading (rule 8: "Señal →")
+    # So-what reading (rule 8)
     sowhat_html = ""
     if reading:
-        sowhat_html = f'<div class="sowhat"><div class="sowhat-label">Lectura estratégica</div><p>{reading}</p></div>'
+        sowhat_html = f'<div class="sowhat"><div class="sowhat-label">Lectura estrategica</div><p>{reading}</p></div>'
 
-    # Sentiment bar
+    # Fix 4: Sentiment bar with fallback for empty dict
     bar_parts = ""
-    for label, pct in sorted(sentiment_bar.items(), key=lambda x: x[1], reverse=True):
-        if pct < 1:
-            continue
-        klower = label.lower()
-        if klower in ("negative", "negativo"):
-            color = "var(--red)"
-            txt = f"{_pct(pct)} NEG"
-        elif klower in ("positive", "positivo"):
-            color = "var(--green)"
-            txt = f"{_pct(pct)} POS"
-        else:
-            color = "var(--dim)"
-            txt = f"{_pct(pct)}" if pct > 5 else ""
-        bar_parts += f'<div style="width:{pct}%;background:{color}">{txt if pct > 8 else ""}</div>'
+    if sentiment_bar:
+        for label, pct in sorted(sentiment_bar.items(), key=lambda x: x[1], reverse=True):
+            if pct < 1:
+                continue
+            klower = label.lower()
+            if klower in ("negative", "negativo"):
+                color = "var(--red)"
+                txt = f"{_pct(pct)} NEG"
+            elif klower in ("positive", "positivo"):
+                color = "var(--green)"
+                txt = f"{_pct(pct)} POS"
+            else:
+                color = "var(--dim)"
+                txt = f"{_pct(pct)}" if pct > 5 else ""
+            bar_parts += f'<div style="width:{pct}%;background:{color}">{txt if pct > 8 else ""}</div>'
+    else:
+        # Fallback: show a gray bar indicating no data
+        bar_parts = '<div style="width:100%;background:var(--dim)">Sin datos de sentimiento</div>'
 
     bar_html = f'<div class="card" style="margin-bottom:10px"><div class="chart-label">Sentimiento sobre {_esc(actor_name)}</div><div class="bar">{bar_parts}</div></div>'
 
@@ -393,11 +478,11 @@ def _slide_actor(
             eng_display = ""
             eng = post.get("engagement", "")
             if eng:
-                eng_display = f'<span>❤️ {_esc(str(eng))}</span>'
+                eng_display = f'<span>&#10084; {_esc(str(eng))}</span>'
 
             posts_html += f"""\
 <div class="spost">
-<div class="spost-head"><div class="spost-avatar" style="background:{avatar_bg}">💬</div><div><div class="spost-user">{_esc(post.get("author", ""))}</div><div class="spost-handle">{_esc(platform)} · {_esc(post.get("date", ""))}{f" · {_esc(str(eng))} interacciones" if eng else ""}</div></div></div>
+<div class="spost-head"><div class="spost-avatar" style="background:{avatar_bg}">&#128172;</div><div><div class="spost-user">{_esc(post.get("author", ""))}</div><div class="spost-handle">{_esc(platform)} · {_esc(post.get("date", ""))}{f" · {_esc(str(eng))} interacciones" if eng else ""}</div></div></div>
 <div class="spost-text">{_esc(post.get("text", "")[:300])}</div>
 <div class="spost-meta">{eng_display}</div>
 </div>"""
@@ -439,27 +524,27 @@ def _slide_catalyst(
     if sample_posts:
         for post in sample_posts[:2]:
             posts_html += f"""\
-<div class="spost"><div class="spost-head"><div class="spost-avatar" style="background:#4267B2">✈️</div><div><div class="spost-user">{_esc(post.get("author", "Comentario"))}</div><div class="spost-handle">{_esc(post.get("platform", ""))} · {_esc(post.get("date", ""))}</div></div></div>
+<div class="spost"><div class="spost-head"><div class="spost-avatar" style="background:#4267B2">&#9992;</div><div><div class="spost-user">{_esc(post.get("author", "Comentario"))}</div><div class="spost-handle">{_esc(post.get("platform", ""))} · {_esc(post.get("date", ""))}</div></div></div>
 <div class="spost-text">{_esc(post.get("text", "")[:300])}</div>
-<div class="spost-meta"><span>❤️ {_esc(str(post.get("engagement", "")))}</span></div></div>"""
+<div class="spost-meta"><span>&#10084; {_esc(str(post.get("engagement", "")))}</span></div></div>"""
 
     return f"""\
 <!-- ========== CATALYST ========== -->
 <section class="sl"><div class="si">
 <div class="tag fu">Hallazgo no obvio</div>
-<div class="h1 fu">El efecto catalizador: el incidente le dio micrófono a la insatisfacción acumulada</div>
+<div class="h1 fu">El efecto catalizador: el incidente le dio microfono a la insatisfaccion acumulada</div>
 <p class="sub fu s2">{_fmt(total)} menciones tangenciales negativas revelan un problema que trasciende el caso.</p>
 <div class="g2 fu s2">
 <div>
-<p class="p">Además de las menciones relevantes, detectamos <strong>{_fmt(neg)} menciones tangenciales negativas</strong> — quejas sin relación directa con el incidente pero que aparecieron durante el mismo período.</p>
-<p class="p">El incidente funcionó como <strong>catalizador de insatisfacción latente</strong>: personas que tenían una queja guardada vieron la marca era tendencia y aprovecharon para hacerla visible.</p>
-<p class="p">Composición: {_esc(themes_text)}.</p>
+<p class="p">Ademas de las menciones relevantes, detectamos <strong>{_fmt(neg)} menciones tangenciales negativas</strong> — quejas sin relacion directa con el incidente pero que aparecieron durante el mismo periodo.</p>
+<p class="p">El incidente funciono como <strong>catalizador de insatisfaccion latente</strong>: personas que tenian una queja guardada vieron la marca era tendencia y aprovecharon para hacerla visible.</p>
+<p class="p">Composicion: {_esc(themes_text)}.</p>
 </div>
 <div>
 {posts_html}
 </div>
 </div>
-<div class="risk-box fu s3"><p><strong>Patrón predecible:</strong> cada vez que la marca sea tendencia en redes, este banco de insatisfacción se reactiva. No es un problema comunicacional — es un indicador operativo que se puede llevar como evidencia cuantificada.</p></div>
+<div class="risk-box fu s3"><p><strong>Patron predecible:</strong> cada vez que la marca sea tendencia en redes, este banco de insatisfaccion se reactiva. No es un problema comunicacional — es un indicador operativo que se puede llevar como evidencia cuantificada.</p></div>
 </div></section>"""
 
 
@@ -516,10 +601,11 @@ def _slide_timeline(
     spike_colors = ["var(--dim)", "var(--red)", "var(--red)", "var(--magenta)",
                     "var(--cyan)", "var(--cyan)", "var(--dim)", "var(--dim)"]
 
+    # Fix 10: spikes are already filtered to top 4 by caller, show up to 4
     # Build spike annotation items (2 columns)
     left_spikes = ""
     right_spikes = ""
-    for i, spike in enumerate(spikes[:8]):
+    for i, spike in enumerate(spikes[:4]):
         letter = spike_labels[i] if i < len(spike_labels) else str(i + 1)
         color = spike_colors[i] if i < len(spike_colors) else "var(--dim)"
         desc = spike.get("description", f"{spike.get('date', '')} — {_fmt(spike.get('mentions', 0))} menciones")
@@ -543,8 +629,8 @@ def _slide_timeline(
     return f"""\
 <!-- ========== TIMELINE ========== -->
 <section class="sl"><div class="si">
-<div class="tag fu">Evolución temporal</div>
-<div class="h1 fu">La línea de tiempo de la conversación</div>
+<div class="tag fu">Evolucion temporal</div>
+<div class="h1 fu">La linea de tiempo de la conversacion</div>
 <div class="chart-box fu s2"><div style="position:relative;height:200px"><canvas id="volChart"></canvas></div></div>
 <div class="g2 fu s3" style="margin-top:20px">
 <div>{left_spikes}</div>
@@ -567,30 +653,54 @@ def _slide_comunicado_impact(
     peak = impact_data.get("peak_day", {})
     recovery = impact_data.get("recovery_days")
 
-    recovery_text = f"Recuperación a niveles pre-evento en {recovery} días." if recovery else "Sin recuperación completa en el período analizado."
+    # Fix 11: Format large deltas as multipliers and add descriptive insight
+    mentions_pct = delta.get("mentions_pct", 0)
+    engagement_pct = delta.get("engagement_pct", 0)
+
+    if abs(mentions_pct) > 1000:
+        mentions_display = f"{int(round(mentions_pct / 100))}x"
+    else:
+        mentions_display = f"+{_pct(mentions_pct)}"
+
+    if abs(engagement_pct) > 1000:
+        engagement_display = f"{int(round(engagement_pct / 100))}x"
+    else:
+        engagement_display = f"+{_pct(engagement_pct)}"
+
+    if recovery:
+        recovery_text = f"Recuperacion a niveles pre-evento en {recovery} dias."
+    else:
+        multiplier = int(round(mentions_pct / 100)) if mentions_pct > 100 else 0
+        if multiplier > 1:
+            recovery_text = (
+                f"El comunicado multiplico las menciones {multiplier}x. "
+                f"Sin recuperacion completa en el periodo analizado."
+            )
+        else:
+            recovery_text = "Sin recuperacion completa en el periodo analizado."
 
     return f"""\
 <!-- ========== COMUNICADO IMPACT ========== -->
 <section class="sl"><div class="si">
 <div class="tag fu">Impacto del comunicado</div>
-<div class="h1 fu">Antes y después del {_esc(impact_data["event_date"])}</div>
+<div class="h1 fu">Antes y despues del {_esc(impact_data["event_date"])}</div>
 <div class="g2 fu s2">
 <div class="card"><div class="h3">Pre-evento</div>
 <div class="kpi-row">
 <div class="kpi"><div class="kpi-v">{_fmt(pre.get("mentions", 0))}</div><div class="kpi-l">Menciones</div></div>
 <div class="kpi"><div class="kpi-v">{_fmt(pre.get("engagement", 0))}</div><div class="kpi-l">Engagement</div></div>
-<div class="kpi"><div class="kpi-v">{pre.get("avg_daily_mentions", 0):.0f}/día</div><div class="kpi-l">Promedio</div></div>
+<div class="kpi"><div class="kpi-v">{pre.get("avg_daily_mentions", 0):.0f}/dia</div><div class="kpi-l">Promedio</div></div>
 </div></div>
 <div class="card"><div class="h3">Post-evento</div>
 <div class="kpi-row">
 <div class="kpi"><div class="kpi-v" style="color:var(--red)">{_fmt(post.get("mentions", 0))}</div><div class="kpi-l">Menciones</div></div>
 <div class="kpi"><div class="kpi-v" style="color:var(--red)">{_fmt(post.get("engagement", 0))}</div><div class="kpi-l">Engagement</div></div>
-<div class="kpi"><div class="kpi-v" style="color:var(--red)">{post.get("avg_daily_mentions", 0):.0f}/día</div><div class="kpi-l">Promedio</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">{post.get("avg_daily_mentions", 0):.0f}/dia</div><div class="kpi-l">Promedio</div></div>
 </div></div>
 </div>
 <div class="kpi-row fu s3">
-<div class="kpi"><div class="kpi-v" style="color:var(--red)">+{_pct(delta.get("mentions_pct", 0))}</div><div class="kpi-l">Δ Menciones</div></div>
-<div class="kpi"><div class="kpi-v" style="color:var(--red)">+{_pct(delta.get("engagement_pct", 0))}</div><div class="kpi-l">Δ Engagement</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">{mentions_display}</div><div class="kpi-l">Delta Menciones</div></div>
+<div class="kpi"><div class="kpi-v" style="color:var(--red)">{engagement_display}</div><div class="kpi-l">Delta Engagement</div></div>
 <div class="kpi"><div class="kpi-v">{peak.get("date", "—")}</div><div class="kpi-l">Pico ({_fmt(peak.get("mentions", 0))})</div></div>
 </div>
 <div class="insight fu s4"><p>{_esc(recovery_text)}</p></div>
@@ -598,22 +708,60 @@ def _slide_comunicado_impact(
 
 
 def _slide_narratives(
-    narratives: List[Dict[str, str]],
+    narratives: List[Dict[str, Any]],
 ) -> str:
-    """Slides 15-17: Narrative cards."""
+    """Slides 15-17: Narrative cards.
+
+    Fix 1: Updated to render THESIS/EVOLUTION/EVIDENCE format.
+    Each narrative dict may contain: title, badge, badge_class, body, evidence (list).
+    """
     if not narratives:
         return ""
 
-    badge_classes = ["badge-g", "badge-o", "badge-b"]
     cards_html = ""
     for i, narr in enumerate(narratives[:3]):
-        badge_cls = badge_classes[i] if i < len(badge_classes) else "badge-b"
+        badge_cls = narr.get("badge_class", "badge-b")
         num = f"{i + 1:02d}"
+
+        # Body text (may contain multiple paragraphs)
+        body_text = narr.get("body", "")
+        body_html = ""
+        if body_text:
+            for para in body_text.split("\n\n"):
+                para = para.strip()
+                if para:
+                    body_html += f'<p class="p">{_esc(para)}</p>\n'
+
+        # Fix 1: Evidence items rendered as social-post-style cards
+        evidence_html = ""
+        evidence_list = narr.get("evidence", [])
+        for ev in evidence_list[:3]:
+            ev_text = ev.get("quote", str(ev) if isinstance(ev, str) else "")
+            ev_platform = ev.get("platform", "")
+            ev_date = ev.get("date", "")
+            ev_engagement = ev.get("engagement", "")
+            meta_parts = []
+            if ev_platform:
+                meta_parts.append(_esc(ev_platform))
+            if ev_date:
+                meta_parts.append(_esc(ev_date))
+            if ev_engagement:
+                meta_parts.append(f"{_esc(ev_engagement)} interacciones")
+            meta_str = " · ".join(meta_parts) if meta_parts else ""
+            evidence_html += f"""\
+<div class="spost" style="margin:8px 0">
+<div class="spost-text" style="font-style:italic">"{_esc(ev_text)}"</div>
+{f'<div class="spost-meta"><span>{meta_str}</span></div>' if meta_str else ''}
+</div>
+"""
+
         cards_html += f"""\
 <div class="nar fu {'s2' if i == 0 else 's3' if i == 1 else 's4'}"><div class="nar-num">{num}</div>
 <div class="nar-title">{_esc(narr.get("title", ""))}</div>
 <div class="badge {badge_cls}">{_esc(narr.get("badge", ""))}</div>
-<p class="p">{narr.get("body", "")}</p></div>
+{body_html}
+{evidence_html}
+</div>
 """
 
     return f"""\
@@ -622,6 +770,130 @@ def _slide_narratives(
 <div class="tag fu">Las narrativas en juego</div>
 {cards_html}
 </div></section>"""
+
+
+# ── Fix 2: Co-occurrence SVG builder ─────────────────────────────────
+
+def _build_cooccurrence_svg(cooccurrence_data: Dict[str, Any]) -> str:
+    """Generate an inline SVG for co-occurrence network visualization.
+
+    Uses nodes and edges from the cooccurrence data dict.
+    Returns an HTML section string, or empty string if no data.
+    """
+    nodes = cooccurrence_data.get("nodes", [])
+    edges = cooccurrence_data.get("edges", [])
+
+    if not nodes or not edges:
+        return ""
+
+    # SVG dimensions
+    W, H = 900, 340
+    CX, CY = W // 2, H // 2
+
+    # Calculate node positions in circular layout
+    node_positions = {}
+    n = len(nodes)
+    # Determine radius range based on mentions
+    mentions_vals = [nd.get("mentions", 1) for nd in nodes]
+    min_m = min(mentions_vals) if mentions_vals else 1
+    max_m = max(mentions_vals) if mentions_vals else 1
+    range_m = max(max_m - min_m, 1)
+
+    for i, node in enumerate(nodes):
+        angle = (2 * math.pi * i / n) - math.pi / 2
+        spread_r = min(W, H) * 0.35
+        x = CX + spread_r * math.cos(angle)
+        y = CY + spread_r * math.sin(angle)
+        # Radius proportional to mentions, 30-54px range
+        mentions = node.get("mentions", 1)
+        r = 30 + 24 * ((mentions - min_m) / range_m)
+        node_positions[node.get("name", node.get("id", str(i)))] = {
+            "x": x, "y": y, "r": r, "mentions": mentions,
+            "label": node.get("name", node.get("id", str(i))),
+        }
+
+    # Build SVG elements
+    edge_elements = []
+    max_weight = max((e.get("weight", 1) for e in edges), default=1)
+    for edge in edges:
+        src = edge.get("source", "")
+        tgt = edge.get("target", "")
+        weight = edge.get("weight", 1)
+        if src not in node_positions or tgt not in node_positions:
+            continue
+        s = node_positions[src]
+        t = node_positions[tgt]
+        opacity = max(0.15, min(0.9, weight / max(max_weight, 1)))
+        mx = (s["x"] + t["x"]) / 2
+        my = (s["y"] + t["y"]) / 2
+        edge_elements.append(
+            f'<line x1="{s["x"]:.0f}" y1="{s["y"]:.0f}" x2="{t["x"]:.0f}" y2="{t["y"]:.0f}" '
+            f'stroke="#1098AD" stroke-width="2" stroke-opacity="{opacity:.2f}"/>'
+        )
+        # Edge label pill
+        edge_elements.append(
+            f'<rect x="{mx - 14:.0f}" y="{my - 9:.0f}" width="28" height="18" rx="9" fill="#fff" stroke="#DDDDE8" stroke-width="1"/>'
+            f'<text x="{mx:.0f}" y="{my + 4:.0f}" text-anchor="middle" font-size="10" '
+            f'font-family="JetBrains Mono,monospace" fill="#3B3B58">{weight}</text>'
+        )
+
+    node_elements = []
+    colors = ["#D6336C", "#1098AD", "#2B8A3E", "#C27803", "#DC2626", "#667eea", "#764ba2", "#0F1635"]
+    for i, (name, pos) in enumerate(node_positions.items()):
+        color = colors[i % len(colors)]
+        r = pos["r"]
+        font_size = max(12, min(16, int(12 + 4 * ((pos["mentions"] - min_m) / range_m))))
+        node_elements.append(
+            f'<circle cx="{pos["x"]:.0f}" cy="{pos["y"]:.0f}" r="{r:.0f}" fill="{color}" fill-opacity="0.15" stroke="{color}" stroke-width="2"/>'
+            f'<text x="{pos["x"]:.0f}" y="{pos["y"] + 4:.0f}" text-anchor="middle" font-size="{font_size}" '
+            f'font-family="DM Sans,sans-serif" font-weight="600" fill="{color}">{_esc(name)}</text>'
+        )
+
+    edges_svg = "\n".join(edge_elements)
+    nodes_svg = "\n".join(node_elements)
+
+    return f"""\
+<!-- ========== CO-OCCURRENCE ========== -->
+<section class="sl"><div class="si">
+<div class="tag fu">Red de co-ocurrencia</div>
+<div class="h1 fu">Como se conectan los temas</div>
+<div class="chart-box fu s2" style="padding:16px;text-align:center">
+<svg viewBox="0 0 {W} {H}" width="100%" style="max-width:{W}px">
+{edges_svg}
+{nodes_svg}
+</svg>
+</div>
+</div></section>"""
+
+
+# ── Fix 13: Thank you slide ─────────────────────────────────────────
+
+def _slide_thank_you(
+    client_name: str = "",
+    client_logo_url: str = "",
+) -> str:
+    """Final slide: Thank you with CTA and contact info."""
+    client_logo_html = ""
+    if client_logo_url:
+        client_logo_html = f"""\
+<div style="width:1px;height:24px;background:rgba(255,255,255,0.15)"></div>
+<img src="{_esc(client_logo_url)}" alt="{_esc(client_name)}" style="height:20px;opacity:0.6" onerror="this.style.display='none'">"""
+
+    return f"""\
+<!-- ========== THANK YOU ========== -->
+<section class="sl cover" style="text-align:center">
+<div class="si" style="display:flex;flex-direction:column;align-items:center">
+<h1 style="font-family:var(--display);font-size:clamp(40px,6vw,64px);color:#fff;font-weight:700;margin-bottom:20px">Gracias.</h1>
+<p style="font-size:18px;color:rgba(255,255,255,0.6);max-width:500px;margin-bottom:40px;line-height:1.8;font-weight:300">Queres ver como se aplica esto a tu marca?</p>
+<a href="mailto:hi@epical.digital" style="display:inline-block;background:#FF4081;color:#fff;padding:14px 36px;border-radius:8px;font-family:var(--body);font-size:15px;font-weight:600;text-decoration:none;letter-spacing:0.5px;margin-bottom:48px">Solicita un demo</a>
+<div style="font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:1.5px;margin-bottom:12px">hi@epical.digital · epical.digital</div>
+<div style="font-size:12px;color:rgba(255,255,255,0.25);margin-bottom:32px">Buenos Aires · Bogota · Ciudad de Mexico</div>
+<div style="display:flex;align-items:center;gap:20px;justify-content:center">
+<img src="https://epical.digital/wp-content/uploads/2023/08/cropped-logoEpicalwhite-152x30-1.png" alt="Epical" style="height:16px;opacity:0.5" onerror="this.style.display='none'">
+{client_logo_html}
+</div>
+</div>
+</section>"""
 
 
 def _slide_scenarios(
@@ -653,8 +925,8 @@ def _slide_scenarios(
     return f"""\
 <!-- ========== SCENARIOS ========== -->
 <section class="sl"><div class="si">
-<div class="tag fu">Proyección a 30 días</div>
-<div class="h1 fu">Tres escenarios según nivel de acción</div>
+<div class="tag fu">Proyeccion a 30 dias</div>
+<div class="h1 fu">Tres escenarios segun nivel de accion</div>
 <div class="sc-grid fu s2">
 {cards_html}
 </div>
@@ -664,7 +936,7 @@ def _slide_scenarios(
 def _slide_strategic_readings(
     readings: List[Dict[str, str]],
 ) -> str:
-    """Slide 19: Strategic readings with 'Señal →' tags (rule 8)."""
+    """Slide 19: Strategic readings with signals (rule 8)."""
     if not readings:
         return ""
 
@@ -673,7 +945,7 @@ def _slide_strategic_readings(
     for i, rec in enumerate(readings[:6]):
         delay = delays[i] if i < len(delays) else "s4"
         signal = rec.get("signal", "")
-        signal_html = f'<div class="rec-signal">Señal → {_esc(signal)}</div>' if signal else ""
+        signal_html = f'<div class="rec-signal">Senal -> {_esc(signal)}</div>' if signal else ""
         recs_html += f"""\
 <div class="rec fu {delay}"><h3>{_esc(rec.get("title", ""))}</h3>
 <p class="p" style="font-size:14px">{rec.get("body", "")}</p>
@@ -683,9 +955,9 @@ def _slide_strategic_readings(
     return f"""\
 <!-- ========== STRATEGIC READINGS ========== -->
 <section class="sl"><div class="si">
-<div class="tag fu">Lecturas estratégicas</div>
-<div class="h1 fu">Señales que los datos emiten</div>
-<p class="sub fu s2">No son instrucciones — son lecturas de lo que la conversación sugiere como dirección estratégica.</p>
+<div class="tag fu">Lecturas estrategicas</div>
+<div class="h1 fu">Senales que los datos emiten</div>
+<p class="sub fu s2">No son instrucciones — son lecturas de lo que la conversacion sugiere como direccion estrategica.</p>
 {recs_html}
 </div></section>"""
 
@@ -713,7 +985,7 @@ def _slide_applications(
     return f"""\
 <!-- ========== APPLICATIONS ========== -->
 <section class="sl"><div class="si">
-<div class="tag fu">Uso práctico</div>
+<div class="tag fu">Uso practico</div>
 <div class="h1 fu">Aplicaciones concretas{role_label}</div>
 <div class="g2 fu s2">
 <div>{_cards(left)}</div>
@@ -729,7 +1001,7 @@ def _slide_closing(
     client_name: str = "",
     client_logo_url: str = "",
 ) -> str:
-    """Slides 21-22: Closing (standard vs deep) + thank you."""
+    """Slides 21-22: Closing (standard vs deep)."""
     sowhat_html = ""
     if closing_question:
         sowhat_html = f"""\
@@ -746,14 +1018,14 @@ def _slide_closing(
 <!-- ========== CLOSING ========== -->
 <section class="sl"><div class="si">
 <div class="tag fu">Cierre</div>
-<div class="h1 fu">La diferencia entre información y decisión</div>
+<div class="h1 fu">La diferencia entre informacion y decision</div>
 <div class="g2 fu s2">
-<div class="card card-m"><div class="h3" style="color:var(--dim)">Monitoreo estándar</div>
+<div class="card card-m"><div class="h3" style="color:var(--dim)">Monitoreo estandar</div>
 <p class="p" style="font-size:14px">{standard_reading}</p>
-<p class="sm">Diagnóstico superficial. Estrategia reactiva.</p></div>
-<div class="card card-b"><div class="h3">Análisis profundo</div>
+<p class="sm">Diagnostico superficial. Estrategia reactiva.</p></div>
+<div class="card card-b"><div class="h3">Analisis profundo</div>
 <p class="p" style="font-size:14px">{deep_reading}</p>
-<p class="sm" style="color:var(--cyan)">Diagnóstico preciso. Estrategia informada.</p></div>
+<p class="sm" style="color:var(--cyan)">Diagnostico preciso. Estrategia informada.</p></div>
 </div>
 {sowhat_html}
 <div style="display:flex;justify-content:center;align-items:center;gap:40px;margin-top:56px" class="fu s4">
@@ -892,7 +1164,7 @@ def build_report_html(
         report_type: "crisis", "campaign", or "monitoring".
         report_sections: Pre-parsed narrative sections dict. If None, builds from report_text.
         event_date: Optional event/comunicado date for impact analysis slide.
-        client_role: E.g. "la Dirección de Comunicaciones" for personalized labels.
+        client_role: E.g. "la Direccion de Comunicaciones" for personalized labels.
         client_logo_url: URL to client logo for cover/closing.
 
     Returns:
@@ -920,16 +1192,25 @@ def build_report_html(
     comunicado_data = metrics.get("comunicado_impact", {})
     actor_metrics = metrics.get("actor_metrics", {})
     brand_criticism = metrics.get("brand_criticism", {})
+    cooccurrence_data = metrics.get("cooccurrence", {})
 
     # Total engagement
     eng_total = 0
     for col in ("total_likes", "total_comments", "total_shares"):
         eng_total += metrics.get(col, 0)
 
+    # ── Fix 5/6/15: Normalize platforms to top 5 + Others ────────
+    if engagement_by_platform:
+        engagement_by_platform = _normalize_platforms(engagement_by_platform, top_n=5)
+
+    # ── Fix 10: Filter spikes to top 4 by absolute mentions ──────
+    if spikes:
+        spikes = sorted(spikes, key=lambda s: s.get("mentions", 0), reverse=True)[:4]
+
     # ── Extract narrative sections ───────────────────────────────
     sec = report_sections
     cover_title = sec.get("cover_title", f"Inteligencia reputacional<br><em>{_esc(client_name)}</em>")
-    cover_subtitle = sec.get("cover_subtitle", "Análisis profundo de la conversación digital.")
+    cover_subtitle = sec.get("cover_subtitle", "Analisis profundo de la conversacion digital.")
     findings = sec.get("findings", [])
     exec_implication = sec.get("exec_implication", "")
     narratives = sec.get("narratives", [])
@@ -948,14 +1229,14 @@ def build_report_html(
     # ── Build default methodology if not provided ────────────────
     if not methodology_rows:
         methodology_rows = [
-            {"stage": "Recolección", "description": "Social listening + scrapping directo de perfiles", "result": _fmt(total_mentions)},
-            {"stage": "Clasificación IA", "description": "Modelos propietarios de clasificación: relevancia, sentimiento, dirección", "result": _fmt(total_mentions)},
+            {"stage": "Recoleccion", "description": "Social listening + scrapping directo de perfiles", "result": _fmt(total_mentions)},
+            {"stage": "Clasificacion IA", "description": "Modelos propietarios de clasificacion: relevancia, sentimiento, direccion", "result": _fmt(total_mentions)},
         ]
         # Add sentiment reclassification stats if available
         reclass = metrics.get("reclassification_stats", {})
         if reclass:
             methodology_rows.append({
-                "stage": "Reclasificación",
+                "stage": "Reclasificacion",
                 "description": f"Reglas: {reclass.get('rules', 0)}, IA: {reclass.get('ai', 0)}",
                 "result": f"{reclass.get('remaining_pct', 0)}% restante",
             })
@@ -967,40 +1248,102 @@ def build_report_html(
             name = src[0] if isinstance(src, (list, tuple)) else str(src)
             count = src[1] if isinstance(src, (list, tuple)) and len(src) > 1 else 0
             engagement_by_platform.append({
-                "platform": str(name),
+                "platform": _normalize_platform_name(str(name)),
                 "mentions": int(count),
                 "engagement_share": round(int(count) / max(total_mentions, 1) * 100, 1),
             })
 
-    # ── Build actor slides from actor_metrics if not in sections ─
-    if not actors_data and actor_metrics:
+    # ── Fix 3: Build actor slides from actor_metrics ─────────────
+    # Merge narrative PERCEPTION data with actor_metrics data
+    narrative_actors = {a.get("name", "").lower(): a for a in actors_data}
+
+    if actor_metrics:
+        merged_actors = []
         for actor_key, actor_m in actor_metrics.items():
-            if actor_key in ("combined", "otros"):
+            if actor_key.lower() in ("combined", "otros"):
                 continue
             am_total = actor_m.get("total_mentions", 0)
-            if am_total == 0:
+            # Fix 3: Skip actors with < 50 mentions
+            if am_total < 50:
                 continue
+
             am_sent = actor_m.get("sentiment_breakdown", {})
             bar = {}
             for sk, sv in am_sent.items():
                 if isinstance(sv, dict):
                     bar[sk] = sv.get("percentage", 0)
-            actors_data.append({
+
+            # Look for matching narrative data
+            narr_actor = narrative_actors.get(actor_key.lower(), {})
+            body = narr_actor.get("body", [])
+            title = narr_actor.get("title", f"Percepcion sobre {actor_key.capitalize()}")
+            reading = narr_actor.get("reading", "")
+            posts = narr_actor.get("posts", [])
+
+            # Try to get sample_mentions from metrics
+            sample_mentions = metrics.get("sample_mentions", {})
+            if not posts and isinstance(sample_mentions, dict) and actor_key in sample_mentions:
+                posts = sample_mentions[actor_key][:3]
+
+            merged_actors.append({
                 "name": actor_key.capitalize(),
                 "mentions": am_total,
                 "pct": round(am_total / max(total_mentions, 1) * 100, 1),
-                "title": f"Percepción sobre {actor_key.capitalize()}",
-                "body": [],
+                "title": title,
+                "body": body if body else [],
                 "sentiment_bar": bar,
-                "reading": "",
-                "posts": [],
+                "reading": reading,
+                "posts": posts,
+                "criticism_table": narr_actor.get("criticism_table"),
             })
+
+        # Sort by mention count descending
+        merged_actors.sort(key=lambda a: a.get("mentions", 0), reverse=True)
+        if merged_actors:
+            actors_data = merged_actors
+
+    # ── Fix 12: Build data-driven closing defaults if not provided
+    if not closing_standard:
+        neg_count = 0
+        neg_pct = 0
+        for k, v in sentiment.items():
+            if isinstance(v, dict) and k.lower() in ("negative", "negativo"):
+                neg_count = v.get("count", 0)
+                neg_pct = v.get("percentage", 0)
+        closing_standard = f"Monitoreo estandar: {_fmt_exact(total_mentions)} menciones, {_pct(neg_pct)} negativo — diagnostico crisis reputacional."
+
+    if not closing_deep:
+        # Find main actor with highest negative percentage
+        main_actor = ""
+        main_actor_neg_pct = 0
+        positive_count = 0
+        for ak, am in actor_metrics.items():
+            if ak.lower() in ("combined", "otros"):
+                continue
+            am_sent = am.get("sentiment_breakdown", {})
+            for sk, sv in am_sent.items():
+                if isinstance(sv, dict) and sk.lower() in ("negative", "negativo"):
+                    pct_val = sv.get("percentage", 0)
+                    if pct_val > main_actor_neg_pct:
+                        main_actor_neg_pct = pct_val
+                        main_actor = ak.capitalize()
+                elif isinstance(sv, dict) and sk.lower() in ("positive", "positivo"):
+                    positive_count += sv.get("count", 0)
+        if main_actor:
+            closing_deep = (
+                f"Analisis profundo: {_pct(main_actor_neg_pct)} del negativo contra {main_actor}, "
+                f"{_fmt_exact(positive_count)} defensores activos — diagnostico posicion favorable."
+            )
+        else:
+            closing_deep = "Analisis profundo que revela lo que un dashboard no muestra."
 
     # ── Assemble slides ──────────────────────────────────────────
     slides: List[str] = []
 
-    # 1. Cover
+    # Fix 15: Use normalized platform count instead of raw length
     platforms_count = len(engagement_by_platform)
+
+    # 1. Cover
     slides.append(_slide_cover(
         client_name=client_name,
         period=period,
@@ -1040,11 +1383,11 @@ def build_report_html(
     if actors_data:
         actor_names = [a.get("name", "") for a in actors_data[:3]]
         slides.append(_slide_transition(
-            title="La conversación tiene actores distintos.<br>Cada uno requiere una lectura diferente.",
+            title="La conversacion tiene actores distintos.<br>Cada uno requiere una lectura diferente.",
             subtitle=f"Actores analizados: {', '.join(actor_names)}." if actor_names else "",
         ))
 
-    # 6-8. Actor slides
+    # 6-8. Actor slides (Fix 3: one per actor from actor_metrics)
     for actor in actors_data[:5]:
         slides.append(_slide_actor(
             actor_name=actor.get("name", ""),
@@ -1089,13 +1432,17 @@ def build_report_html(
     # 13. Transition: narratives
     if narratives:
         slides.append(_slide_transition(
-            title="Los datos definen el presente.<br>Las narrativas definen cómo se recuerda.",
+            title="Los datos definen el presente.<br>Las narrativas definen como se recuerda.",
             subtitle=f"{len(narratives)} narrativas compiten por dar forma a la memoria colectiva.",
         ))
 
     # 14-16. Narratives
     if narratives:
         slides.append(_slide_narratives(narratives))
+
+    # Fix 2: Co-occurrence SVG after narratives
+    if cooccurrence_data and cooccurrence_data.get("nodes"):
+        slides.append(_build_cooccurrence_svg(cooccurrence_data))
 
     # 17. Scenarios
     if scenarios:
@@ -1111,9 +1458,15 @@ def build_report_html(
 
     # 20-21. Closing
     slides.append(_slide_closing(
-        standard_reading=closing_standard or f"{_fmt(total_mentions)} menciones procesadas con lectura superficial.",
-        deep_reading=closing_deep or "Análisis profundo que revela lo que un dashboard no muestra.",
+        standard_reading=closing_standard,
+        deep_reading=closing_deep,
         closing_question=closing_question,
+        client_name=client_name,
+        client_logo_url=client_logo_url,
+    ))
+
+    # Fix 13: Thank you slide as the last slide
+    slides.append(_slide_thank_you(
         client_name=client_name,
         client_logo_url=client_logo_url,
     ))
@@ -1159,16 +1512,42 @@ def build_report_html(
 # ══════════════════════════════════════════════════════════════════════
 
 def _strip_signal_prefix(s: str) -> str:
-    """Remove ALL 'Señal →' / 'Signal →' prefixes from a signal string.
+    """Remove ALL 'Senal ->' / 'Signal ->' prefixes from a signal string.
 
-    The HTML template adds its own 'Señal →' prefix, so the raw value
+    The HTML template adds its own 'Senal ->' prefix, so the raw value
     should contain only the principle text, no prefix.
     """
     import re as _re
     result = s.strip()
-    # Strip repeatedly in case of "Señal → Señal → ..."
-    while _re.match(r"^(?:Señal|Signal)\s*→\s*", result, flags=_re.IGNORECASE):
-        result = _re.sub(r"^(?:Señal|Signal)\s*→\s*", "", result, count=1, flags=_re.IGNORECASE).strip()
+    # Strip repeatedly in case of nested prefixes
+    while _re.match(r"^(?:Se[nñ]al|Signal)\s*(?:→|->|–>)+\s*", result, flags=_re.IGNORECASE):
+        result = _re.sub(r"^(?:Se[nñ]al|Signal)\s*(?:→|->|–>)+\s*", "", result, count=1, flags=_re.IGNORECASE).strip()
+    return result
+
+
+def _parse_evidence(raw: str) -> Dict[str, str]:
+    """Parse an evidence string in format: '"quote text" [platform, date, engagement]'
+
+    Returns dict with keys: quote, platform, date, engagement.
+    """
+    import re
+    result = {"quote": raw, "platform": "", "date": "", "engagement": ""}
+    # Try to parse: "quote text" [platform, date, engagement]
+    m = re.match(r'"(.+?)"\s*\[([^\]]*)\]', raw, re.DOTALL)
+    if m:
+        result["quote"] = m.group(1).strip()
+        meta_parts = [p.strip() for p in m.group(2).split(",")]
+        if len(meta_parts) >= 1:
+            result["platform"] = meta_parts[0]
+        if len(meta_parts) >= 2:
+            result["date"] = meta_parts[1]
+        if len(meta_parts) >= 3:
+            result["engagement"] = meta_parts[2]
+    else:
+        # Try just quoted text without brackets
+        m2 = re.match(r'"(.+?)"', raw, re.DOTALL)
+        if m2:
+            result["quote"] = m2.group(1).strip()
     return result
 
 
@@ -1177,6 +1556,9 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
 
     Supports the === delimited format from report_generator.py and
     falls back to markdown heading parsing.
+
+    Fix 1: Updated to handle THESIS/EVOLUTION/EVIDENCE format for narratives.
+    Fix 14: Updated to handle RECOMMENDATION sections for readings.
 
     Returns dict with keys matching the report_sections parameter of
     build_report_html.
@@ -1227,17 +1609,90 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
                 body = card_match.group(2).strip()
                 sections["findings"].append({"title": title, "text": body[:500]})
 
-        # Extract narratives
-        narr_pattern = re.compile(
-            r"===NARRATIVE_(\d+)===\s*\n(?:TITLE:\s*([^\n]+)\n)?(?:BADGE:\s*([^\n]+)\n)?(?:BODY:\s*)?(.+?)(?====|\Z)",
+        # ── Fix 1: Extract narratives — support both old and new format ──
+        # New format: THESIS/EVOLUTION/EVIDENCE/IMPLICATION/RISK_LEVEL/DOMINANT_PLATFORM
+        narr_new_pattern = re.compile(
+            r"===NARRATIVE_(\d+)===\s*\n(.+?)(?====|\Z)",
             re.DOTALL,
         )
-        for m in narr_pattern.finditer(text):
-            sections["narratives"].append({
-                "title": (m.group(2) or "").strip(),
-                "badge": (m.group(3) or "").strip(),
-                "body": m.group(4).strip()[:800],
-            })
+        found_new_format = False
+        for m in narr_new_pattern.finditer(text):
+            block = m.group(2)
+            # Check if this is the new format
+            if "THESIS:" in block:
+                found_new_format = True
+                thesis = ""
+                evolution = ""
+                implication = ""
+                risk_level = ""
+                dominant_platform = ""
+                evidences = []
+
+                thesis_m = re.search(r"THESIS:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+                if thesis_m:
+                    thesis = thesis_m.group(1).strip()
+
+                evolution_m = re.search(r"EVOLUTION:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+                if evolution_m:
+                    evolution = evolution_m.group(1).strip()
+
+                implication_m = re.search(r"IMPLICATION:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+                if implication_m:
+                    implication = implication_m.group(1).strip()
+
+                risk_m = re.search(r"RISK_LEVEL:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+                if risk_m:
+                    risk_level = risk_m.group(1).strip().lower()
+
+                dom_m = re.search(r"DOMINANT_PLATFORM:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+                if dom_m:
+                    dominant_platform = dom_m.group(1).strip()
+
+                # Extract EVIDENCE_1, EVIDENCE_2, EVIDENCE_3
+                for ei in range(1, 4):
+                    ev_m = re.search(rf"EVIDENCE_{ei}:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+                    if ev_m:
+                        evidences.append(_parse_evidence(ev_m.group(1).strip()))
+
+                # Map RISK_LEVEL to badge text and class
+                badge_map = {
+                    "growing": ("Creciente · Riesgo", "badge-o"),
+                    "stable": ("Dominante · Estable", "badge-g"),
+                    "fading": ("En declive", "badge-b"),
+                }
+                badge_text, badge_class = badge_map.get(risk_level, ("", "badge-b"))
+
+                # Build body from EVOLUTION + IMPLICATION
+                body_parts = []
+                if evolution:
+                    body_parts.append(evolution)
+                if implication:
+                    body_parts.append(implication)
+                body = "\n\n".join(body_parts)
+
+                sections["narratives"].append({
+                    "title": thesis,
+                    "badge": badge_text,
+                    "badge_class": badge_class,
+                    "body": body[:800],
+                    "evidence": evidences,
+                    "dominant_platform": dominant_platform,
+                })
+
+        # Fallback: old format (TITLE/BADGE/BODY)
+        if not found_new_format:
+            narr_pattern = re.compile(
+                r"===NARRATIVE_(\d+)===\s*\n(?:TITLE:\s*([^\n]+)\n)?(?:BADGE:\s*([^\n]+)\n)?(?:BODY:\s*)?(.+?)(?====|\Z)",
+                re.DOTALL,
+            )
+            for m in narr_pattern.finditer(text):
+                sections["narratives"].append({
+                    "title": (m.group(2) or "").strip(),
+                    "badge": (m.group(3) or "").strip(),
+                    "badge_class": "badge-b",
+                    "body": m.group(4).strip()[:800],
+                    "evidence": [],
+                })
 
         # Extract scenarios
         sc_pattern = re.compile(
@@ -1251,7 +1706,7 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
                 "outcome": (m.group(4) or "").strip(),
             })
 
-        # Extract signals/readings
+        # Extract signals/readings (old SIGNAL_ format)
         sig_pattern = re.compile(
             r"===SIGNAL_(\d+)===\s*\n(?:TITLE:\s*([^\n]+)\n)?(?:BODY:\s*)?(.+?)(?:SIGNAL:\s*([^\n]+))?(?====|\Z)",
             re.DOTALL,
@@ -1261,6 +1716,48 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
                 "title": (m.group(2) or "").strip(),
                 "body": m.group(3).strip()[:600],
                 "signal": _strip_signal_prefix(m.group(4) or ""),
+            })
+
+        # Fix 14: Extract RECOMMENDATION sections for readings
+        rec_pattern = re.compile(
+            r"===RECOMMENDATION_(\d+)===\s*\n(.+?)(?====|\Z)",
+            re.DOTALL,
+        )
+        for m in rec_pattern.finditer(text):
+            block = m.group(2)
+            rec_title = ""
+            rec_data_support = ""
+            rec_reading = ""
+            rec_signal = ""
+
+            t_m = re.search(r"TITLE:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+            if t_m:
+                rec_title = t_m.group(1).strip()
+
+            ds_m = re.search(r"DATA_SUPPORT:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+            if ds_m:
+                rec_data_support = ds_m.group(1).strip()
+
+            rd_m = re.search(r"READING:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+            if rd_m:
+                rec_reading = rd_m.group(1).strip()
+
+            sg_m = re.search(r"SIGNAL:\s*(.+?)(?=\n\w+:|\Z)", block, re.DOTALL)
+            if sg_m:
+                rec_signal = _strip_signal_prefix(sg_m.group(1).strip())
+
+            # Combine DATA_SUPPORT + READING for body
+            body_parts = []
+            if rec_data_support:
+                body_parts.append(rec_data_support)
+            if rec_reading:
+                body_parts.append(rec_reading)
+            body = " ".join(body_parts) if body_parts else ""
+
+            sections["readings"].append({
+                "title": rec_title,
+                "body": body[:600],
+                "signal": rec_signal,
             })
 
         # Extract perception/actor sections
@@ -1332,10 +1829,12 @@ def _assign_markdown_section(sections: Dict[str, Any], heading: str, content: st
             sections["narratives"].append({
                 "title": title,
                 "badge": badges[i] if i < len(badges) else "",
+                "badge_class": "badge-b",
                 "body": body[:800],
+                "evidence": [],
             })
 
-    elif any(k in heading_lower for k in ("escenario", "scenario", "proyección")):
+    elif any(k in heading_lower for k in ("escenario", "scenario", "proyeccion")):
         import re
         parts = re.split(r"###\s+", content)
         for part in parts:
@@ -1349,7 +1848,7 @@ def _assign_markdown_section(sections: Dict[str, Any], heading: str, content: st
                 "outcome": "",
             })
 
-    elif any(k in heading_lower for k in ("lectura", "reading", "señal", "signal", "recomend")):
+    elif any(k in heading_lower for k in ("lectura", "reading", "senal", "signal", "recomend")):
         import re
         parts = re.split(r"###\s+", content)
         for part in parts:
@@ -1357,14 +1856,14 @@ def _assign_markdown_section(sections: Dict[str, Any], heading: str, content: st
             if not part:
                 continue
             lines = part.split("\n", 1)
-            signal_match = re.search(r"(?:Señal|Signal)\s*→\s*(.+)", part)
+            signal_match = re.search(r"(?:Se[nñ]al|Signal)\s*(?:→|->|–>)+\s*(.+)", part)
             sections["readings"].append({
                 "title": lines[0].strip(),
                 "body": lines[1].strip()[:600] if len(lines) > 1 else "",
                 "signal": _strip_signal_prefix(signal_match.group(1)) if signal_match else "",
             })
 
-    elif any(k in heading_lower for k in ("aplicacion", "application", "uso práctico")):
+    elif any(k in heading_lower for k in ("aplicacion", "application", "uso practico")):
         import re
         parts = re.split(r"###\s+", content)
         for part in parts:
