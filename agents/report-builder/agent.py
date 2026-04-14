@@ -12,7 +12,10 @@ The agent is a state machine. External code drives it by calling
 advance() with analyst feedback at each checkpoint.
 """
 
+import html as html_lib
 import json
+import re
+import subprocess
 import time
 from dataclasses import dataclass, field
 from datetime import date, datetime
@@ -135,9 +138,11 @@ class ReportBuilderAgent:
         report_type: str = "crisis",
         sentimia_mock: bool = False,
         output_dir: Optional[Union[str, Path]] = None,
+        reference_report_path: Optional[Union[str, Path]] = None,
     ) -> None:
         self.state = AgentState.INIT
         self.sentimia_mock = sentimia_mock
+        self.reference_report_path: Optional[str] = str(reference_report_path) if reference_report_path else None
         self.output_dir = Path(output_dir) if output_dir else self._default_output_dir()
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -159,6 +164,128 @@ class ReportBuilderAgent:
             "Agent initialized: client=%s, period=%s, files=%d, mock=%s",
             client_name, period, len(file_paths), sentimia_mock,
         )
+
+    # ══════════════════════════════════════════════════════════════
+    # Reference report: editorial style extraction
+    # ══════════════════════════════════════════════════════════════
+
+    @staticmethod
+    def _extract_editorial_style(html_path: str) -> str:
+        """Extract a ~1500 char summary of editorial tone and structure from a reference HTML report.
+
+        Reads the HTML file, strips tags/scripts/styles, and extracts representative
+        paragraphs to characterize the editorial voice.
+
+        Args:
+            html_path: Path to the reference HTML report.
+
+        Returns:
+            A ~1500 character summary with examples of tone, structure, and style.
+        """
+        path = Path(html_path)
+        if not path.exists():
+            logger.warning("Reference report not found: %s", html_path)
+            return ""
+
+        raw_html = path.read_text(encoding="utf-8", errors="replace")
+
+        # Remove script and style blocks entirely
+        clean = re.sub(r"<script[\s\S]*?</script>", "", raw_html, flags=re.IGNORECASE)
+        clean = re.sub(r"<style[\s\S]*?</style>", "", clean, flags=re.IGNORECASE)
+
+        # Strip remaining HTML tags
+        clean = re.sub(r"<[^>]+>", " ", clean)
+
+        # Decode HTML entities
+        clean = html_lib.unescape(clean)
+
+        # Collapse whitespace
+        clean = re.sub(r"\s+", " ", clean).strip()
+
+        # Extract representative paragraphs (sentences with enough substance)
+        sentences = re.split(r"(?<=[.!?])\s+", clean)
+        paragraphs: list[str] = []
+        current: list[str] = []
+        for s in sentences:
+            s = s.strip()
+            # Skip very short fragments (likely UI labels, nav items)
+            if len(s) < 40:
+                if current:
+                    paragraphs.append(" ".join(current))
+                    current = []
+                continue
+            current.append(s)
+            if len(current) >= 3:
+                paragraphs.append(" ".join(current))
+                current = []
+        if current:
+            paragraphs.append(" ".join(current))
+
+        # Select the most representative paragraphs (longer = more editorial content)
+        paragraphs.sort(key=len, reverse=True)
+
+        # Build summary with examples, capped at ~1500 chars
+        summary_parts: list[str] = []
+        char_count = 0
+        for p in paragraphs:
+            if char_count + len(p) > 1500:
+                # Add a truncated version if we have room
+                remaining = 1500 - char_count
+                if remaining > 80:
+                    summary_parts.append(p[:remaining] + "...")
+                break
+            summary_parts.append(p)
+            char_count += len(p) + 1  # +1 for newline
+
+        return "\n".join(summary_parts)
+
+    # ══════════════════════════════════════════════════════════════
+    # Live Preview Iteration Loop
+    # ══════════════════════════════════════════════════════════════
+
+    def iterate_with_preview(self, on_feedback: Callable[[str], str]) -> str:
+        """Open HTML in browser and iterate based on analyst feedback.
+
+        Args:
+            on_feedback: Callback that shows the report path and returns feedback.
+                When called with the HTML path, it should open the browser and
+                return the analyst's feedback text. Return 'ok' or 'listo' to stop.
+
+        Returns:
+            Final HTML path.
+        """
+        iteration = 0
+
+        while True:
+            iteration += 1
+            html_path = self.ctx.html_path
+
+            if not html_path:
+                logger.error("iterate_with_preview: no HTML path available")
+                raise RuntimeError("No HTML report available for preview")
+
+            # Open in default browser
+            logger.info("Preview iteration %d: opening %s", iteration, html_path)
+            subprocess.run(["open", html_path])
+
+            # Get analyst feedback
+            feedback = on_feedback(html_path)
+            feedback_lower = feedback.strip().lower()
+
+            logger.info(
+                "Preview iteration %d: feedback received (%d chars): %s",
+                iteration, len(feedback), feedback[:100],
+            )
+
+            # Check for approval signals
+            if feedback_lower in ("ok", "listo"):
+                logger.info("Preview iteration %d: analyst approved, finishing", iteration)
+                return html_path
+
+            # Incorporate feedback and regenerate
+            logger.info("Preview iteration %d: incorporating feedback and regenerating", iteration)
+            self._step_synthesis_with_feedback(feedback)
+            self._step_generate_html()
 
     @staticmethod
     def _default_output_dir() -> Path:
@@ -300,6 +427,10 @@ class ReportBuilderAgent:
             # Regenerate HTML
             self._step_generate_html()
 
+            # Auto-open updated HTML in browser
+            if self.ctx.html_path:
+                subprocess.run(["open", self.ctx.html_path])
+
         self.state = AgentState.CHECKPOINT_2
         return self._build_checkpoint2(feedback)
 
@@ -329,6 +460,10 @@ class ReportBuilderAgent:
             logger.info("Checkpoint 2: additional adjustments: %s", feedback[:100])
             self._step_synthesis_with_feedback(feedback)
             self._step_generate_html()
+
+            # Auto-open updated HTML in browser
+            if self.ctx.html_path:
+                subprocess.run(["open", self.ctx.html_path])
 
         # Generate PDF
         self._step_generate_pdf()
@@ -659,6 +794,14 @@ class ReportBuilderAgent:
 
         topic_summary = format_topic_summary(self.ctx.topic_clusters) if self.ctx.topic_clusters else ""
 
+        # Extract editorial style from reference report if provided
+        editorial_reference = ""
+        if self.reference_report_path:
+            editorial_reference = self._extract_editorial_style(self.reference_report_path)
+            if editorial_reference:
+                logger.info("Editorial reference extracted (%d chars) from %s",
+                            len(editorial_reference), self.reference_report_path)
+
         # Generate via Claude
         self.ctx.report_text = generate_report_draft(
             client_name=self.ctx.client_name,
@@ -669,6 +812,7 @@ class ReportBuilderAgent:
             data_quality_issues=self.ctx.metrics.get("data_quality_issues", []),
             topic_summary=topic_summary,
             report_type=self.ctx.report_type,
+            editorial_reference=editorial_reference,
         )
 
     def _step_synthesis_with_feedback(self, feedback: str) -> None:
@@ -878,6 +1022,10 @@ class ReportBuilderAgent:
             attachments.append(self.ctx.html_path)
         if self.ctx.json_path:
             attachments.append(self.ctx.json_path)
+
+        # Auto-open HTML in browser for analyst preview
+        if self.ctx.html_path:
+            subprocess.run(["open", self.ctx.html_path])
 
         return CheckpointMessage(
             checkpoint=1,

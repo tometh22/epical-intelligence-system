@@ -338,6 +338,26 @@ if "actor" in df_relevant.columns:
     metrics["total_negative_mentions"] = total_neg
     print(f"  Sentiment toward: {toward_summary}")
 
+# Extract top mentions per actor for .spost rendering
+top_mentions_by_actor = {}
+eng_col = "engagement" if "engagement" in df_relevant.columns else None
+for actor_name in df_relevant["actor"].dropna().unique():
+    actor_df = df_relevant[df_relevant["actor"] == actor_name]
+    if eng_col:
+        actor_df = actor_df.sort_values(eng_col, ascending=False)
+    top_rows = actor_df.head(3)
+    posts = []
+    for _, row in top_rows.iterrows():
+        posts.append({
+            "text": str(row.get("text", ""))[:300],
+            "platform": str(row.get("platform", "")),
+            "date": str(row.get("date", ""))[:10],
+            "engagement": int(row.get("engagement", 0)) if pd.notna(row.get("engagement")) else 0,
+            "author": str(row.get("author", row.get("profile_source", ""))) if pd.notna(row.get("author", row.get("profile_source"))) else "",
+        })
+    top_mentions_by_actor[actor_name] = posts
+metrics["top_mentions_by_actor"] = top_mentions_by_actor
+
 anomalies = detect_anomalies(df_relevant, metrics)
 
 print(f"{elapsed()} Metrics calculated:")

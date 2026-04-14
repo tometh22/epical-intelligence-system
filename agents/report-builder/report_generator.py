@@ -220,6 +220,7 @@ def generate_report_draft(
     topic_summary: str = "",
     anthropic_client: Optional[AnthropicClient] = None,
     report_type: str = "crisis",
+    editorial_reference: str = "",
 ) -> str:
     """Generate a structured intelligence report narrative using Claude."""
     if anthropic_client is None:
@@ -244,6 +245,16 @@ def generate_report_draft(
         topic_summary, report_type=report_type,
         actor_name=actor_name,
     )
+
+    # Inject editorial reference if provided
+    if editorial_reference:
+        editorial_block = (
+            "\n\n== EDITORIAL REFERENCE ==\n"
+            "Generá contenido con el mismo nivel de detalle, tono y profundidad "
+            "analítica que este reporte de referencia:\n"
+            f"{editorial_reference}"
+        )
+        user_prompt += editorial_block
 
     logger.info("Generating report draft for client '%s', period '%s', type '%s'",
                 client_name, period, report_type)

@@ -1255,7 +1255,26 @@ def build_report_html(
 
     # ── Fix 3: Build actor slides from actor_metrics ─────────────
     # Merge narrative PERCEPTION data with actor_metrics data
-    narrative_actors = {a.get("name", "").lower(): a for a in actors_data}
+    # Map narrative keys (brand/actor/ambos) to real actor names
+    narrative_actors = {}
+    brand_lower = client_name.lower()
+    # Determine the main non-brand actor from actor_metrics
+    main_actor_name = ""
+    if actor_metrics:
+        non_brand = [(k, v.get("total_mentions", 0)) for k, v in actor_metrics.items()
+                     if k.lower() not in ("combined", "otros", "ninguno", "removed", "otro", "none", brand_lower)]
+        if non_brand:
+            main_actor_name = max(non_brand, key=lambda x: x[1])[0]
+
+    for a in actors_data:
+        key = a.get("name", "").lower()
+        if key == "brand":
+            narrative_actors[brand_lower] = a
+        elif key == "actor":
+            if main_actor_name:
+                narrative_actors[main_actor_name.lower()] = a
+        else:
+            narrative_actors[key] = a
 
     if actor_metrics:
         merged_actors = []
@@ -1291,10 +1310,10 @@ def build_report_html(
             reading = narr_actor.get("reading", "")
             posts = narr_actor.get("posts", [])
 
-            # Try to get sample_mentions from metrics
-            sample_mentions = metrics.get("sample_mentions", {})
-            if not posts and isinstance(sample_mentions, dict) and actor_key in sample_mentions:
-                posts = sample_mentions[actor_key][:3]
+            # Get top mentions per actor for .spost rendering
+            top_mentions = metrics.get("top_mentions_by_actor", {})
+            if not posts and actor_key in top_mentions:
+                posts = top_mentions[actor_key][:3]
 
             # If body is empty, generate a simple summary from metrics
             if not body:
@@ -1801,20 +1820,41 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
                 "signal": rec_signal,
             })
 
-        # Extract perception/actor sections
+        # Extract perception/actor sections (BRAND, ACTOR, and COLLISION_ZONE)
         actor_pattern = re.compile(
             r"===PERCEPTION_(\w+)===\s*\n(?:EDITORIAL_TITLE:\s*([^\n]+)\n)?(?:EDITORIAL_SUBTITLE:\s*([^\n]+)\n)?(?:BODY:\s*)?(.+?)(?====|\Z)",
             re.DOTALL,
         )
         for m in actor_pattern.finditer(text):
             actor_key = m.group(1).strip()
+            # Map BRAND → client name, ACTOR → main actor name
+            # These will be matched by lowercase key in the actor merge
             if actor_key.upper() == "BRAND":
-                continue  # Brand perception handled separately
+                # Extract client name from thesis or use generic
+                name_key = "brand"  # will be matched against client_name.lower()
+            elif actor_key.upper() == "ACTOR":
+                name_key = "actor"  # will be matched against main actor name
+            else:
+                name_key = actor_key.lower()
             sections["actors"].append({
-                "name": actor_key.capitalize(),
+                "name": name_key,
                 "title": (m.group(2) or "").strip(),
                 "body": [p.strip() for p in m.group(4).strip().split("\n\n") if p.strip()],
                 "reading": (m.group(3) or "").strip(),
+            })
+
+        # Extract COLLISION_ZONE as "ambos" actor data
+        collision_pattern = re.compile(
+            r"===COLLISION_ZONE===\s*\n(?:EDITORIAL_TITLE:\s*([^\n]+)\n)?(?:EDITORIAL_SUBTITLE:\s*([^\n]+)\n)?(?:BODY:\s*)?(.+?)(?====|\Z)",
+            re.DOTALL,
+        )
+        collision_m = collision_pattern.search(text)
+        if collision_m:
+            sections["actors"].append({
+                "name": "ambos",
+                "title": (collision_m.group(1) or "").strip(),
+                "body": [p.strip() for p in collision_m.group(3).strip().split("\n\n") if p.strip()],
+                "reading": (collision_m.group(2) or "").strip(),
             })
 
     # ── Fallback: markdown heading parsing ───────────────────────
