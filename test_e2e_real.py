@@ -311,6 +311,21 @@ if not df_tangential.empty:
 metrics["api_sentiment_distribution"] = api_sentiments
 metrics["api_total_mentions"] = len(all_api_mentions)
 
+# Compute explicit sentiment_toward summary for the synthesis prompt
+if "actor" in df_relevant.columns:
+    neg_df = df_relevant[df_relevant["sentiment"].astype(str).str.lower() == "negativo"]
+    total_neg = len(neg_df)
+    toward_summary = {}
+    for target in neg_df["actor"].value_counts().index:
+        count = int(neg_df[neg_df["actor"] == target].shape[0])
+        toward_summary[target] = {
+            "negative_count": count,
+            "negative_pct_of_total": round(count / max(total_neg, 1) * 100, 1),
+        }
+    metrics["sentiment_toward_summary"] = toward_summary
+    metrics["total_negative_mentions"] = total_neg
+    print(f"  Sentiment toward: {toward_summary}")
+
 anomalies = detect_anomalies(df_relevant, metrics)
 
 print(f"{elapsed()} Metrics calculated:")

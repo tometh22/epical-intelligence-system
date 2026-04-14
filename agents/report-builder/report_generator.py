@@ -63,13 +63,21 @@ A C-level believes real quotes more than percentages.
 7. DETECT NARRATIVE MUTATIONS over time. Show evolution: "In the first 24 hours, the \
 dominant narrative was X. By day 3, it shifted to Y. By day 5, Z emerged."
 
-CRITICAL RULE — SENTIMENT DIRECTION:
-Before diagnosing a brand crisis, CHECK the sentiment_toward data. If more than 80% \
-of negative sentiment is directed at ANOTHER ACTOR (not the brand), the brand is NOT in \
-crisis — the other actor is. A dashboard showing "70% negative" without direction analysis \
-produces the wrong diagnosis. Your job is to produce the RIGHT diagnosis by always asking \
-"negative TOWARD WHOM?". This is the single most important analytical distinction in \
-crisis reports.
+REGLA CRÍTICA — SENTIMENT DIRECTION (SENTIMIENTO HACIA QUIÉN):
+Antes de diagnosticar una crisis de marca, VERIFICÁ la sección SENTIMENT DIRECTION en los \
+datos. Si más del 60% del sentimiento negativo se dirige a OTRO ACTOR (no a la marca), la \
+marca NO está en crisis — el otro actor lo está. Un dashboard que muestra "70% negativo" \
+sin análisis de dirección produce el diagnóstico EQUIVOCADO. Tu trabajo es producir el \
+diagnóstico CORRECTO preguntando siempre "negativo HACIA QUIÉN?".
+
+Este es el hallazgo analítico más importante en reportes de crisis. Si la data muestra \
+que el negativo va hacia otro actor, tu tesis DEBE reflejarlo: la marca salió fortalecida, \
+no debilitada. La percepción de crisis es un artefacto de no separar dirección de sentimiento.
+
+EJEMPLO CONCRETO: Si 94% del negativo va hacia Cossio y solo 4% hacia Avianca, la tesis \
+correcta NO es "Avianca enfrenta crisis" sino "Avianca absorbió ruido pero el castigo real \
+fue para Cossio — la marca salió con legitimidad reforzada ante audiencia adulta". \
+NUNCA diagnostiques crisis de marca cuando el negativo no la apunta a ella.
 
 WRITING RULES:
 - Write in Spanish, formal but not bureaucratic
@@ -352,10 +360,40 @@ def _build_user_prompt(
             )
         # Percentage of total negative going to each actor
         if total_neg > 0:
-            dir_lines.append(f"\n  DISTRIBUTION OF ALL NEGATIVE SENTIMENT:")
-            for aname, a_neg in sorted(actor_neg_map.items(), key=lambda x: x[1], reverse=True):
+            dir_lines.append(f"\n  DISTRIBUTION OF ALL {total_neg:,} NEGATIVE MENTIONS:")
+            sorted_actors = sorted(actor_neg_map.items(), key=lambda x: x[1], reverse=True)
+            for aname, a_neg in sorted_actors:
                 pct = a_neg / total_neg * 100
                 dir_lines.append(f"    → {pct:.1f}% of negative goes to {aname.capitalize()} ({a_neg:,} of {total_neg:,})")
+
+            # Explicit diagnosis based on direction
+            brand_name_lower = client_name.lower()
+            brand_neg = actor_neg_map.get(brand_name_lower, 0)
+            brand_neg_pct = brand_neg / total_neg * 100 if total_neg > 0 else 0
+            top_actor, top_actor_neg = sorted_actors[0]
+            top_actor_pct = top_actor_neg / total_neg * 100
+
+            if brand_neg_pct < 20 and top_actor.lower() != brand_name_lower:
+                dir_lines.append(
+                    f"\n  ⚡ DIAGNÓSTICO AUTOMÁTICO: {client_name} NO está en crisis. "
+                    f"Solo {brand_neg_pct:.1f}% del negativo ({brand_neg:,} de {total_neg:,}) "
+                    f"se dirige a {client_name}. El {top_actor_pct:.1f}% va a {top_actor.capitalize()}. "
+                    f"La percepción de crisis es un artefacto de no separar dirección. "
+                    f"TESIS CORRECTA: {client_name} absorbió ruido pero no daño — "
+                    f"{top_actor.capitalize()} recibió el castigo real."
+                )
+            elif brand_neg_pct > 50:
+                dir_lines.append(
+                    f"\n  ⚠️ DIAGNÓSTICO: {client_name} recibe {brand_neg_pct:.1f}% del negativo. "
+                    f"Esto SÍ indica presión reputacional directa."
+                )
+            else:
+                dir_lines.append(
+                    f"\n  📊 DIAGNÓSTICO: Sentimiento mixto. {client_name} recibe {brand_neg_pct:.1f}% "
+                    f"del negativo, {top_actor.capitalize()} recibe {top_actor_pct:.1f}%. "
+                    f"Analizar por plataforma para determinar dónde la marca está expuesta."
+                )
+
         direction_block = "\n".join(dir_lines)
 
     # ── Brand criticism categories ───────────────────────────────
