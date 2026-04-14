@@ -1228,18 +1228,18 @@ def build_report_html(
 
     # ── Build default methodology if not provided ────────────────
     if not methodology_rows:
+        # Get total raw from source_counts or estimate
+        source_counts = metrics.get("source_counts", {})
+        total_raw = sum(source_counts.values()) if source_counts else total_mentions
+        total_tangential = tangential_data.get("total_tangential", 0) if tangential_data else 0
+        total_discarded = total_raw - total_mentions - total_tangential
+
         methodology_rows = [
-            {"stage": "Recoleccion", "description": "Social listening + scrapping directo de perfiles", "result": _fmt(total_mentions)},
-            {"stage": "Clasificacion IA", "description": "Modelos propietarios de clasificacion: relevancia, sentimiento, direccion", "result": _fmt(total_mentions)},
+            {"stage": "Recolección", "description": "Social listening + scrapping directo de perfiles y comentarios", "result": f"{total_raw:,}"},
+            {"stage": "Limpieza de ruido", "description": "Filtrado automático: bots, spam, menciones sin contenido", "result": f"{total_raw - max(total_discarded, 0):,}"},
+            {"stage": "Clasificación IA", "description": "Relevancia, sentimiento, dirección (sentiment_toward)", "result": f"{total_mentions:,} relevantes"},
+            {"stage": "Descartados", "description": f"Irrelevantes ({max(total_discarded,0):,}) + tangenciales ({total_tangential:,})", "result": f"{max(total_discarded,0) + total_tangential:,}"},
         ]
-        # Add sentiment reclassification stats if available
-        reclass = metrics.get("reclassification_stats", {})
-        if reclass:
-            methodology_rows.append({
-                "stage": "Reclasificacion",
-                "description": f"Reglas: {reclass.get('rules', 0)}, IA: {reclass.get('ai', 0)}",
-                "result": f"{reclass.get('remaining_pct', 0)}% restante",
-            })
 
     # ── Build default platform data if engagement_by_platform empty
     if not engagement_by_platform:
@@ -1259,12 +1259,12 @@ def build_report_html(
 
     if actor_metrics:
         merged_actors = []
+        _skip_actor_keys = {"combined", "otros", "ninguno", "removed", "otro", "none"}
         for actor_key, actor_m in actor_metrics.items():
-            if actor_key.lower() in ("combined", "otros"):
+            if actor_key.lower() in _skip_actor_keys:
                 continue
             am_total = actor_m.get("total_mentions", 0)
-            # Fix 3: Skip actors with < 50 mentions
-            if am_total < 50:
+            if am_total < 100:
                 continue
 
             am_sent = actor_m.get("sentiment_breakdown", {})
@@ -1272,6 +1272,17 @@ def build_report_html(
             for sk, sv in am_sent.items():
                 if isinstance(sv, dict):
                     bar[sk] = sv.get("percentage", 0)
+
+            # If sentiment_bar values are all 0, recalculate from counts
+            if bar and all(v == 0 for v in bar.values()):
+                total_sent_count = sum(
+                    sv.get("count", 0) for sv in am_sent.values() if isinstance(sv, dict)
+                )
+                if total_sent_count > 0:
+                    bar = {
+                        sk: round(sv.get("count", 0) / total_sent_count * 100, 1)
+                        for sk, sv in am_sent.items() if isinstance(sv, dict)
+                    }
 
             # Look for matching narrative data
             narr_actor = narrative_actors.get(actor_key.lower(), {})
@@ -1285,12 +1296,21 @@ def build_report_html(
             if not posts and isinstance(sample_mentions, dict) and actor_key in sample_mentions:
                 posts = sample_mentions[actor_key][:3]
 
+            # If body is empty, generate a simple summary from metrics
+            if not body:
+                neg_pct_val = bar.get("negative", bar.get("negativo", 0))
+                pos_pct_val = bar.get("positive", bar.get("positivo", 0))
+                body = [
+                    f"{am_total:,} menciones totales. "
+                    f"{neg_pct_val:.0f}% negativo, {pos_pct_val:.0f}% positivo."
+                ]
+
             merged_actors.append({
                 "name": actor_key.capitalize(),
                 "mentions": am_total,
                 "pct": round(am_total / max(total_mentions, 1) * 100, 1),
                 "title": title,
-                "body": body if body else [],
+                "body": body,
                 "sentiment_bar": bar,
                 "reading": reading,
                 "posts": posts,
@@ -1313,29 +1333,43 @@ def build_report_html(
         closing_standard = f"Monitoreo estandar: {_fmt_exact(total_mentions)} menciones, {_pct(neg_pct)} negativo — diagnostico crisis reputacional."
 
     if not closing_deep:
-        # Find main actor with highest negative percentage
+        toward_summary = metrics.get("sentiment_toward_summary", {})
+        total_neg = metrics.get("total_negative_mentions", 0)
+
+        # Find the main non-brand actor receiving most negative
+        brand_lower = client_name.lower()
         main_actor = ""
-        main_actor_neg_pct = 0
+        main_actor_pct = 0
+        brand_neg_pct = 0
         positive_count = 0
-        for ak, am in actor_metrics.items():
-            if ak.lower() in ("combined", "otros"):
-                continue
-            am_sent = am.get("sentiment_breakdown", {})
-            for sk, sv in am_sent.items():
-                if isinstance(sv, dict) and sk.lower() in ("negative", "negativo"):
-                    pct_val = sv.get("percentage", 0)
-                    if pct_val > main_actor_neg_pct:
-                        main_actor_neg_pct = pct_val
-                        main_actor = ak.capitalize()
-                elif isinstance(sv, dict) and sk.lower() in ("positive", "positivo"):
-                    positive_count += sv.get("count", 0)
-        if main_actor:
+
+        for actor_key, data in toward_summary.items():
+            neg_pct = data.get("negative_pct_of_total", 0)
+            if actor_key.lower() == brand_lower:
+                brand_neg_pct = neg_pct
+            elif neg_pct > main_actor_pct:
+                main_actor = actor_key.capitalize()
+                main_actor_pct = neg_pct
+
+        # Count positives for brand
+        for k, v in sentiment.items():
+            if isinstance(v, dict) and k.lower() in ("positive", "positivo"):
+                positive_count = v.get("count", 0)
+
+        if main_actor and main_actor_pct > 50:
             closing_deep = (
-                f"Analisis profundo: {_pct(main_actor_neg_pct)} del negativo contra {main_actor}, "
-                f"{_fmt_exact(positive_count)} defensores activos — diagnostico posicion favorable."
+                f"Análisis profundo: {_fmt_exact(total_mentions)} menciones relevantes. "
+                f"{main_actor_pct:.0f}% del negativo contra {main_actor}, "
+                f"solo {brand_neg_pct:.0f}% contra {_esc(client_name)}. "
+                f"{_fmt_exact(positive_count)} defensores activos. "
+                f"Diagnóstico: posición favorable. Estrategia: capitalización."
             )
         else:
-            closing_deep = "Analisis profundo que revela lo que un dashboard no muestra."
+            closing_deep = (
+                f"Análisis profundo: {_fmt_exact(total_mentions)} menciones, "
+                f"dirección de sentimiento separada por actor. "
+                f"Diagnóstico preciso. Estrategia informada."
+            )
 
     # ── Assemble slides ──────────────────────────────────────────
     slides: List[str] = []
@@ -1607,7 +1641,7 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
             if card_match:
                 title = (card_match.group(1) or "").strip()
                 body = card_match.group(2).strip()
-                sections["findings"].append({"title": title, "text": body[:500]})
+                sections["findings"].append({"title": title, "text": body})
 
         # ── Fix 1: Extract narratives — support both old and new format ──
         # New format: THESIS/EVOLUTION/EVIDENCE/IMPLICATION/RISK_LEVEL/DOMINANT_PLATFORM
@@ -1674,7 +1708,7 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
                     "title": thesis,
                     "badge": badge_text,
                     "badge_class": badge_class,
-                    "body": body[:800],
+                    "body": body,
                     "evidence": evidences,
                     "dominant_platform": dominant_platform,
                 })
@@ -1690,7 +1724,7 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
                     "title": (m.group(2) or "").strip(),
                     "badge": (m.group(3) or "").strip(),
                     "badge_class": "badge-b",
-                    "body": m.group(4).strip()[:800],
+                    "body": m.group(4).strip(),
                     "evidence": [],
                 })
 
@@ -1702,7 +1736,7 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
         for m in sc_pattern.finditer(text):
             sections["scenarios"].append({
                 "name": (m.group(2) or "").strip(),
-                "description": m.group(3).strip()[:500],
+                "description": m.group(3).strip(),
                 "outcome": (m.group(4) or "").strip(),
             })
 
@@ -1714,7 +1748,7 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
         for m in sig_pattern.finditer(text):
             sections["readings"].append({
                 "title": (m.group(2) or "").strip(),
-                "body": m.group(3).strip()[:600],
+                "body": m.group(3).strip(),
                 "signal": _strip_signal_prefix(m.group(4) or ""),
             })
 
@@ -1756,7 +1790,7 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
 
             sections["readings"].append({
                 "title": rec_title,
-                "body": body[:600],
+                "body": body,
                 "signal": rec_signal,
             })
 
@@ -1812,7 +1846,7 @@ def _assign_markdown_section(sections: Dict[str, Any], heading: str, content: st
         for item in items:
             item = item.strip()
             if item and len(item) > 20:
-                sections["findings"].append({"title": "", "text": item[:500]})
+                sections["findings"].append({"title": "", "text": item})
 
     elif any(k in heading_lower for k in ("narrativa", "narrative")):
         # Parse sub-headings as narratives
@@ -1830,7 +1864,7 @@ def _assign_markdown_section(sections: Dict[str, Any], heading: str, content: st
                 "title": title,
                 "badge": badges[i] if i < len(badges) else "",
                 "badge_class": "badge-b",
-                "body": body[:800],
+                "body": body,
                 "evidence": [],
             })
 
@@ -1844,7 +1878,7 @@ def _assign_markdown_section(sections: Dict[str, Any], heading: str, content: st
             lines = part.split("\n", 1)
             sections["scenarios"].append({
                 "name": lines[0].strip(),
-                "description": lines[1].strip()[:500] if len(lines) > 1 else "",
+                "description": lines[1].strip() if len(lines) > 1 else "",
                 "outcome": "",
             })
 
@@ -1859,7 +1893,7 @@ def _assign_markdown_section(sections: Dict[str, Any], heading: str, content: st
             signal_match = re.search(r"(?:Se[nñ]al|Signal)\s*(?:→|->|–>)+\s*(.+)", part)
             sections["readings"].append({
                 "title": lines[0].strip(),
-                "body": lines[1].strip()[:600] if len(lines) > 1 else "",
+                "body": lines[1].strip() if len(lines) > 1 else "",
                 "signal": _strip_signal_prefix(signal_match.group(1)) if signal_match else "",
             })
 

@@ -79,6 +79,14 @@ correcta NO es "Avianca enfrenta crisis" sino "Avianca absorbió ruido pero el c
 fue para Cossio — la marca salió con legitimidad reforzada ante audiencia adulta". \
 NUNCA diagnostiques crisis de marca cuando el negativo no la apunta a ella.
 
+REGLA PARA FRAMEWORK_THESIS Y COVER:
+Si más del 80% del negativo se dirige a otro actor (no a la marca), el FRAMEWORK_THESIS \
+y el FRAMEWORK_NAME DEBEN reflejar la posición FAVORABLE de la marca. NO uses frases como \
+"perdió la batalla", "no puede ganar", "pierde donde importa". En su lugar, el thesis debe \
+capturar el hallazgo más importante: la marca absorbió ruido pero salió fortalecida, el otro \
+actor recibió el castigo real. El cover es la primera impresión del cliente — si le decís \
+que está en crisis cuando no lo está, perdés credibilidad en todo el reporte.
+
 WRITING RULES:
 - Write in Spanish, formal but not bureaucratic
 - Never use: "es importante destacar", "cabe mencionar", "en este sentido", \
@@ -107,7 +115,7 @@ BODY: [4-5 sentences. The reputational risk quantified — specific numbers in c
 
 ===EXECUTIVE_CARD_3===
 TITLE: Qué decidir ahora
-BODY: [4-5 sentences. 3 specific decisions with deadlines. Actionable, not strategic.]
+BODY: [4-5 sentences. What the data reveals about the DECISION LANDSCAPE — what options exist, what the data says about each option's viability, and what will happen if no decision is made. Do NOT write operational instructions like "activar", "implementar", "definir antes del". Instead, present the strategic reading: what the data says about timing, risk windows, and directional signals.]
 
 ===SIGNALS===
 SIGNAL_1: [One non-obvious finding: data point + "so what" implication. 2-3 sentences.]
