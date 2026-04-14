@@ -119,18 +119,19 @@ class SentimiaClient:
         context: str,
         actors: List[str],
         language: str = "es",
-    ) -> str:
+    ) -> int:
         """Create a new analysis project.
 
         Args:
             name: Project name (e.g. "Avianca Crisis Marzo 2026").
-            brand: Primary brand being analyzed.
-            context: Brief / context from the analyst.
-            actors: List of secondary actors/entities.
+            brand: Primary brand being analyzed (maps to actor_a).
+            context: Brief / context from the analyst (maps to case_context).
+            actors: List of secondary actors/entities. First element maps to
+                actor_b, rest to other_actors.
             language: Content language (default "es").
 
         Returns:
-            project_id: Unique project identifier.
+            project_id: Integer project identifier.
         """
         if self.mock:
             project_id = f"mock-proj-{int(time.time())}"
@@ -138,14 +139,14 @@ class SentimiaClient:
             return project_id
 
         data = {
-            "name": name,
-            "brand": brand,
-            "context": context,
-            "actors": actors,
-            "language": language,
+            "nombre": name,
+            "marca_objetivo": brand,
+            "competidores": actors,
+            "contexto_analisis": context,
+            "marcas_objetivo": [brand],
         }
-        result = self._request("post", "/api/v2/projects", json=data)
-        project_id = result["project_id"]
+        result = self._request("post", "/api/projects", json=data)
+        project_id = result["project"]["id"]
         logger.info("Created project '%s' → %s", name, project_id)
         return project_id
 
@@ -178,24 +179,20 @@ class SentimiaClient:
             logger.info("MOCK: Uploaded '%s' to project %s → %s", file_path.name, project_id, upload_id)
             return upload_id
 
-        import httpx
         with open(file_path, "rb") as f:
             files = {"file": (file_path.name, f, "application/octet-stream")}
-            data = {"source_type": source_type}
-            # Use a fresh request without JSON content-type for multipart
             session = self._get_session()
             response = session.post(
                 f"/api/v2/projects/{project_id}/upload",
                 files=files,
-                data=data,
             )
         if response.status_code >= 400:
             raise SentimiaError(response.status_code, response.text[:500])
         result = response.json()
-        upload_id = result["upload_id"]
+        upload_id = result.get("id", result.get("file_name", "ok"))
         logger.info("Uploaded '%s' (%s) to project %s → %s",
                      file_path.name, source_type, project_id, upload_id)
-        return upload_id
+        return str(upload_id)
 
     # ──────────────────────────────────────────────────────────────
     # 3. Process (launch Capa 0 + 1 + 2)
@@ -220,24 +217,25 @@ class SentimiaClient:
             logger.info("MOCK: Launched processing for %s → %s", project_id, job_id)
             return job_id
 
-        data = {"options": options or {"layers": [0, 1, 2]}}
+        data = options or {"quality_mode": "standard", "text_column": "text"}
         result = self._request("post", f"/api/v2/projects/{project_id}/process", json=data)
-        job_id = result["job_id"]
-        logger.info("Launched processing for %s → job %s", project_id, job_id)
+        job_id = result.get("job_id", str(result.get("id", "")))
+        logger.info("Launched processing for %s → job %s (status: %s)",
+                     project_id, job_id, result.get("status"))
         return job_id
 
     # ──────────────────────────────────────────────────────────────
     # 4. Get status
     # ──────────────────────────────────────────────────────────────
 
-    def get_status(self, project_id: str) -> Dict[str, Any]:
+    def get_status(self, project_id) -> Dict[str, Any]:
         """Get project processing status.
 
-        Returns:
+        Returns a normalised dict with:
             {
                 "status": "pending" | "processing" | "completed" | "error",
                 "progress": float (0-100),
-                "current_layer": int,
+                "current_layer": str | None,
                 "mentions_processed": int,
                 "estimated_remaining_seconds": int | None,
                 "error": str | None
@@ -253,7 +251,17 @@ class SentimiaClient:
                 "error": None,
             }
 
-        return self._request("get", f"/api/v2/projects/{project_id}/status")
+        raw = self._request("get", f"/api/v2/projects/{project_id}/status")
+        return {
+            "status": raw.get("status", "unknown"),
+            "progress": raw.get("progress_pct", 0.0),
+            "current_layer": raw.get("phase"),
+            "mentions_processed": raw.get("processed", 0),
+            "estimated_remaining_seconds": None,
+            "error": raw.get("error_message"),
+            "message": raw.get("message", ""),
+            "total": raw.get("total", 0),
+        }
 
     # ──────────────────────────────────────────────────────────────
     # 5. Get results (aggregated)
@@ -286,18 +294,19 @@ class SentimiaClient:
 
     def get_mentions(
         self,
-        project_id: str,
+        project_id,
         filters: Optional[Dict[str, Any]] = None,
-        limit: int = 1000,
+        limit: int = 200,
         offset: int = 0,
     ) -> Dict[str, Any]:
         """Get individual mentions with classification data.
 
         Args:
             project_id: Project ID.
-            filters: Optional filters (e.g. {"sentiment": "negative", "actor": "brand"}).
-            limit: Max mentions to return per page.
-            offset: Pagination offset.
+            filters: Optional filters. Supported keys:
+                relevance, sentiment, sentiment_toward, platform, is_noise, search.
+            limit: Max mentions per page (v2 max: 200).
+            offset: Pagination offset (converted to page internally).
 
         Returns:
             {
@@ -309,12 +318,23 @@ class SentimiaClient:
         if self.mock:
             return _mock_mentions(filters, limit)
 
-        params: Dict[str, Any] = {"limit": limit, "offset": offset}
+        page_size = min(limit, 200)
+        page = (offset // page_size) + 1 if page_size else 1
+
+        params: Dict[str, Any] = {"page": page, "page_size": page_size}
         if filters:
             for k, v in filters.items():
-                params[f"filter_{k}"] = v
+                if v is not None:
+                    params[k] = v
 
-        return self._request("get", f"/api/v2/projects/{project_id}/mentions", params=params)
+        raw = self._request("get", f"/api/v2/projects/{project_id}/mentions", params=params)
+        return {
+            "mentions": raw.get("mentions", []),
+            "total": raw.get("total", 0),
+            "has_more": raw.get("page", 1) < raw.get("total_pages", 1),
+            "page": raw.get("page", 1),
+            "total_pages": raw.get("total_pages", 1),
+        }
 
     # ──────────────────────────────────────────────────────────────
     # 7. Export CSV
