@@ -1351,17 +1351,24 @@ def build_report_html(
                 main_actor = actor_key.capitalize()
                 main_actor_pct = neg_pct
 
-        # Count positives for brand
-        for k, v in sentiment.items():
-            if isinstance(v, dict) and k.lower() in ("positive", "positivo"):
-                positive_count = v.get("count", 0)
+        # Count positives specifically for brand (from actor_metrics)
+        brand_pos_count = 0
+        brand_neg_count = 0
+        brand_am = actor_metrics.get(brand_lower, {})
+        if brand_am:
+            for sk, sv in brand_am.get("sentiment_breakdown", {}).items():
+                if isinstance(sv, dict):
+                    if sk.lower() in ("positive", "positivo"):
+                        brand_pos_count = sv.get("count", 0)
+                    elif sk.lower() in ("negative", "negativo"):
+                        brand_neg_count = sv.get("count", 0)
 
         if main_actor and main_actor_pct > 50:
             closing_deep = (
                 f"Análisis profundo: {_fmt_exact(total_mentions)} menciones relevantes. "
                 f"{main_actor_pct:.0f}% del negativo contra {main_actor}, "
                 f"solo {brand_neg_pct:.0f}% contra {_esc(client_name)}. "
-                f"{_fmt_exact(positive_count)} defensores activos. "
+                f"{_fmt_exact(brand_pos_count)} defensores activos vs {_fmt_exact(brand_neg_count)} detractores. "
                 f"Diagnóstico: posición favorable. Estrategia: capitalización."
             )
         else:

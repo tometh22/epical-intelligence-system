@@ -258,9 +258,17 @@ if "source_platform" in df_ys.columns and "platform" not in df_ys.columns:
 df_ys["data_source"] = "youscan"
 df_sc["data_source"] = "scrapping"
 
+# Map sentiment_toward → actor BEFORE concat (SC has sentiment_toward, YS has actor)
+if "actor" not in df_sc.columns and "sentiment_toward" in df_sc.columns:
+    df_sc["actor"] = df_sc["sentiment_toward"]
+
 df_local = pd.concat([df_ys, df_sc], ignore_index=True)
 if "date" in df_local.columns:
     df_local["date"] = pd.to_datetime(df_local["date"], errors="coerce")
+
+# Fill NaN actors from sentiment_toward (handles any remaining gaps)
+if "sentiment_toward" in df_local.columns and "actor" in df_local.columns:
+    df_local["actor"] = df_local["actor"].fillna(df_local["sentiment_toward"])
 
 # Filter relevant only
 if "relevance" in df_local.columns:
@@ -274,12 +282,6 @@ else:
 print(f"  Local total:  {len(df_local):,}")
 print(f"  Relevant:     {len(df_relevant):,}")
 print(f"  Tangential:   {len(df_tangential):,}")
-
-# Map sentiment_toward → actor if actor column missing
-if "actor" not in df_relevant.columns and "sentiment_toward" in df_relevant.columns:
-    df_relevant["actor"] = df_relevant["sentiment_toward"]
-if not df_tangential.empty and "actor" not in df_tangential.columns and "sentiment_toward" in df_tangential.columns:
-    df_tangential["actor"] = df_tangential["sentiment_toward"]
 
 # Ensure columns expected by sampler/metrics exist
 for col in ["likes", "comments", "shares", "reach", "author"]:
@@ -307,6 +309,16 @@ if not df_tangential.empty:
     metrics["tangential_analysis"] = calc.compute_tangential_analysis(
         tangential_mentions=df_tangential
     )
+
+# Compute actor-separated metrics (required for actor slides + direction analysis)
+from agents.report_builder.metrics import calculate_actor_metrics, calculate_intersection_metrics
+actor_metrics_data = calculate_actor_metrics(df_relevant)
+metrics["actor_metrics"] = actor_metrics_data
+metrics["intersection"] = calculate_intersection_metrics(
+    df_relevant, brand_name=BRAND.lower(), actor_names=ACTORS,
+)
+actor_summary = [f"{k}={v.get('total_mentions',0)}" for k,v in actor_metrics_data.items() if k != "combined"]
+print(f"  Actor metrics: {actor_summary}")
 
 metrics["api_sentiment_distribution"] = api_sentiments
 metrics["api_total_mentions"] = len(all_api_mentions)
