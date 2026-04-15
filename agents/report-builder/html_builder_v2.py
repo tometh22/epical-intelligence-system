@@ -723,44 +723,76 @@ def _slide_narratives(
         badge_cls = narr.get("badge_class", "badge-b")
         num = f"{i + 1:02d}"
 
-        # Body text (may contain multiple paragraphs)
-        body_text = narr.get("body", "")
-        body_html = ""
-        if body_text:
-            for para in body_text.split("\n\n"):
-                para = para.strip()
-                if para:
-                    body_html += f'<p class="p">{_esc(para)}</p>\n'
+        # Evolution section (how the narrative changed over time)
+        evolution_text = narr.get("evolution", "")
+        evolution_html = ""
+        if evolution_text:
+            evolution_html = f"""\
+<div style="margin:12px 0">
+<div class="tag" style="font-size:10px;margin-bottom:4px">EVOLUCIÓN</div>
+<p class="p">{_esc(evolution_text)}</p>
+</div>
+"""
+        else:
+            # Fallback: use body if no separate evolution
+            body_text = narr.get("body", "")
+            if body_text:
+                for para in body_text.split("\n\n"):
+                    para = para.strip()
+                    if para:
+                        evolution_html += f'<p class="p">{_esc(para)}</p>\n'
 
-        # Fix 1: Evidence items rendered as social-post-style cards
+        # Evidence items rendered as social-post-style cards
         evidence_html = ""
         evidence_list = narr.get("evidence", [])
-        for ev in evidence_list[:3]:
-            ev_text = ev.get("quote", str(ev) if isinstance(ev, str) else "")
-            ev_platform = ev.get("platform", "")
-            ev_date = ev.get("date", "")
-            ev_engagement = ev.get("engagement", "")
-            meta_parts = []
-            if ev_platform:
-                meta_parts.append(_esc(ev_platform))
-            if ev_date:
-                meta_parts.append(_esc(ev_date))
-            if ev_engagement:
-                meta_parts.append(f"{_esc(ev_engagement)} interacciones")
-            meta_str = " · ".join(meta_parts) if meta_parts else ""
-            evidence_html += f"""\
+        if evidence_list:
+            evidence_html += '<div style="margin:12px 0">\n'
+            evidence_html += '<div class="tag" style="font-size:10px;margin-bottom:4px">EVIDENCIA</div>\n'
+            for ev in evidence_list[:3]:
+                ev_text = ev.get("quote", str(ev) if isinstance(ev, str) else "")
+                ev_platform = ev.get("platform", "")
+                ev_date = ev.get("date", "")
+                ev_engagement = ev.get("engagement", "")
+                meta_parts = []
+                if ev_platform:
+                    meta_parts.append(_esc(ev_platform))
+                if ev_date:
+                    meta_parts.append(_esc(ev_date))
+                if ev_engagement:
+                    meta_parts.append(f"{_esc(ev_engagement)} interacciones")
+                meta_str = " · ".join(meta_parts) if meta_parts else ""
+                evidence_html += f"""\
 <div class="spost" style="margin:8px 0">
-<div class="spost-text" style="font-style:italic">"{_esc(ev_text)}"</div>
+<div class="spost-text" style="font-style:italic">&ldquo;{_esc(ev_text)}&rdquo;</div>
 {f'<div class="spost-meta"><span>{meta_str}</span></div>' if meta_str else ''}
 </div>
 """
+            evidence_html += '</div>\n'
+
+        # Implication section (what this means for the client)
+        implication_text = narr.get("implication", "")
+        implication_html = ""
+        if implication_text:
+            implication_html = f"""\
+<div class="sowhat" style="margin:12px 0">
+<strong>Implicancia para el cliente:</strong> {_esc(implication_text)}
+</div>
+"""
+
+        # Dominant platform badge
+        dom_platform = narr.get("dominant_platform", "")
+        dom_html = ""
+        if dom_platform:
+            dom_html = f'<div class="tag" style="font-size:9px;margin-top:6px;opacity:0.7">Plataforma dominante: {_esc(dom_platform)}</div>'
 
         cards_html += f"""\
 <div class="nar fu {'s2' if i == 0 else 's3' if i == 1 else 's4'}"><div class="nar-num">{num}</div>
 <div class="nar-title">{_esc(narr.get("title", ""))}</div>
 <div class="badge {badge_cls}">{_esc(narr.get("badge", ""))}</div>
-{body_html}
+{evolution_html}
 {evidence_html}
+{implication_html}
+{dom_html}
 </div>
 """
 
@@ -1397,6 +1429,19 @@ def build_report_html(
                 f"Diagnóstico preciso. Estrategia informada."
             )
 
+    # ── Closing question default if not provided ────────────────
+    if not closing_question:
+        if closing_deep and "capitalización" in closing_deep.lower():
+            closing_question = (
+                "Dos lecturas del mismo dataset producen dos estrategias opuestas. "
+                "Una gasta en contención. La otra invierte en posicionamiento."
+            )
+        else:
+            closing_question = (
+                "La diferencia entre un dashboard y un análisis es la misma "
+                "que entre saber la temperatura y saber si va a llover."
+            )
+
     # ── Assemble slides ──────────────────────────────────────────
     slides: List[str] = []
 
@@ -1604,10 +1649,20 @@ def _parse_evidence(raw: str) -> Dict[str, str]:
         if len(meta_parts) >= 3:
             result["engagement"] = meta_parts[2]
     else:
-        # Try just quoted text without brackets
-        m2 = re.match(r'"(.+?)"', raw, re.DOTALL)
+        # Try quoted text followed by unbracketed metadata: "quote" Platform, date, engagement
+        m2 = re.match(r'"(.+?)"\s*(.+)?', raw, re.DOTALL)
         if m2:
             result["quote"] = m2.group(1).strip()
+            remainder = (m2.group(2) or "").strip()
+            if remainder:
+                # Split by comma and assign
+                meta_parts = [p.strip() for p in remainder.split(",")]
+                if len(meta_parts) >= 1:
+                    result["platform"] = meta_parts[0]
+                if len(meta_parts) >= 2:
+                    result["date"] = meta_parts[1]
+                if len(meta_parts) >= 3:
+                    result["engagement"] = meta_parts[2].replace("interacciones", "").strip()
     return result
 
 
@@ -1646,6 +1701,11 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
 
     if not text.strip():
         return sections
+
+    # ── Extract CLOSING_QUESTION if present ──────────────────────
+    cq_match = re.search(r"CLOSING_QUESTION:\s*(.+?)(?:\n|$)", text)
+    if cq_match:
+        sections["closing_question"] = cq_match.group(1).strip()
 
     # ── Try structured === format first ──────────────────────────
     if "===" in text:
@@ -1722,7 +1782,7 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
                 }
                 badge_text, badge_class = badge_map.get(risk_level, ("", "badge-b"))
 
-                # Build body from EVOLUTION + IMPLICATION
+                # Keep EVOLUTION and IMPLICATION as separate fields
                 body_parts = []
                 if evolution:
                     body_parts.append(evolution)
@@ -1735,6 +1795,8 @@ def _parse_sections_from_text(text: str) -> Dict[str, Any]:
                     "badge": badge_text,
                     "badge_class": badge_class,
                     "body": body,
+                    "evolution": evolution,
+                    "implication": implication,
                     "evidence": evidences,
                     "dominant_platform": dominant_platform,
                 })

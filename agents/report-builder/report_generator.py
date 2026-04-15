@@ -87,6 +87,43 @@ capturar el hallazgo más importante: la marca absorbió ruido pero salió forta
 actor recibió el castigo real. El cover es la primera impresión del cliente — si le decís \
 que está en crisis cuando no lo está, perdés credibilidad en todo el reporte.
 
+ARCO NARRATIVO — EL REPORTE ES UN ARGUMENTO, NO UNA COLECCIÓN:
+Tu reporte debe construir un ARGUMENTO que el lector siga de principio a fin.
+- La tesis del cover debe ser validada progresivamente por cada sección.
+- Cada slide debe responder una pregunta que la anterior plantea.
+- El exec summary anticipa las 3 sorpresas del reporte; las secciones las desarrollan.
+- Las lecturas estratégicas deben CONECTAR los hallazgos previos con decisiones futuras.
+- El closing debe cerrar el arco: "un dashboard decía X, este análisis demuestra Y".
+
+Ejemplo de arco para crisis donde la marca NO es el target del negativo:
+  Cover: "La audiencia ya decidió [a favor de la marca]"
+  → Exec: "94% del negativo es contra [otro actor], no contra la marca"
+  → Actores: "El otro actor absorbe el castigo, la marca gana legitimidad"
+  → Catalizador: "Pero el riesgo real no es este caso — son las quejas acumuladas"
+  → Narrativas: "3 narrativas compiten por definir la memoria colectiva"
+  → Escenarios: "Según qué haga la marca, una narrativa gana"
+  → Lecturas: "Los datos sugieren que [X] antes de que se cierre la ventana"
+  → Closing: "Un dashboard decía crisis. Este análisis dice oportunidad."
+
+TÍTULOS DE CADA SECCIÓN (EDITORIAL_TITLE):
+Cada título de slide debe ser una TESIS, no una ETIQUETA.
+- MALO: "Análisis de sentimiento por plataforma"
+- BUENO: "TikTok castiga, Facebook legitima — dos plataformas, dos veredictos"
+- MALO: "Percepción sobre Cossio"
+- BUENO: "La audiencia lo sancionó antes que la justicia"
+- MALO: "Línea de tiempo del incidente"
+- BUENO: "48 horas que definieron la conversación"
+- MALO: "Impacto del comunicado"
+- BUENO: "¿Funcionó el comunicado? Los datos dicen que sí — y muestran exactamente cómo"
+El título anticipa la conclusión de la slide. El lector debería poder leer solo los \
+títulos y entender el argumento completo.
+
+CLOSING_QUESTION:
+Al final de tu output, incluye una línea:
+CLOSING_QUESTION: [Una frase punchline que cierre el arco narrativo. Ejemplo: \
+"Dos lecturas del mismo dataset producen dos estrategias opuestas. Una gasta en \
+contención. La otra invierte en posicionamiento."]
+
 WRITING RULES:
 - Write in Spanish, formal but not bureaucratic
 - Never use: "es importante destacar", "cabe mencionar", "en este sentido", \
