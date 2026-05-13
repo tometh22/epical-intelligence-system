@@ -4,3 +4,20 @@ __pycache__/
 *.pyc
 .pytest_cache/
 logs/
+
+# runtime artifacts (uploaded files, generated reports)
+inputs/
+outputs/
+
+# python venvs
+.venv/
+venv/
+*.egg-info/
+
+# dashboard build/runtime
+dashboard/.next/
+dashboard/node_modules/
+dashboard/.vercel/
+dashboard/*.tsbuildinfo
+dashboard/next-env.d.ts
+dashboard/.env*

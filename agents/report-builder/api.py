@@ -1,7 +1,9 @@
 """FastAPI endpoints for the Report Builder agent."""
 
+import json
+import time
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse
@@ -18,7 +20,17 @@ OUTPUT_DIR = BASE_DIR / "outputs" / AGENT_NAME
 INPUT_DIR = BASE_DIR / "inputs"
 
 
-def _run_agent_task(input_paths: List[str], source_labels: List[str], client_name: str, period: str, logo_path: str = None, theme: str = "dark", brand_color: str = "#FF1B6B", report_type: str = "crisis") -> None:
+def _run_agent_task(
+    input_paths: List[str],
+    source_labels: List[str],
+    client_name: str,
+    period: str,
+    logo_path: str = None,
+    theme: str = "dark",
+    brand_color: str = "#FF1B6B",
+    report_type: str = "crisis",
+    brief: Optional[Dict[str, Any]] = None,
+) -> None:
     """Background task that runs the report builder pipeline."""
     try:
         run_report_builder(
@@ -30,10 +42,11 @@ def _run_agent_task(input_paths: List[str], source_labels: List[str], client_nam
             theme=theme,
             brand_color=brand_color,
             report_type=report_type,
+            brief=brief,
         )
     except Exception as e:
         logger.error("Background agent task failed: %s", e, exc_info=True)
-        save_run_status(AGENT_NAME, "error", {"error": str(e)})
+        save_run_status(AGENT_NAME, "error", {"error": str(e), "brief": brief})
 
 
 async def _save_upload(upload: UploadFile) -> Path:
@@ -61,6 +74,13 @@ async def trigger_run(
     theme: str = Form("dark"),
     brand_color: str = Form("#FF1B6B"),
     report_type: str = Form("crisis"),
+    brief_evento: str = Form(...),
+    brief_eje_1: str = Form(...),
+    brief_eje_2: str = Form(""),
+    brief_eje_3: str = Form(""),
+    brief_hipotesis: str = Form(""),
+    brief_decision: str = Form(...),
+    brief_limitaciones: str = Form(""),
 ) -> dict:
     """Accept file uploads and trigger the report builder agent.
 
@@ -98,13 +118,41 @@ async def trigger_run(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to save uploaded file: {e}")
 
+    # Build editorial brief (Phase 0 of the Epical methodology) and persist it
+    brief = {
+        "evento": brief_evento,
+        "ejes": [brief_eje_1, brief_eje_2, brief_eje_3],
+        "hipotesis": brief_hipotesis,
+        "decision": brief_decision,
+        "limitaciones": brief_limitaciones,
+    }
+    try:
+        INPUT_DIR.mkdir(parents=True, exist_ok=True)
+        brief_path = INPUT_DIR / f"brief_{int(time.time())}.json"
+        brief_path.write_text(json.dumps(brief, ensure_ascii=False, indent=2))
+        logger.info("Brief persisted to %s", brief_path)
+    except Exception as e:
+        logger.warning("Failed to persist brief: %s", e)
+
     # Update status and queue background task
     save_run_status(AGENT_NAME, "running", {
         "client": client_name,
         "period": period,
         "input_files": input_paths,
+        "brief": brief,
     })
-    background_tasks.add_task(_run_agent_task, input_paths, source_labels, client_name, period, logo_saved, theme, brand_color, report_type)
+    background_tasks.add_task(
+        _run_agent_task,
+        input_paths,
+        source_labels,
+        client_name,
+        period,
+        logo_saved,
+        theme,
+        brand_color,
+        report_type,
+        brief,
+    )
 
     file_count = len(input_paths)
     return {

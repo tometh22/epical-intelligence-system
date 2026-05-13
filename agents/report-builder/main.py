@@ -61,6 +61,7 @@ def run_report_builder(
     theme: str = "",
     brand_color: str = "",
     report_type: str = "",
+    brief: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """Run the full report builder pipeline.
 
@@ -101,11 +102,14 @@ def run_report_builder(
             "client": client_name,
             "period": period,
             "input_files": [str(f) for f in file_paths],
+            "brief": brief,
         })
         logger.info(
             "Starting report builder for client '%s', period '%s', %d input file(s)",
             client_name, period, len(file_paths),
         )
+        if brief:
+            logger.info("Brief recibido: %s", brief)
 
         # 2. Merge and normalize all input files
         logger.info("Merging %d input file(s)...", len(file_paths))
@@ -308,6 +312,7 @@ def run_report_builder(
             "anomalies_count": len(anomalies),
             "source_counts": source_counts,
             "data_quality_issues": data_quality_issues,
+            "brief": brief,
         }
         save_run_status(AGENT_NAME, "completed", result)
         logger.info("Report builder completed. QA: %s (%d errors, %d warnings). Outputs: %s, %s, %s, %s",
